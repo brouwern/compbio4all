@@ -5,7 +5,7 @@
 #'
 #' @examples
 #'
-#' header. <- ">NC_001477.1 Dengue virus 1, complete genome"
+#' dengueseq_fasta <- rentrez::entrez_fetch(db = "nucleotide", id = "NC_001477", rettype = "fasta")
 #' fasta_cleaner(dengueseq_fasta, parse = TRUE)
 #'
 #' @export

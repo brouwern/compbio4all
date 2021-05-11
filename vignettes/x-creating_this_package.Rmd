@@ -118,7 +118,6 @@ usethis::use_package("phangorn", "Imports")
 usethis::use_package("ggplot2", "Imports")
 usethis::use_package("rentrez", "Imports")
 usethis::use_package("seqinr", "Imports")
-usethis::use_package("seqinr", "Imports")
 # usethis::use_package("lubridate",   "Imports")
 # #usethis::use_package("tint",   "Imports")
 # #usethis::use_package("formatR",   "Imports")
@@ -139,6 +138,7 @@ usethis::use_package("reshape2",   "Imports")
 
 usethis::use_package("dplyr",   "Imports")
 usethis::use_package("tidyr",   "Imports")
+usethis::use_package("stringr",   "Imports")
 
 # use_package("nlme", "Imports")
 # 
