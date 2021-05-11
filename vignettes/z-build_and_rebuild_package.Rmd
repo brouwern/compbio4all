@@ -1,0 +1,185 @@
+---
+title: "Building & rebuilding this package"
+author: "Nathan Brouwer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Building & rebuilding this package}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval  = F,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+This code is used to build, re-build, and trouble shoot the building of the package, including 
+
+1. Building/compiling diffrent components
+1. Building the pkgdown website
+
+These are mostly commands that can be launched from within RStudio via the GUI, except pkgdown::build_site()
+
+## devtools functions
+
+```{r}
+library(devtools)
+```
+
+
+### Clean vignettes
+
+"This uses a fairly rudimentary algorithm where any files in ‘inst/doc’ with a name that exists in ‘vignettes’ are removed."
+
+```{r, eval = F}
+devtools::clean_vignettes() 
+```
+
+### Build vignettes
+
+"Builds package vignettes using the same algorithm that R CMD build does"
+
+```{r, eval = F}
+devtools::build_vignettes()
+```
+
+### Build documentation
+
+document()
+
+```{r, eval = F}
+devtools::document(roclets=c('rd', 'collate', 'namespace'))
+```
+
+### Load all
+
+```{r, eval = F}
+devtools::load_all(".")
+```
+
+
+### Check
+
+```{r, eval = F}
+devtools::check()
+```
+
+check_failures
+
+## pckgdown functions
+
+### Build package down website
+
+Single function to build whole site:
+"This will generate a docs/ directory. The home page will be generated from your package’s README.md, and a function reference will be generated from the documentation in the man/ directory."
+```{r, eval = F}
+pkgdown::build_site()
+```
+
+```{r}
+
+```
+
+
+#### Build piece by piece
+
+pkgdown::clean_site (pkg = ".")
+
+-- Initializing site
+```{r, eval = F}
+pkgdown::init_site(pkg = ".")
+```
+
+Building home 
+```{r, eval = F}
+pkgdown::build_home(pkg = ".")
+```
+
+Building function reference
+```{r, eval = F}
+pkgdown::build_reference(pkg = ".")
+```
+
+
+Build vignettes
+```{r, eval = F}
+pkgdown::build_articles(pkg = ".")
+```
+
+
+```{r, eval = F}
+pkgdown::build_news()
+```
+
+
+
+## Explore dependencies
+
+```{r}
+report1 <- CreatePackageReport(pkg_name = "FACavian")
+```
+
+
+
+## Build pdf manual
+https://stackoverflow.com/questions/16986422/r-create-reference-manual-with-r-cmd-check
+R CMD Rd2pdf mypackage
+
+
+https://stackoverflow.com/questions/30607496/making-an-r-package-pdf-manual-using-devtools
+```{r, eval = F}
+pack <- "FACavian"
+path <- find.package(pack)
+system(paste(shQuote(file.path(R.home("bin"), "R")),
+    "CMD", "Rd2pdf", shQuote(path)))
+```
+
+remove manual
+```{r, eval = F}
+file.remove("FACavian.pdf")
+```
+
+
+```{r, eval = F}
+check(cleanup = FALSE,manual = TRUE,path = getwd())
+```
+
+
+
+## Keep logs files (?)
+
+```{r}
+options(keep.source.pkgs = TRUE)
+devtools::check()
+```
+
+
+
+
+## Rcmd.exe
+"Clean and rebuild"
+==> Rcmd.exe INSTALL --preclean --no-multiarch --with-keep.source mammalsmilk
+
+"Install restart"
+==> Rcmd.exe INSTALL --no-multiarch --with-keep.source mammalsmilk
+
+```{r}
+devtools::check(env_vars = )
+```
+
+
+devtools::check()
+
+See 'C:/Users/lisanjie/Documents/1_R/git/git-aviary/FACavian.Rcheck/00install.out' for details.
+Information on the location(s) of code generating the 'Note's can be
+obtained by re-running with environment variable R_KEEP_PKG_SOURCE set
+to 'yes'.
+

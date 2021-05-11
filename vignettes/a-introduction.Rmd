@@ -1,0 +1,21 @@
+---
+title: "a) Introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{a) Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r , eval = F, setup}
+library(compbio4all)
+```
+
+Introduction goes here...
