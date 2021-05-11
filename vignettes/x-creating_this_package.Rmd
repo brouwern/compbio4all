@@ -118,8 +118,8 @@ usethis::use_package("phangorn", "Imports")
 usethis::use_package("ggplot2", "Imports")
 usethis::use_package("rentrez", "Imports")
 usethis::use_package("seqinr", "Imports")
-# usethis::use_package("lubridate",   "Imports")
-# #usethis::use_package("tint",   "Imports")
+usethis::use_package("‘UniprotR’",   "Imports") # not used?
+usethis::use_package("Biostrings",   "Imports") # oh boy
 # #usethis::use_package("formatR",   "Imports")
 # usethis::use_package("readxl",   "Imports")
 # #usethis::use_package("cowplot",   "Imports")

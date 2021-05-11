@@ -29,4 +29,6 @@ Imports:
     phangorn,
     rentrez,
     seqinr,
-    stringr
+    stringr,
+    ‘UniprotR’,
+    Biostrings
