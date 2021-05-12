@@ -1,8 +1,8 @@
 ---
-title: "temp"
+title: "z) vignette template"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{temp}
+  %\VignetteIndexEntry{z) vignette template}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

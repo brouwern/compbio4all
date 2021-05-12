@@ -1,0 +1,63 @@
+---
+title: "z) vocab"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{z) vocab}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+ENTREZ: an integratted collection of databases hosted by NCBI
+
+NCBI: National Cnterl for Biotechnology Information.
+
+sequence database: a compilation of macromolecular sequences which can be searched.  Most databases are online and can be searched mulitple ways.   Searching by an accession numbers provides direct access to a particular sequences. Datasbases can often be searched by keywords to look for sequences that have been flagged with particular features.  Databases can also be searched by algorithsm to look for sequences that are similar to a sequence of interest.
+
+accession number: a unique identifier for a gene, protein or mRNA transcript. 
+
+R: a statistical programming language used for statistics, data science, bioinformatics, machine learning, and some areas of computational biology.  R is an interpretted language typically run from scripts.  The term R is also used to refer to the software used to run R code.  Like Python, R is an open source language.  Unlike Python, R is not a fully functional programming language and has limited ability to make stand-alone applications. It does have a powerful extension for making web apps called Shiny.
+
+RStudio: is the name of the most popular IDE for the R language.  RStudio is the name of both the software and the company which makes it.
+
+Python: an open source language which is popular for data science, machine learning/deep learning, bioinformatics, and web programming. In contrast with R, Python is a fully featured language that can be used to build stand alone pieces of software; YouTube, Reddit, Spotify and many other websites rely heavily on Python.
+
+RStudio Cloud: A web-based implementation of R and RStudio that allows you to use all of R and RStudio's functionality in a web browser. This allows R to be run on almost any device, including tablets and watches.  It also allows multiple individuals to be provided with identical copies of R working environments which prevents issues due to software impcompatabiliites between different users computers.
+
+interpretted language: a language where code is excuted on the fly, often in small pieces or scripts. R, Python and Jave Script are scriptting languages.  (This is a rough definition)
+
+compiled language: a language where code is compiled into an executable file or program.  Compiled languages are typically used to build stand-alone pieces of software.  C, C++ and Jave are compiled languages.  (This is a rough definition)
+
+IDE: Integrated Development Environment.  A workspace or front end for coding which provides useful tools for programming, such as file management, code highligting, tab completion, etc.
+
+.R file: A basic R file containing only R code in the form of text (letters, numbers, basic symbols) with no embedded images, pictures or graphs.  Basic installations of R only work with .R files.
+
+.Rmd file: An RMarkdown file.  
+
+.txt file: A basic file format that contains only letters, numbers, punctuationand basic symbols. No figures, images, can occur in .txt files. 
+
+HTML: Hyper Text Markup Language.  Code use to build websites.
+
+comment character: Character such as "#" (in R) which incidates that what ever follows it is not code but just words.
+
+assignment: Indicating that concrete information should be stored in an abstract variable.  For example, "x<-1" tells R to print return the number 1 any time the letter "x" is used. So, in this case, "x+x" yield 2.  
+
+assignment operator: Most R users currently use "<-", though some prefer "=".  Python uses "=".
+
+bioinformatics
+computational biology
+literate programming
+FASTA file: Ubiquitous file format for macromolecular sequences. 
+BLAST: Basic Local Alignment Search Tool.  An algorithm and search tool for aligning macromolecular sequences. This allows researchers to search a database for similar sequences. To "BLAST a sequence" means to have the search engine compare a sequence against a database for similar sequences.
+
+GUI: Graphical User Interface.  A graphical front-end for a program, in particular where all operations are carried out via a point-and-click interface.  Most programms for aligning sequences and building phylogenetic trees have a GUI.

@@ -1,0 +1,93 @@
+---
+title: "z0) Undergraduate editors"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{z0) Undergraduate editors}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = F}
+library(compbio4all)
+```
+
+
+
+## Winter 2021
+
+Aman Virmani AMV88@pitt.edu
+Noah Burget NGB23@pitt.edu
+Emily Jenison EMJ45@pitt.edu
+Havannah Tung. <LET61@pitt.edu>
+Nitish?
+
+
+## Original students emailed
+	"Burget, Noah G" <ngb23@pitt.edu>,
+"Whitfield, Tyler S" <Tsw32@pitt.edu>,
+"Kalepalli, Nishita" <nik78@pitt.edu>,
+ARR130@pitt.edu,
+"Sheng, Tao" <tao_sheng@pitt.edu>,
+"Shetty, Shriya S" <SSS92@pitt.edu>,
+"Cherupally, Vijay Kiran" <VIC38@pitt.edu>,
+"Cheng, Claire A" <cac332@pitt.edu>,
+"Murray, Anna M" <Amm498@pitt.edu>,
+"Virmani, Aman" <amv88@pitt.edu>,
+brd98@pitt.edu,
+"Varghese, Christopher G" <cgv7@pitt.edu>,
+"Morley, Lucas N" <Lnm48@pitt.edu>,
+"Prem, Michelle" <mrp105@pitt.edu>,
+"Fiore, Jack A" <Jaf192@pitt.edu>,
+"Shetty, Saumya S" <sss93@pitt.edu>,
+"Chamania, Nitish" <nic64@pitt.edu>,
+"Walbridge, Jordan H" <jhw43@pitt.edu>,
+"Hutchins, Theresa R" <Trh53@pitt.edu>,
+thk44@pitt.edu,
+"Reich, Isaac J" <ijr11@pitt.edu>,
+"Walsh, Jake" <jaw312@pitt.edu>,
+"Spellman, David A" <das320@pitt.edu>,
+"Ramaradj, Priyanka" <prr44@pitt.edu>,
+"Tung, Havannah" <Let61@pitt.edu>,
+"Katz, Tyler J" <TJK68@pitt.edu>,
+"Shi, Tingjia" <tis46@pitt.edu>,
+"Sharoubeem, Paula" <Pas195@pitt.edu>,
+"Khamar, Ronak K" <rkk19@pitt.edu>,
+"Wang, Li-Ting" <liw89@pitt.edu>,
+"Jenison, Emily Grace" <emj45@pitt.edu>,
+"Dowling, Rileigh" <rid32@pitt.edu>
+
+
+
+## Original email
+
+A spreadsheet where you can sign up for tasks is here:
+https://docs.google.com/spreadsheets/d/1MjUMNidAHfTTHrF0p7MjOUysDC-LGAz3RYgbhJJWGAc/edit?usp=sharing
+
+
+A book which I want to integrate into "Comp Bio For All!" but haven't done any work on yet is
+https://little-book-of-r-for-multivariate-analysis.readthedocs.io/en/latest/
+
+I'd like to integrate the sections below into CB4ALL.  The main task here is turning these webpages into .rmd files with the code in code chunks, section titles formatted, etc.
+
+https://little-book-of-r-for-multivariate-analysis.readthedocs.io/en/latest/src/multivariateanalysis.html#plotting-multivariate-data
+https://little-book-of-r-for-multivariate-analysis.readthedocs.io/en/latest/src/multivariateanalysis.html#calculating-summary-statistics-for-multivariate-data
+https://little-book-of-r-for-multivariate-analysis.readthedocs.io/en/latest/src/multivariateanalysis.html#calculating-correlations-for-multivariate-data
+https://little-book-of-r-for-multivariate-analysis.readthedocs.io/en/latest/src/multivariateanalysis.html#standardising-variables
+https://little-book-of-r-for-multivariate-analysis.readthedocs.io/en/latest/src/multivariateanalysis.html#principal-component-analysis 
+
+I've worked on most of this book
+https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/
+
+but there are several chapters I have not yet done anything with.  These chapters need to be pasted into .rmd, code put into code chunks, etc.
+https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter10.html
+https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/revisionexercises_answers.html
+https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter11.html
+
+All graphs in the book are currently done with base R graphics,  For any chapter, including the ones I've worked on you can re-work the graphs using ggpubr or ggplot2.

@@ -1,0 +1,32 @@
+---
+title: "TODO"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{TODO}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = F}
+library(compbio4all)
+```
+
+
+
+1. Copy text and code from original website to .rmd files
+1. Move any functions AC wrote to .R files
+1. Move code into R code chunks
+1. Compile list of packages used in the chapter; make sure these are loaded at beginning of chapter
+1. Compile list of AC functions used in the chapter
+1. Compile list of dad used in the chapter
+1. Add AC functions to biodata package
+1. Add dat to the biodata package
+1. Make sure biodata gets called at beginning of chapter to load any ASC
+

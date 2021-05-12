@@ -27,10 +27,6 @@ library(compbio4all)
 
 
 
-**TODO**
-
-need fasta clean function put into package
-
 
 Preliminaries
 

@@ -12,11 +12,12 @@ editor_options:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = F
 )
 ```
 
-```{r setup, eval = F}
+```{r setup, eval = T}
 library(compbio4all)
 ```
 
@@ -35,39 +36,36 @@ We use the query() function from SeqinR to query this database, as described in 
 
 For example to retrieve the protein sequences for UniProt accessions Q9CD83 and A0PQ23, we type in R:
 
-Original:
-no longer works
-TODO
-```{r, eval = F}
-# library("seqinr")
-# choosebank("swissprot")
-# 
-# query("leprae", "AC=Q9CD83")
-# lepraeseq <- getSequence(leprae$req[[1]])
-# query("ulcerans", "AC=A0PQ23")
-# ulceransseq <- getSequence(ulcerans$req[[1]])
-# closebank()
+
+```{r}
+leprae_fasta <- rentrez::entrez_fetch(db = "protein",
+                        id = "Q9CD83",
+                         rettype = "fasta")
+
+ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
+                         id = "OIN17619.1",
+                         rettype = "fasta")
 ```
 
 
-From seqinr helpfile
-```{r, eval = F}
- seqinr::choosebank("genbank")
- bb <- seqinr::query("bb", "sp=Borrelia burgdorferi")
- # To get the names of the 4 first sequences:
- 
 
- # To get the 4 first sequences:
- bb1 <- sapply(bb$req[1], seqinr::getSequence, as.string = FALSE) 
- bb2 <- sapply(bb$req[2], seqinr::getSequence, as.string = FALSE) 
-```
 
 Display the contents of "lepraeseq"
-```{r, eval = F}
-## lepraeseq
-bb1
+```{r}
+leprae_fasta
 ```
 
+Clean
+```{r}
+leprae_vector <-fasta_cleaner(leprae_fasta)
+ulcerans_vector <-fasta_cleaner(ulcerans_fasta)
+```
+
+Examine
+
+```{r}
+leprae_vector
+```
 
 ## Comparing two sequences using a dotplot
 
@@ -81,16 +79,16 @@ We can create a dotplot for two sequences using the “dotPlot()” function in 
 
 For example, if we want to create a dotplot of the sequences for the chorismate lyase proteins from Mycobacterium leprae and Mycobacterium ulcerans, we would type:
 
-this is slow
-```{r, eval = F}
-seqinr::dotPlot(bb1[1:100], bb2[1:100])
+
+```{r}
+seqinr::dotPlot(leprae_vector, ulcerans_vector)
 ```
 
 
 
-In the dotplot above, the M. leprae sequence is plotted along the x-axis (horizontal axis), and the M. ulcerans sequence is plotted along the y-axis (vertical axis). The dotplot displays a dot at points where there is an identical amino acid in the two sequences.
+In the dotplot above, the *M. leprae* sequence is plotted along the x-axis (horizontal axis), and the *M. ulcerans* sequence is plotted along the y-axis (vertical axis). The dotplot displays a dot at points where there is an identical amino acid in the two sequences.
 
-For example, if amino acid 53 in the M. leprae sequence is the same amino acid (eg. “W”) as amino acid 70 in the M. ulcerans sequence, then the dotplot will show a dot the position in the plot where x =50 and y =53.
+For example, if amino acid 53 in the *M. leprae* sequence is the same amino acid (eg. “W”) as amino acid 70 in the M. ulcerans sequence, then the dotplot will show a dot the position in the plot where x =50 and y =53.
 
 In this case you can see a lot of dots along a diagonal line, which indicates that the two protein sequences contain many identical amino acids at the same (or very similar) positions along their lengths. This is what you would expect, because we know that these two proteins are homologues (related proteins).
 
@@ -103,14 +101,19 @@ There are two types of alignment in general. A global alignment is an alignment 
 
 The first step in computing a alignment (global or local) is to decide on a scoring system. For example, we may decide to give a score of +2 to a match and a penalty of -1 to a mismatch, and a penalty of -2 to a gap. Thus, for the alignment:
 
-G A A T T C
-G A T T - A
+```{r echo = F}
+"G A A T T C"
+"G A T T - A"
+```
 we would compute a score of 2 + 2 -1 + 2 -2 - 1 = 2. 
 
 Similarly, the score for the following alignment is 2 + 2 -2 + 2 + 2 -1 = 5:
 
-G A A T T C
-G A - T T A
+```{r echo = F}
+"G A A T T C"
+"G A - T T A"
+```
+
 The scoring system above can be represented by a scoring matrix (also known as a substitution matrix). The scoring matrix has one row and one column for each possible letter in our alphabet of letters (eg. 4 rows and 4 columns for DNA sequences). The (i,j) element of the matrix has a value of +2 in case of a match and -1 in case of a mismatch.
 
 We can make a scoring matrix in R by using the nucleotideSubstitutionMatrix() function in the Biostrings() package. The Biostrings package is part of a set of R packages for bioinformatics analysis known as Bioconductor (www.bioconductor.org/).
@@ -123,7 +126,9 @@ To make a scoring matrix which assigns a score of +2 to a match and -1 to a mism
 
 ```{r}
 library(Biostrings)
-sigma <- nucleotideSubstitutionMatrix(match = 2, mismatch = -1, baseOnly = TRUE)
+sigma <- nucleotideSubstitutionMatrix(match = 2, 
+                                      mismatch = -1, 
+                                      baseOnly = TRUE)
 sigma # Print out the matrix
 ```
 
@@ -143,12 +148,14 @@ For example, to find the score for the optimal global alignment between the sequ
 ```{r}
 s1 <- "GAATTC"
 s2 <- "GATTA"
-
 ```
 
 ```{r}
-globalAligns1s2 <- Biostrings::pairwiseAlignment(s1, s2, substitutionMatrix = sigma, gapOpening = -2,
-gapExtension = -8, scoreOnly = FALSE)
+globalAligns1s2 <- Biostrings::pairwiseAlignment(s1, s2, 
+                                                 substitutionMatrix = sigma, 
+                                                 gapOpening = -2,
+                                                 gapExtension = -8, 
+                                                 scoreOnly = FALSE)
 ```
 
 
@@ -189,14 +196,12 @@ To find the optimal global alignment between the protein sequences “PAWHEAE”
 data(BLOSUM50)
 s3 <- "PAWHEAE"
 s4 <- "HEAGAWGHEE"
-
 ```
 
 
 ```{r}
 globalAligns3s4 <- pairwiseAlignment(s3, s4, substitutionMatrix = "BLOSUM50", gapOpening = -2,
 gapExtension = -8, scoreOnly = FALSE)
-
 ```
 
 ```{r}
@@ -215,37 +220,41 @@ You can align these sequences using pairwiseAlignment() from the Biostrings pack
 
 As its input, the pairwiseAlignment() function requires that the sequences be in the form of a single string (eg. “ACGTA”), rather than as a vector of characters (eg. a vector with the first element as “A”, the second element as “C”, etc.). Therefore, to align the M. leprae and M. ulcerans chorismate lyase proteins, we first need to convert the vectors lepraeeq and ulceransseq into strings. We can do this using the c2s() function in the SeqinR package:
 
-```{r, eval = F}
-lepraeseqstring <- seqinr::c2s(lepraeseq)     # Make a string that contains the sequence in "lepraeseq"
+```{r}
+lepraeseq_string <- seqinr::c2s(leprae_vector)     # Make a string that contains the sequence in "lepraeseq"
 
 ```
 
-```{r , eval = F}
-ulceransseqstring <- c2s(ulceransseq) # Make a string that contains the sequence in "ulceransseq"
+```{r}
+ulceransseq_string <- seqinr::c2s(ulcerans_vector) # Make a string that contains the sequence in "ulceransseq"
 ```
 
-Furthermore, pairwiseAlignment() requires that the sequences be stored as uppercase characters. Therefore, if they are not already in uppercase, we need to use the toupper() function to convert lepraeseqstring and ulceransseqstring to uppercase:
+Furthermore, pairwiseAlignment() requires that the sequences be stored as uppercase characters. Therefore, if they are not already in uppercase, we need to use the toupper() function to convert lepraeseq_string and ulceransseq_string to uppercase:
 
-```{r, eval = F}
-lepraeseqstring <- toupper(lepraeseqstring)
-ulceransseqstring <- toupper(ulceransseqstring)
+```{r}
+lepraeseq_string <- toupper(lepraeseq_string)
+ulceransseq_string <- toupper(ulceransseq_string)
 ```
 
-```{r, eval = F}
-lepraeseqstring # Print out the content of "lepraeseqstring"
+```{r}
+lepraeseq_string # Print out the content of "lepraeseq_string"
 ```
 
 
 We can now align the the *M. leprae* and *M. ulcerans* chorismate lyase protein sequences using the pairwiseAlignment() function:
 
-```{r, eval = F}
-globalAlignLepraeUlcerans <- pairwiseAlignment(lepraeseqstring, ulceransseqstring,
-  substitutionMatrix = BLOSUM50, gapOpening = -2, gapExtension = -8, scoreOnly = FALSE)
+```{r}
+globalAlignLepraeUlcerans <- Biostrings::pairwiseAlignment(lepraeseq_string, 
+                                               ulceransseq_string,
+                                               substitutionMatrix = BLOSUM50, 
+                                               gapOpening = -2, 
+                                               gapExtension = -8, 
+                                               scoreOnly = FALSE)
 
 ```
 
 
-```{r, eval = F}
+```{r}
 globalAlignLepraeUlcerans # Print out the optimal global alignment and its score
 ```
 
@@ -259,7 +268,7 @@ The R function “printPairwiseAlignment()” below will do this for you:
 
 To use this function you first need to copy and paste this function into R. You can then use our function printPairwiseAlignment() to print out the alignment between the M. leprae and M. ulcerans chorismate lyase proteins (we stored this alignment in the globalAlignLepraeUlcerans variable, see above), in blocks of 60 alignment columns:
 
-```{r, eval = F}
+```{r}
 printPairwiseAlignment(globalAlignLepraeUlcerans, 60)
 ```
 
@@ -272,20 +281,25 @@ You can use the pairwiseAlignment() function to find the optimal local alignment
 
 For example, to find the best local alignment between the M. leprae and M. ulcerans chorismate lyase proteins, we can type:
 
-```{r, eval = F}
-localAlignLepraeUlcerans <- pairwiseAlignment(lepraeseqstring, ulceransseqstring,
-  substitutionMatrix = BLOSUM50, gapOpening = -2, gapExtension = -8, scoreOnly = FALSE, type="local")
+```{r}
+localAlignLepraeUlcerans <- pairwiseAlignment(lepraeseq_string, 
+                                              ulceransseq_string,
+                                              substitutionMatrix = BLOSUM50, 
+                                              gapOpening = -2, 
+                                              gapExtension = -8, 
+                                              scoreOnly = FALSE, 
+                                              type="local")
 
 ```
 
  Print out the optimal local alignment and its score
-```{r, eval = F}
+```{r}
 localAlignLepraeUlcerans 
 ```
 
 
 
-```{r, eval = F}
+```{r}
 printPairwiseAlignment(localAlignLepraeUlcerans, 60)
 ```
 
