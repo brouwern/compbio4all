@@ -1,0 +1,150 @@
+---
+title: "Walkthrough - making a simple dataframe"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Walkthrough - making a simple dataframe}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+In this walkthrough we'll take a simple dataset that is presented as lists of seperate numbers (eg 1,2,3,4) and put them into vectors.  We'll then take these vectors and make simply dataframe.  We'll then make a boxplot using ggplot2 and ggpubr.
+
+
+## Working with data in 2 seperate vectors
+
+* Data often come in 2 seperate sets of numbers, such as "the control group had lengths 4, 5, 6, 3, and 3, while the treatment group had length 11, 12, 6, 4 and 7".
+* One way to work with data like this in R is to load each set of numbers into a "vector" using the c() function
+
+```{r}
+control <-   c(4,  5,6,3,3)
+treatment <- c(11,12,6,4,7)
+```
+
+
+### Summary Statistics
+
+We can calculate the mean and other summary statistics of each vector on its own
+
+```{r}
+mean(control)
+sd(control)
+summary(control)
+```
+
+### Making a dataframe
+
+To plot data its is almost always best to set it up in a dataframe.
+
+Starting with the raw data we could make a dataframe like this
+
+```{r}
+dat <- data.frame(length = c(4,  5,6,3,3,
+                             11,12,6,4,7),
+                  group = c("C","C","C","C","C",
+                            "T","T","T","T","T"))
+```
+
+
+
+We can make a dataframe from the two vectors we've already typed up like this by surrounding them with a c() like this " c(control, treatment) "
+
+
+```{r}
+dat <- data.frame(length = c(control, 
+                             treatment),
+                  group = c("C","C","C","C","C",
+                            "T","T","T","T","T"))
+```
+
+
+### Making a boxplot
+
+We can make a boxplot from the data like this using ggpubr
+
+```{r}
+library(ggplot2)
+library(ggpubr)
+
+ggboxplot(data = dat,
+          y = "length",
+          x = "group")
+```
+
+
+### Making a histogram
+
+* An alternative to using a boxplot is a histogram.
+* We can split up the data by treatment using facet.by = "group"
+* Because my sample dataset has so few datapoints this doesn't look very good.
+
+```{r}
+gghistogram(data = dat,
+          x = "length",
+          facet.by = "group")
+```
+
+### Making a density plot
+
+A plot that is similar to a histogram is a density plot.  
+```{r}
+ggdensity(data = dat,
+          x = "length",
+          facet.by = "group",
+          fill = "group")
+```
+
+
+
+### Advanced
+
+You can save yourself some typing by using the rep() command when making your dataframe since the group codes "C" and "T" get repeated.  IF you do this you need to make sure you keep track of all your parenetheses.
+
+```{r}
+dat <- data.frame(length = c(control, 
+                             treatment),
+                  group = c(rep("C",5),
+                            rep("T",5)))
+```
+
+
+### Historical reference
+
+
+#### Base R
+In the old days (eg 2008...) we used to make our boxplot using the boxplot function.
+
+```{r}
+boxplot(length ~ group, data = dat)
+```
+
+
+In the less old days (eg 2015) we used to make our boxplots using regular qplot or ggplot
+
+#### ggplot's qplot 
+```{r,eval =FALSE}
+qplot(data = dat,
+      y = length,
+      x = group,
+      geom = "boxplot")
+```
+
+
+#### Standard ggplot
+```{r, eval = FALSE}
+ggplot(data = dat,
+      aes(y = length,
+      x = group)) +
+        geom_boxplot()
+```
+

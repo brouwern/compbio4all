@@ -1,0 +1,33 @@
+---
+title: "a) Project notes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{a) Project notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+
+## TODO
+
+go through all my repos to look for addiationl code
+
+blast-stats project
+https://github.com/brouwern/blaststats
+
+https://github.com/brouwern/carnivorephylo
+
+https://github.com/brouwern/CaseStudiesEcoStats

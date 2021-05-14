@@ -1,0 +1,291 @@
+---
+title: "Displaying data - means & error bars"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Displaying data - means & error bars}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+
+
+
+```{r}
+errbar2 <- function (x, y, yplus, yminus, cap = 0.015, main = NULL, sub = NULL, 
+          xlab = as.character(substitute(x)), ylab = if (is.factor(x) || 
+                                                         is.character(x)) "" else as.character(substitute(y)), 
+          add = FALSE, lty = 1, type = "p", ylim = NULL, lwd = 1, pch = 16, 
+          errbar.col = par("fg"), Type = rep(1, length(y)), ...) 
+{
+  if (is.null(ylim)) 
+    ylim <- range(y[Type == 1], yplus[Type == 1], yminus[Type == 
+                                                           1], na.rm = TRUE)
+  if (is.factor(x) || is.character(x)) {
+    x <- as.character(x)
+    n <- length(x)
+    t1 <- Type == 1
+    t2 <- Type == 2
+    n1 <- sum(t1)
+    n2 <- sum(t2)
+    omai <- par("mai")
+    mai <- omai
+    mai[2] <- max(strwidth(x, "inches")) + 0.25
+    par(mai = mai)
+    on.exit(par(mai = omai))
+    plot(NA, NA, xlab = ylab, ylab = "", xlim = ylim, ylim = c(1, 
+                                                               n + 1), axes = FALSE, ...)
+    axis(1)
+    w <- if (any(t2)) 
+      n1 + (1:n2) + 1
+    else numeric(0)
+    axis(2, at = c(seq.int(length.out = n1), w), labels = c(x[t1], 
+                                                            x[t2]), las = 1, adj = 1)
+    points(y[t1], seq.int(length.out = n1), pch = pch, type = type, 
+           ...)
+    segments(yplus[t1], seq.int(length.out = n1), yminus[t1], 
+             seq.int(length.out = n1), lwd = lwd, lty = lty, col = errbar.col)
+    if (any(Type == 2)) {
+      abline(h = n1 + 1, lty = 2, ...)
+      offset <- mean(y[t1]) - mean(y[t2])
+      if (min(yminus[t2]) < 0 & max(yplus[t2]) > 0) 
+        lines(c(0, 0) + offset, c(n1 + 1, par("usr")[4]), 
+              lty = 2, ...)
+      points(y[t2] + offset, w, pch = pch, type = type, 
+             ...)
+      segments(yminus[t2] + offset, w, yplus[t2] + offset, 
+               w, lwd = lwd, lty = lty, col = errbar.col)
+      at <- pretty(range(y[t2], yplus[t2], yminus[t2]))
+      axis(side = 3, at = at + offset, labels = format(round(at, 
+                                                             6)))
+    }
+    return(invisible())
+  }
+  if (add) 
+    points(x, y, pch = pch, type = type, ...)
+  else plot(x, y, ylim = ylim, xlab = xlab, ylab = ylab, pch = pch, 
+            type = type, ...)
+  xcoord <- par()$usr[1:2]
+  smidge <- cap * (xcoord[2] - xcoord[1])/2
+  segments(x, yminus, x, yplus, lty = lty, lwd = lwd, col = errbar.col)
+  if (par()$xlog) {
+    xstart <- x * 10^(-smidge)
+    xend <- x * 10^(smidge)
+  }
+  else {
+    xstart <- x - smidge
+    xend <- x + smidge
+  }
+  segments(xstart, yminus, xend, yminus, lwd = lwd, lty = lty, 
+           col = errbar.col)
+  segments(xstart, yplus, xend, yplus, lwd = lwd, lty = lty, 
+           col = errbar.col)
+  return(invisible())
+}
+```
+
+
+
+
+# Plotting means
+
+One of the most common plots in science shows the mean value of a sample of data, and some kind of measurement of variablity using **error bars**.  Typically, the error bars are defined as +/- 1 **standard error (SE)**, or are **95% confidence intervals (95% CI)**
+<br>
+<br>
+There are several ways to build this type of plot in R, depending on your starting point and the exact approach you chose to use.  I'll walk you through just one approach.
+
+
+<br><br><br><br><br><br><br><br><br><br>
+----------------------------------------------
+
+
+
+# Mean values for mammal data
+
+I have calcualted some means and standard errors (SEs) from the "mammals" data
+<br>
+
+```{r, echo = F}
+library(MASS)
+data(mammals)
+
+# Don't show math yet
+n <- dim(mammals)[1]
+u.body <- mean(mammals$body)
+u.brain <- mean(mammals$brain)
+
+se.body <- sd(mammals$body)/sqrt(n)
+se.brain <- sd(mammals$brain)/sqrt(n)
+```
+
+## Mammal data parameters
+
+* 198.79 = Mean body size of mammals in dataset (in kg)
+* 0.28 = mean brain weight (in grams!)
+* 114.19 = SE for body size
+* 0.12 = SE for brain
+* The data come from 62 species
+* SE = standard error, a measure of variation
+
+<br>
+(Note that the "body size" is in kg, and the brain is in grams!  Because these 2 body parts are ver different in size its it a bit silly to make a plot like this; this exercise is for illustration only!)
+
+<br>
+
+Let's take this data and turn it into a simple dataframe.  First, we'll put the 2 mean measurements together into a **"vector"** using the **c()** command.
+<br>
+
+```{r}
+#assign means to a vector
+#this is a numeric vector
+mean.values <- c(198.79, 283.13) #must have comma!
+```
+
+<br>
+
+Then we'll put the two SE (standard error) values together
+```{r}
+#Assign SE to vector
+SE.values <- c(114.1932, 118.15)#must have comma!
+```
+<br>
+
+We'll also make a set of labels
+```{r}
+#this is a character vector
+body.part <- c("Body","Brain")
+```
+
+
+And, so we remember that the units are different, lets make a vector for that info
+```{r}
+#another character vector
+units <- c("g","kg")
+```
+
+
+Now, let's turn thse vectors into a simple dataset called "df" for "data.frame".  We'll use the **data.frame()** command.
+```{r}
+mam.df <- data.frame(body.part,mean.values, SE.values,units)
+```
+
+
+See what this dataframe looks like
+```{r}
+mam.df
+```
+
+
+
+# Plotting means using errbar()
+We'll plot these data using a function called **errbar()** (for "error bar") in the **Hmisc** package.  This will require a bit of code, but it will be good practice for reading a somewhat dense piece of R code.
+<br>
+Key to this code are 2 arguments: **yplus** and **yminus**.  These define how far above the mean value and how far below the mean value the error bars extend.  
+<br>
+
+# Basic plot of mammal means
+## Load the Hmisc package
+```{r}
+library(Hmisc)
+```
+
+
+## Make the plot using errbar()
+
+```{r}
+##plot means with Hmisc::errbar
+errbar2(x = c(1,2), #x =  sets the number of groups to plot on the x axis
+       y = mam.df$mean.values, #y = sets the location of the means
+       yplus = mam.df$mean.values + mam.df$SE.values, #location of top of the error bar
+       yminus = mam.df$mean.values-mam.df$SE.values #location of the bottom of the error bar
+       )
+```
+
+
+This plot is, frankly, not very pretty.  So we'll tweak it to make it look better.  
+<br>We'll do 2 things.  1st, we'll remove the labels from the axis, which are being shown as numbers even though we have 2 discrete categories.  This is done with the arguement in errbar **xaxt="n"**, which means "x-axis = no, turn it off".  
+
+We'll also change the scale of the x-axis to better center the points using the **xlim** arugment to set the upper and lower limits of the x axis.  (Don't worry, At this stage, its not essential that you understand what exactly is going on here.)
+
+
+```{r}
+errbar(x = c(1,2), #x = ... sets the number of groups to plot on the x axis
+       y = mam.df$mean.values, #y = ... sets the location of the means
+       yplus = mam.df$mean.values + mam.df$SE.values, #location of top of the error bar
+       yminus = mam.df$mean.values-mam.df$SE.values, #location of the bottom of the error bar
+       xlim=c(0.5,2.5), #set x-axis limits
+       xaxt="n")
+```
+
+
+This looks a little better.  As before, we can labels the axes using the **xlab** and **ylab** agruements.
+
+
+```{r}
+#make the plot
+errbar(x = c(1,2), 
+       y = mam.df$mean.values,
+       yplus = mam.df$mean.values + mam.df$SE.values, 
+       yminus = mam.df$mean.values-mam.df$SE.values, 
+       xlab = "Body Part",
+       ylab = "Mass",
+       xlim=c(0.5,2.5),
+       xaxt="n")
+
+
+```
+
+
+# Label the axes of the errbar plot
+Finally, we need to label what the 2 points are.  This is done with a special command, **"axis"**.  Again, don't worry about all of the details right now.
+```{r}
+#make the plot
+errbar(x = c(1,2), 
+       y = mam.df$mean.values, 
+       yplus = mam.df$mean.values + mam.df$SE.values, 
+       yminus = mam.df$mean.values-mam.df$SE.values, 
+       xlab = "Body Part",
+       ylab = "Mass",
+       xlim=c(0.5,2.5),
+       xaxt="n")
+
+#define the axis and labels
+axis(side=1,     #1 = the bottom
+     at=c(1,2),  #where on x-axis
+     labels=mam.df$body.part)  #what to print
+
+```
+
+
+# Annotate plot w/ legend() command
+To make things a bit more fancy we can a some annotations to the plot using the *legend()* command
+<br>
+
+```{r}
+errbar(x = c(1,2), 
+       y = mam.df$mean.values, 
+       yplus = mam.df$mean.values + mam.df$SE.values, 
+       yminus = mam.df$mean.values-mam.df$SE.values, 
+       xlab = "Body Part",
+       ylab = "Mass",
+       xlim=c(0.5,2.5),
+       xaxt="n")
+
+axis(side=1,     #1 = the bottom
+     at=c(1,2),  #where on x-axis
+     labels=mam.df$body.part)  #what to print
+
+legend("topleft", legend = "Error bars = SE",bty = "n") 
+legend("bottomleft", legend = "n = 62 spp",bty = "n") 
+```
+

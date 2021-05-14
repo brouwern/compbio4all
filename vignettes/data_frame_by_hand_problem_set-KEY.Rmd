@@ -1,0 +1,449 @@
+---
+title: "Dataframe by hand - problem set - KEY"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dataframe by hand - problem set - KEY}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+HAS SCORING FUNCTION AT END
+
+SAVE THIS FILE TO A SAFE PLACE WHERE YOU CAN RELOCATE IT
+
+In this exercise we will rebuild a data table and figure in a paper by kimura_KEY et al. "Growth temperatures of archaeal communities can be estimated from the guanine‐plus‐cytosine contents of 16 S rRNA gene fragments".  The paper can be downloaded from https://doi.org/10.1111/1758-2229.12035
+
+
+## Preliminaries
+
+This data is found in the dayhoff package.  The only other package you need it ggpubr for plotting.
+
+```{r}
+
+library(ggpubr)
+
+```
+
+
+
+## Step one: Make each column
+
+Read the data off of the original Table 1 and assign them to the objects put in place below.  Delete the NA. 
+
+```{r, echo = T}
+# strain initials (eg, "Methanocalculus pumilus" = "MP")
+strain    <- c("MP","NB","MO","MH","SA","SM","PO")
+
+# Growth temperatures
+T.min     <- c( 25,  25,  40,  50,  57,  70,  80)
+T.opt     <- c( 35,  45,  60,  70,  80,  92,  105)
+T.max     <- c( 45,  55,  75,  80,  89,  98,  110)
+
+# Accession number; leave this code as is
+accession <- rep(NA, length(strain))
+
+# Length of 16sRNA gene in BP
+length.bp <- c(790,796,791,808,808,810,808)
+
+# Percent GC
+P.GC      <- c(55.4,57.8,59.8,62.3,64.1,66.5,68.9)
+
+# Melting temperature
+T.m       <- c(86.2,87.2,88.2,88.9,89.7,90.3,90.9)
+
+# References - leave this as is
+reference <-rep(NA, length(strain))
+
+
+```
+
+
+### Quality control
+
+In the chunk below, type a command to check the size of one of the objects you just made.
+```{r}
+
+length(T.m)
+
+```
+
+
+In the chunk below, type a command to check the type of **data structure** of the object you just made.
+```{r}
+
+is(T.m)
+is.vector(T.m)
+class(T.m)
+is.numeric(T.m)
+
+typeof(T.m) #accetable, but this doesn't tell you data strcture
+
+```
+
+
+
+## Basic Data exploration
+
+What is the mean T.opt?  Replace the NA and type the appropriate code below .
+
+```{r}
+mean.T.opt <- mean(T.opt)
+mean.T.opt
+```
+
+What is the maximum P.GC value?
+
+```{r}
+
+max.P.GC <- max(P.GC)
+max.P.GC
+```
+
+
+
+## Part 2: Build the dataframe
+
+Now, re-make Table 1 of kimura_KEY et al (2013).
+
+Type in the code necessary to build that dataframe; assign it to an object called "kimuar"
+
+```{r}
+# Delete the "NA" and add the appropirate code
+kimura_KEY  <- data.frame(strain, 
+                      T.min, T.opt, T.max, 
+                      accession,
+                      length.bp, P.GC, T.m, 
+                      reference)
+```
+
+```{r}
+kimura_KEY
+```
+
+Using the dataframe as the source of the data, type a command which tells you the mean of the T.min values
+
+```{r}
+
+
+mean(kimura_KEY$T.min)
+
+```
+
+
+## Part 3: Make figure
+
+Re-make Figure 2 of kimura_KEY et al (2013).  **Include the following elements**
+
+* Data points from Table 1
+* Regression line (line of best fit)
+* Correlation coefficient (will show up as "R"; Plot 2 in the paper actually has R^2)
+* P-value (created by same arguement as the correlation coefficient)
+
+The original Figure 2 has the sample size listed and some small error bars around the data points.  Don't worry about this.
+
+In addition to previous exercises you may with to consult this site:
+http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/78-perfect-scatter-plots-with-correlation-and-marginal-histograms/
+
+
+```{r, echo = T}
+#Note: making plots doesn't involve the assignment operator
+ggscatter(data = kimura_KEY,
+         y = "P.GC",
+         x = "T.m",
+         add = "reg.line",
+         cor.coef = T) + 
+  ggtitle("Key")
+```
+
+
+Now add teh arguement size = "length.bp" so that the size of the points is scaled to that column.
+
+```{r, echo = T}
+#Note: making plots doesn't involve the assignment operator
+ggscatter(data = kimura_KEY,
+         y = "P.GC",
+         x = "T.m",
+         add = "reg.line",
+         size = "length.bp",
+         cor.coef = T) + 
+  ggtitle("Key")
+```
+
+
+## Graph of length.bp
+
+Create a graph that shows the relationship between T. and length.bp
+
+```{r}
+ggscatter(data = kimura_KEY,
+         y = "T.m",
+         x = "length.bp",
+         add = "reg.line",
+         cor.coef = T) + 
+  ggtitle("Key")
+```
+
+
+
+## Create new variable: T.m/length.bp
+
+
+Divide T.m by by length.bp; assign this to a column in the table called T.m.per.bp
+
+
+```{r}
+
+kimura_KEY$T.m.per.bp <- kimura_KEY$T.m/kimura_KEY$length.bp
+
+# Other versions also work and are equivalent
+T.m/length.bp == c(T.m/length.bp)
+kimura_KEY$T.m/kimura_KEY$length.bp == c(T.m/length.bp)
+
+```
+
+
+### Short answer question: What am I having you do this? (2-4 sentences)
+
+
+
+
+
+
+
+Assign the mean length.bp to an object called mean.length.bp
+```{r}
+
+mean.length.bp <- mean(kimura_KEY$length.bp)
+
+```
+
+
+Multiply the column T.m.per.bp by the value mean.length.bp.  Assign it to a column in the dataframe called T.m.per.mean.bp
+
+```{r}
+
+kimura_KEY$T.m.per.mean.bp <- kimura_KEY$T.m.per.bp*mean.length.bp
+
+```
+
+
+The new column created
+
+```{r}
+mean(kimura_KEY$T.m.per.mean.bp)
+```
+
+
+### Short answer question: What am I having you do this? (2-4 sentences)
+
+
+
+
+
+
+## New plot: T.m801 versus P.GC
+
+
+Create a graph like Figure 2 from the original paper but using T.m.per.mean.bp.
+
+
+### Correct axes
+
+T.m (now T.m.per.mean.bp) on x-axis
+y axis is still P.GC
+
+```{r}
+ggscatter(data = kimura_KEY,
+         y = "T.m.per.mean.bp",
+         x = "P.GC",
+         add = "reg.line",
+         cor.coef = T)
+```
+
+### Flipped axes
+
+```{r}
+ggscatter(data = kimura_KEY,
+         x = "T.m.per.mean.bp",
+         y = "P.GC",
+         add = "reg.line",
+         cor.coef = T)
+```
+
+
+### Short answer question:  What has changed with this new plot? Why? (3-5 sentences)
+
+
+
+
+
+SAVE THIS FILE TO A SAFE PLACE WHERE YOU CAN RELOCATE IT
+
+```{r}
+
+```
+
+
+
+## Grading function
+
+
+T.min     <- 
+T.opt     <- 
+T.max     <- 
+
+# Accession number; leave this code as is
+accession <- 
+
+# Length of 16sRNA gene in BP
+length.bp <- 
+
+# Percent GC
+P.GC      <- 
+
+# Melting temperature
+T.m       
+
+# References - leave this as is
+reference <-
+
+
+```{r, eval = F}
+
+# rename final data frame
+kimura <- kimura_KEY
+
+#key objects and columns created
+key.list <- list( #strain = c("MP","NB","MO","MH","SA","SM","PO"),    
+T.min = c( 25,  25,  40,  50,  57,  70,  80),    
+T.opt = c( 35,  45,  60,  70,  80,  92,  105),     
+T.max = c( 45,  55,  75,  80,  89,  98,  110),
+
+# accession = rep(NA, length(strain)), 
+length.bp = c(790,796,791,808,808,810,808), 
+P.GC     = c(55.4,57.8,59.8,62.3,64.1,66.5,68.9),     
+T.m      = c(86.2,87.2,88.2,88.9,89.7,90.3,90.9),       
+# reference =  rep(NA, length(strain)),
+mean.T.opt = mean(c( 35,  45,  60,  70,  80,  92,  105)),
+max.P.GC = max(c(55.4,57.8,59.8,62.3,64.1,66.5,68.9)),
+mean.length.bp = mean(c(790,796,791,808,808,810,808)),
+T.m.per.bp = c(86.2,87.2,88.2,88.9,89.7,90.3,90.9)/c(790,796,791,808,808,810,808),
+T.m.per.mean.bp =  c(86.2,87.2,88.2,88.9,89.7,90.3,90.9)/c(790,796,791,808,808,810,808)*mean(c(790,796,791,808,808,810,808)))
+
+
+```
+
+```{r, eval = F}
+score_assignment <- function(){
+  score.dataframe <- data.frame(
+           i = 1:length(key.list),
+           object =names(key.list),
+           exists = NA,
+           correct = NA,
+           stringsAsFactors = F)
+for(i in 1:length(key.list)){
+  object.i.name <- score.dataframe$object[i]
+  score.dataframe$exists[i] <- exists(object.i.name, envir = .GlobalEnv)
+  
+  #see if object exists in memory
+  if(exists(object.i.name) == TRUE){
+    object.i <- try(get(object.i.name,envir = .GlobalEnv))
+    object.i.check <- key.list[[object.i.name]] == object.i
+    object.i.score <- ifelse(any(object.i.check != TRUE) == FALSE, 1, 0)
+    score.dataframe$correct[i] <- object.i.score
+  }
+  
+  # see if object stored just in dataframe
+  if(exists(object.i.name) == FALSE){
+    object.i <- try(kimura[,object.i.name])
+    object.i.check <- key.list[[object.i.name]] == object.i
+    object.i.score <- ifelse(any(object.i.check != TRUE) == FALSE, 1, 0)
+    score.dataframe$correct[i] <- object.i.score
+    
+    score.dataframe$exists[i] <-ifelse(score.dataframe$correct[i] == 1,TRUE,FALSE)
+  }
+ 
+}
+  return(score.dataframe)
+}
+
+```
+
+
+
+```{r, eval = F}
+setwd("C:/Users/lisanjie/Downloads/problemset1")
+
+files.rmd <- list.files(pattern  = ".Rmd")
+length(files.rmd)
+scores.df <- data.frame(email = rep(NA,length(files.rmd)),
+                        score.exists = NA,
+                        score.correct = NA)
+
+for(i in 1:nrow(scores.df)){
+
+  
+# Hack: scrub from memory anything related to answers
+## otherwise previous students work gets used to score current
+## student
+all.files <- ls()   
+i.keep <- which(all.files %in% c("scores.df", "files.rmd","key.list","score_assignment","i"))
+rm(list = all.files[-i.keep])  
+  
+  
+rmd.file.i <- files.rmd[i]
+
+# rmd.file.i <- "Problem set 1 (for  Test 1 )_agf39_attempt_2019-10-01-13-43-55_data_frame_by_hand_Amanda_Finney.Rmd"
+
+## Read in raw text
+tx  <- readLines(rmd.file.i)
+
+### clean bad code
+#### remove rm(list = ls())
+tx  <- gsub(pattern = "rm\\(list", replace = "#rm list", x = tx)
+
+#### remove install.packages()
+tx  <- gsub(pattern = "install.packages", replace = "# install.packages", x = tx)
+
+#### remove update.packages()
+tx  <- gsub(pattern = "update.packages", replace = "# update.packages", x = tx)
+
+#### remove update.packages()
+tx  <- gsub(pattern = "system\\(", replace = "# system", x = tx)
+tx  <- gsub(pattern = "setwd\\(", replace = "# setwd", x = tx)
+tx  <- gsub(pattern = "source\\(", replace = "# source", x = tx)
+
+
+
+writeLines(tx, con=rmd.file.i)
+
+# run the .rmd file and load into global environemnt
+knitr::knit(rmd.file.i,quiet = F)
+
+email.i <- gsub("(.*)([_])([a-z][a-z][a-z][0123456789][0123456789][.]*)([_])(.*)","\\3",rmd.file.i)
+
+score.table.i <- try(score_assignment())
+exists.score.i <- try(length(which(score.table.i$exists == TRUE)))
+correct.score.i <-try(length(which(score.table.i$correct == TRUE)))
+
+scores.df$email[i] <- email.i
+scores.df$score.exists[i] <- exists.score.i
+scores.df$score.correct[i] <- correct.score.i
+#View(scores.df)
+}
+
+write.csv(scores.df, file = "scores_df2.csv")
+
+```
+

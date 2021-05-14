@@ -116,21 +116,21 @@ usethis::use_package("ape", "Imports")
 usethis::use_package("phangorn", "Imports")
 
 usethis::use_package("ggplot2", "Imports")
+usethis::use_package("ggpubr",   "Imports")
 usethis::use_package("rentrez", "Imports")
 usethis::use_package("seqinr", "Imports")
-usethis::use_package("‘UniprotR’",   "Imports") # not used?
+#usethis::use_package("UniprotR",   "Imports") # not used?
 usethis::use_package("Biostrings",   "Imports") # oh boy
-# #usethis::use_package("formatR",   "Imports")
-# usethis::use_package("readxl",   "Imports")
-# #usethis::use_package("cowplot",   "Imports")
-usethis::use_package("ggpubr",   "Imports")
-# #usethis::use_package("dplyr",   "Imports")
+usethis::use_package("MASS",   "Imports")
+usethis::use_package("scatterplot3d",   "Suggests")
+usethis::use_package("GGally",   "Suggests")
+usethis::use_package("cowplot",   "Imports")
 usethis::use_package("pander",   "Imports")
-# #usethis::use_package("plotrix",   "Imports")
+usethis::use_package("bio3d",   "Suggests")
 usethis::use_package("here",   "Imports")
-# #usethis::use_package("pbkrtest",   "Imports")
-# #usethis::use_package("lmerTest",   "Imports")
+usethis::use_package("survival",   "Suggests")
 usethis::use_package("reshape2",   "Imports")
+
 # usethis::use_package("arm",   "Imports")
 # #usethis::use_package("blme",   "Imports")
 
@@ -140,12 +140,12 @@ usethis::use_package("dplyr",   "Imports")
 usethis::use_package("tidyr",   "Imports")
 usethis::use_package("stringr",   "Imports")
 
-# use_package("nlme", "Imports")
-# 
-# use_package("bbmle", "Imports")
-# use_package("RCurl", "Imports")
-# use_package("GGally", "Imports")
-# use_package("broom", "Imports")
+usethis::use_package("evd", "Suggests")
+
+usethis::use_package("HistData", "Suggests")
+usethis::use_package("flextable", "Suggests")
+usethis::use_package("webshot", "Suggests")
+usethis::use_package("cluster", "Suggests")
 
 
 # devtools::use_package("data.table", "Imports")

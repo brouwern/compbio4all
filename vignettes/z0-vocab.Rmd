@@ -16,11 +16,56 @@ knitr::opts_chunk$set(
 )
 ```
 
-
+https://discoveringthegenome.org/glossary/Bioinformatics
+http://www.informatics.jax.org/glossary
+http://rosalind.info/glossary/
+https://rpubs.com/k8huebner/335128
 
 ENTREZ: an integratted collection of databases hosted by NCBI
 
 NCBI: National Cnterl for Biotechnology Information.
+
+
+
+setwd
+getwd
+list.files
+read.csv
+ls
+dim(), names() and  summary()
+
+
+
+install.packages()
+RCurl::getURL()
+scatter.smooth
+
+
+software
+library
+syntax
+quoted text
+Git
+GitHub
+repository
+repo
+software repository
+software developers
+developers
+open source
+CRAN
+source code
+source (verb)
+developement version (of software)
+version control
+.csv
+.xls
+.xlsx
+spreadsheet
+GUI
+point-and-click interface
+working directory
+wd
 
 sequence database: a compilation of macromolecular sequences which can be searched.  Most databases are online and can be searched mulitple ways.   Searching by an accession numbers provides direct access to a particular sequences. Datasbases can often be searched by keywords to look for sequences that have been flagged with particular features.  Databases can also be searched by algorithsm to look for sequences that are similar to a sequence of interest.
 

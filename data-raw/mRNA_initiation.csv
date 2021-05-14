@@ -1,0 +1,9 @@
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,seq.i,organism,gene,notes
+A,G,C,A,C,G,A,G,G,G,G,A,A,A,T,C,T,G,A,T,G,G,A,A,C,C,G,C,T,A,C,1,E. coli,trpA,E. coli trpA
+T,T,T,G,G,A,T,G,G,A,G,T,G,A,A,A,C,G,A,T,G,G,C,G,A,A,T,T,G,C,A,2,E. coli,araB,E. coli araB
+G,G,T,A,A,C,C,A,G,G,T,A,A,C,A,A,C,C,A,T,G,C,G,A,G,G,T,G,T,T,G,3,E. coli,thrA,E. coli thrA
+C,A,A,T,T,C,A,G,G,G,T,G,G,T,G,A,A,T,A,T,G,A,A,A,C,C,C,A,G,T,A,4,E. coli,LacI,E. coli LacI
+A,A,T,C,T,T,G,G,A,G,G,C,T,T,T,T,T,T,A,T,G,G,T,T,C,C,G,T,T,C,T,5,Z714 phage,protein A,phi X174 Phage a protein
+T,A,A,C,T,A,A,G,G,A,T,G,A,A,A,T,G,C,A,T,G,T,C,T,A,A,A,G,A,C,A,6,Q beta phage,replicase,Qbeta phage replicaase
+T,C,C,T,A,G,G,A,G,G,T,T,T,G,A,C,C,T,A,T,G,C,G,A,G,G,C,T,T,T,T,7,R17 phage,protein A,R17 phage A protine
+A,T,G,T,A,C,T,A,A,G,G,A,G,G,T,T,G,T,A,T,G,G,A,A,C,C,A,A,C,G,C,8,lambda phage,cro,Lambda phage cro

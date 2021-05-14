@@ -3,23 +3,23 @@
 # Human shroom 3 (H. sapiens)
 #install_github("ropensci/rentrez")
 library(rentrez)
-hShroom3 <- rentrez::entrez_fetch(db = "protein",
+hShroom3 <- entrez_fetch(db = "protein",
                          id = "NP_065910",
                          rettype = "fasta")
 
 # Mouse shroom 3a (M. musculus)
-mShroom3a <- rentrez::entrez_fetch(db = "protein",
+mShroom3a <- entrez_fetch(db = "protein",
                           id = "AAF13269",
                           rettype = "fasta")
 
 # Human shroom 2 (H. sapiens)
-hShroom2 <- rentrez::entrez_fetch(db = "protein",
+hShroom2 <- entrez_fetch(db = "protein",
                          id = "CAA58534",
                          rettype = "fasta")
 
 
 # Sea-urchin shroom
-sShroom <- rentrez::entrez_fetch(db = "protein",
+sShroom <- entrez_fetch(db = "protein",
                         id = "XP_783573",
                         rettype = "fasta")
 

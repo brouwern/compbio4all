@@ -1,0 +1,226 @@
+---
+title: "Prepare pika data"
+author: "brouwern@gmail.com"
+date: "November 11, 2017"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+Load packages
+```{r}
+library(elevatr)
+library(readxl)
+library(ggplot2)
+library(ggpubr)
+```
+
+Load data
+```{r}
+#load pika data
+pikas <- read_excel("~/1_R/git/wildlifeR_home/prep_files/pika/pikas.xlsx")
+
+#isolate 1st 2 columns, and rip out any tibble formatting
+pikas.LL <- data.frame(as.matrix(pikas[,c(2,1)]))
+
+#aribtrary projection - this has not be checked 
+prj_dd <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+
+#get elevations
+elevs <- get_elev_point(pikas.LL, 
+                        prj = prj_dd, 
+                        src = "epqs")
+
+
+```
+
+
+```{r}
+#add elevs to pika data
+pikas2 <- data.frame(pikas,elevs)
+
+#isolate focal columns
+pikas2 <- pikas2[,1:6]
+
+#rename data
+names(pikas2) <- c("lat","long",
+                   "pika.pres","marmot.pres",
+                   "talus.area",
+                   "elev.m")
+```
+
+
+Look at data
+```{r}
+summary(pikas2)
+```
+
+
+## Code factor variables
+
+Creat a group variable based on whether
+
+* no focal spp were seen
+* just pikas
+* just marmots
+* both species
+```{r}
+pikas2$group <- NA
+pikas2$marmot.pres <- as.character(pikas2$marmot.pres)
+pikas2$pika.pres   <- as.character(pikas2$pika.pres)
+
+#code explicitly where there is no dat available
+pikas2$marmot.pres[is.na(pikas2$marmot.pres)] <- "no.data"
+pikas2$pika.pres[is.na(pikas2$pika.pres)] <- "no.data"
+
+#code where both species present
+pikas2$group[with(pikas2,
+     which(marmot.pres == "Present" &
+           pika.pres %in% "Present"))] <- "both.spp.present"
+
+#code marmots only
+pikas2$group[with(pikas2,
+     which(marmot.pres == "Present" &
+           pika.pres %in% c("Absent","no.data")))] <- "marmots.only"
+
+#code dual absence
+pikas2$group[with(pikas2,
+     which(marmot.pres == "Absent" &
+           pika.pres == "Absent"))] <- "both.spp.absent"
+
+#code piaks only
+pikas2$group[with(pikas2,
+     which(marmot.pres %in% c("Absent","no.data") &
+           pika.pres == "Present"))] <- "pikas.only"
+
+pikas2$group <- factor(pikas2$group)
+
+summary(pikas2$group)
+
+
+pikas2[is.na(pikas2$group),]
+
+
+```
+
+## remove bad codings
+
+Looks like lat and long are mis-coded
+
+```{r}
+pikas2$lat[which(pikas2$lat<0)] 
+pikas2$long[which(pikas2$long<0)] 
+pikas2$elev.m[which(pikas2$elev.m<0)] <- NA
+```
+
+
+Remove NAs 
+```{r}
+i <- which(is.na(pikas2$group) == T)
+
+pikas2 <- pikas2[-i,]
+```
+
+
+Look at talus area - these are very broad categories
+```{r}
+summary(factor(pikas2$talus.area))
+
+with(pikas2, 
+     table(talus.area,
+           group))
+```
+
+
+
+Plot
+
+
+Rename
+
+```{r}
+pikas <- pikas2
+```
+
+
+```{r}
+pikas <- na.omit(pikas)
+save(pikas, file = "./data/pikas.RData")
+
+write.csv(na.omit(pikas), file = "./inst/extdata/pikas.csv")
+```
+
+```{r}
+ggboxplot(data = na.omit(pikas),
+          x = "group",
+          y = "elev.m")
+```
+
+
+
+```{r}
+
+m0 <- lm((elev.m) ~ 1, data = pikas)
+m1 <- lm((elev.m) ~ group, data = pikas)
+a1 <- aov((elev.m) ~ group, data = pikas)
+
+anova(m0,m1)
+
+TukeyHSD(a1)
+
+```
+
+
+
+```{r}
+summary(pikas2$talus.area)
+```
+
+
+
+
+```{r}
+head(pikas2)
+
+library(reshape2)
+
+pikas2$elev.m[which(pikas2$elev.m < 0)] <- NA
+pika3 <- melt(data = pikas2,id.vars = c("lat","long","talus.area","elev.m"))
+
+head(pika3)
+summary(pika3)
+
+names(pika3)[c(5,6)] <- c("spp","pres.abs")
+
+pika3$talus <- pika3$talus.area
+
+
+summary(pikas2$talus.area)
+pika3$talus <- gsub("<1000m2", "500", pika3$talus)
+pika3$talus <- gsub(">1 ha", "2500", pika3$talus)
+pika3$talus <- gsub("5 ha", "5000", pika3$talus)
+pika3$talus <- gsub(">5 ha", "7500", pika3$talus)
+
+
+library(ggplot2)
+library(ggpubr)
+
+pika3$elev.m.log <-log(pika3$elev.m)
+
+i <- which(pika3$pres.abs == "Present")
+ggboxplot(data = pika3[i,],
+          x = "spp",
+          y = "elev.m.log")
+
+t.test(elev.m ~ spp, data = pika3[i,])
+
+```
+
+
+

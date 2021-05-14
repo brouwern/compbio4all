@@ -1,0 +1,61 @@
+---
+title: "set up doves"
+author: "brouwern@gmail.com"
+date: "November 14, 2017"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+```{r}
+doves_PA <- read.csv("~/1_R/git/wildlifeR_home/dove_prep/doves_PA.csv")
+
+dim(doves_PA)
+```
+
+
+
+
+```{r}
+names(doves_PA)[1] <- "Year"
+names(doves_PA)[2] <- "State"
+names(doves_PA)[3] <- "Route"
+
+```
+
+
+
+there are errors in the county names - names chnage over time
+
+```{r}
+doves_PA2 <- dcast(data = doves_PA,
+                  formula = Year + State + Route ~ .,
+                  value.var = "tot.seen",
+                  fun.aggregate = sum)
+
+names(doves_PA2)[4] <- "tot.seen"
+
+dim(doves_PA)
+dim(doves_PA2)
+
+doves_PA <- doves_PA2
+```
+
+
+
+```{r}
+save(doves_PA, file = "./data/doves_PA.RData")
+```
+
+
+```{r}
+with(doves_PA,
+     table(Route, county))
+```
+

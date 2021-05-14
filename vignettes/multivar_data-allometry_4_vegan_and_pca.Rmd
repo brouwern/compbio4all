@@ -1,0 +1,156 @@
+---
+title: "Overview: The vegan package for PCA"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Overview: The vegan package for PCA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+
+### Download packages
+
+Only do this once, then comment out of the script.  You probably already did this in the previous Code Checkpoint.
+
+```{r}
+# install.packages("ggplot2")
+# install.package("vegan")
+```
+
+### Load the libraries
+
+```{r}
+library(ggplot2)
+library(vegan)
+```
+
+### Load the msleep package
+
+The mammals dataset is a classic dataset in the MASS package.  msleep is an updated version of the data that includes more numeric data (e.g. hours of sleep) and categorical data (e.g. if a species is endangered)
+
+
+```{r}
+data(msleep)
+```
+
+
+### Subset numeric variables
+
+msleep has a mixture of numeric and cateogrical varibles.  We want only the numeric data and a few key labels, which I'll also have to set up a special way.    Don't worry about the details
+
+First, all the columns we may want
+```{r}
+
+msleep_num <- msleep[,c("sleep_total","sleep_rem",
+                        "sleep_cycle","awake","brainwt" ,
+                        "bodywt","vore","order")]
+
+  
+```
+
+All data should be continuous numeric that can take on decimal values, except the last 2
+```{r}
+summary(msleep_num[,-c(7:8)])
+```
+
+
+We can look at these data with a scatterplot matrix
+```{r}
+plot(msleep_num[,-c(7:8)])
+```
+
+
+Convert to dataframe
+```{r}
+msleep_num <- data.frame(msleep_num)
+```
+
+
+
+
+Remove missing values
+
+```{r}
+msleep_num <- na.omit(msleep_num)
+```
+
+
+
+## Principal components analysis - base R
+
+Principal component analysis is typically done using base R functions.
+
+Run the PCA
+```{r}
+pca.out <- prcomp(msleep_num[,-c(7,8)], scale = TRUE)
+```
+
+
+Plot the output 
+```{r}
+biplot(pca.out)
+```
+
+
+
+## Principal components analysis - vegan
+
+The base R PCA output isn't very flexible.  The R package vegan is has a function rda() which does PCA and has many more nice features.
+
+For another example see
+https://rpubs.com/brouwern/veganpca
+
+
+
+Run the PCA using rda()
+```{r}
+rda.out <- vegan::rda(msleep_num[,-c(7,8)], scale = TRUE)
+```
+
+
+
+This displays the 2D PCA plot without the arrows.  For more info on what this code does, see the RPubs document linked above
+```{r}
+biplot(rda.out, display = "sites")
+
+```
+
+
+vegan has some nice tools for groups things.
+
+In this dataset I don't expect there to be any interest groups, but I'll check anyway.
+I will supply this code if needed.
+
+PCA is an exploratory method.  First I'll see if there are any groupsing based on diet ("vore").  Not really
+```{r}
+biplot(rda.out, display = "sites")
+
+vegan::ordihull(rda.out,
+         group = msleep_num$vore,
+         col = 1:7,
+         lty = 1:7,
+         lwd = c(3,6))
+```
+
+
+
+## Task
+
+Copy the prevous code chunk and change the group so that the taxonomic order is plotted.  Upload the image to this assignment.  Consider if there are any meaninginful groups.
+
+
+
+
+
+

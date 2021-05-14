@@ -1,0 +1,106 @@
+---
+title: "Prep Trillium"
+author: "brouwern@gmail.com"
+date: "November 7, 2017"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+
+```{r}
+trillium <- read_excel("~/1_R/git/wildlifeR_home/trillium_surveys_resave.xlsx", 
+     sheet = "for.calU")
+```
+
+
+
+```{r}
+summary(trillium$spp )
+i.trill <- which(trillium$spp == "T")
+
+trillium2 <- trillium[i.trill,]
+
+trillium2$spp <- factor(trillium2$spp)
+trillium2$status <- factor(trillium2$status)
+trillium2$eaten <- factor(trillium2$eaten)
+
+trillium2$sites <- factor(trillium2$sites)
+
+grep("[a-zA-Z]",trillium2$length.stem.cm)
+
+trillium2$length.leaf.cm <- as.numeric(trillium2$length.leaf.cm)
+
+trillium2$length.stem.cm <- as.numeric(trillium2$length.stem.cm)
+
+
+
+trillium2$site <- as.character(trillium2$sites)
+  
+  
+trillium2$site[grep("BV",trillium2$sites)] <- "BV"
+trillium2$site[grep("FH",trillium2$sites)] <- "FH"
+trillium2$site[grep("DZ",trillium2$sites)] <- NA
+
+```
+
+
+
+```{r}
+head(trillium2)
+
+summary(trillium2)
+```
+
+
+
+
+
+```{r}
+library(ggplot2)
+library(ggpubr)
+
+trillium2$site <- factor(trillium2$site)
+ggboxplot(data = trillium2,
+          y = "length.leaf.cm ",
+          x = "site")
+
+
+
+i.sites <- which(trillium2$site %in% c("ER","TW","WC","CN"))
+
+trillium3 <- trillium2[i.sites,]
+
+
+trillium4 <- trillium3[,c("site","spp",
+                          "length.stem.cm",
+                          "length.leaf.cm")]
+
+ggboxplot(data = trillium4,
+          y = "length.leaf.cm ",
+          x = "site")
+
+
+
+```
+
+
+
+```{r}
+trillium <- trillium4
+
+
+save(trillium, file = "./data/trillium.RData")
+```
+
+
+```{r}
+names(trillium)
+```
+

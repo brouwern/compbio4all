@@ -1,0 +1,354 @@
+---
+title: "Hiearchical clustering with Euclidean distances"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Hiearchical clustering with Euclidean distances}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+
+
+
+## Preliminaries
+
+### Download packages
+
+Only do this if needed
+```{r}
+# install.packages("ggplot2")
+# install.packages("ggpubr")
+```
+
+
+### Install packages
+
+```{r}
+library(ggplot2)
+library(ggpubr)
+```
+
+
+## Vocab
+
+using color to display a third dimenion, distance, Euclidean distance, numeric data, binary data, categorical data, dist()
+
+
+## Note: This is NOT a real analysis
+
+This is a toy analysis to get accross a specific point about distances.  The data are real and there are interesting biological questions about these data, but this is not a way explore them.
+
+
+
+## Load data
+
+From https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2651158/table/T1/
+
+* GC = the G+C% of the genome
+* mb = the size of the genome in megabase
+* spp = specifif epithet of the organism
+* chromosomes
+* genes = predicted number of genes in the genome
+
+```{r}
+# data
+GC <- c(42.3,37.5,22.6,19.4)
+mb <- c(26.8,23.5,23.1,23.3)
+genes <- c(5433,5188,5875,5403)
+chromosomes <- c(14,14,14,14)
+spp <- c("vivax", "knowlesi","yoelii","falciparum")
+
+# make dataframe
+plasmo <- data.frame(spp, mb, GC,genes)
+
+# label rows
+row.names(plasmo) <- spp
+```
+
+
+## Plot the data
+
+A third dimenions of the data is added by using size = genes.
+
+```{r}
+ggscatter(y = "mb",
+          x = "GC",
+          color = "spp",
+          size = "genes",
+          data = plasmo,
+          label = "spp",
+          xlim = c(18,42.5)) 
+```
+
+## Distances and distance matrices
+
+The firs step in cluster analysis and many related exploratory methods is to select a measure of **distance**.  There are many ways to calculate distances, and the proper choice depends on the type of data and the analysis.
+
+* When data are **numeric** (measured with a scale, calipers, rulers and/or can take on decimal values, and/or can be described by Bell-curve/Normal distribituion) **Euclidean distances** may be appropriate.  
+* When data are **binary** (0 or 1, present or absent), **categorical** (A, T, C, or G) other methods will almost definitely be better.
+* When data are **counts** it will depend.  When counts are relatively low and can contain zero (number of offspring) you may have to be careful.  When counts are large (number of RNA transcripts) it may be just fine.
+
+* Each field (ecology, phylogenetics, genomics) has best practices about selecting the proper distance.
+
+* It can be tempting to try out different distance methods to see which one gives you the results you like.  This is a form of p-hacking: manipulating your data, analysis, etc to get the statistical result or graph you want.
+
+https://bitesizebio.com/31497/guilty-p-hacking/#:~:text=The%20term%20p%2Dhacking%2C%20coined,decisions%20made%20by%20the%20investigator.
+
+
+
+## Calculate Euclidean distance
+
+Euclidean distance is what we learned in high-school geometry
+
+a^2 + b^2 = c^2
+
+We'll use this notation below:
+h^2 + v^2 = d^2
+
+* h = the horizontal distance between 2 points
+* v = vertical distance between 2 point
+* d = the diagonal Euclidean distance between 2 points
+
+
+Euclidean distance extend intuitively to three dimensions.  It can also be extended to any number of dimensions with no modification to the the math, though its much harder to visualize.
+
+### Distance from vivax to knowlesi
+
+First, calculate the horizontal distance (x-axis; GC)
+
+The data are
+```{r}
+plasmo[c(1,2),]
+```
+
+GC content is on the x-axis.  Vivax has a GC content of 42.3.  knowlesi has a GC content of 37.5  The horizontal distance is
+```{r}
+42.3-37.5
+```
+
+Let's call this distance h
+```{r}
+h <- 42.3-37.5
+```
+
+
+The horizontal distance between the points can be visualized like this
+```{r}
+ggscatter(y = "mb",
+          x = "GC",
+          color = "spp",
+          size = "genes",
+          data = plasmo,
+          label = "spp",
+          xlim = c(18, 42.5),
+          ylim = c(23, 27)) +
+    # vivax vs knowlesi
+   # horiz line
+   geom_segment(aes(y    = 26.8,    x = 37.5,
+                   yend = 26.8, xend = 42.3,
+                   colour = "segment")) +
+  annotate("text",
+           x = mean(c(42.3,37.5)), 
+           y = 27.1,
+           label = h)
+```
+
+Genome size in megabases is on the y-axis.  Vivax has a genome size of mb = 26.8 and knowlesi is mb = 23.5.  The vertical distance is therefore
+
+```{r}
+26.8-23.5
+```
+
+Let's call this distance v
+
+```{r}
+v <- 26.8-23.5
+```
+
+We can visualize the vertical and horizontal distances like this
+```{r}
+ggscatter(y = "mb",
+          x = "GC",
+          color = "spp",
+          size = "genes",
+          data = plasmo,
+          label = "spp",
+          xlim = c(18, 42.5),
+          ylim = c(23, 27)) +
+    # vivax vs knowlesi
+   # horiz line
+   geom_segment(aes(y    = 26.8,    x = 37.5,
+                   yend = 26.8, xend = 42.3,
+                   colour = "segment")) +
+  annotate("text",
+           x = mean(c(42.3,37.5)), 
+           y = 27.1,
+           label = h) +
+  # vert line
+   geom_segment(aes(y    = 23.5,    x = 37.5,
+                   yend = 26.8, xend = 37.5,
+                   colour = "segment")) +
+    annotate("text",
+           y = mean(c(26.8,23.5)), 
+           x = 35.1,
+           label = v) 
+```
+
+The Euclidean distance is 
+```{r}
+d2 <- h^2 + v^2
+d <- sqrt(d2)
+d
+```
+
+Round it off and call it "d.vk" for "vivax to knowlesi".
+```{r}
+d.vk <- round(d, 3)
+```
+
+We can visualize this
+```{r}
+ggscatter(y = "mb",
+          x = "GC",
+          color = "spp",
+          size = "genes",
+          data = plasmo,
+          label = "spp",
+          xlim = c(18, 42.5),
+          ylim = c(23, 27)) +
+    # vivax vs knowlesi
+   # horiz line
+   geom_segment(aes(y    = 26.8,    x = 37.5,
+                   yend = 26.8, xend = 42.3,
+                   colour = "segment")) +
+  annotate("text",
+           x = mean(c(42.3,37.5)), 
+           y = 27.1,
+           label = h) +
+  # vert line
+   geom_segment(aes(y    = 23.5,    x = 37.5,
+                   yend = 26.8, xend = 37.5,
+                   colour = "segment")) +
+    annotate("text",
+           y = mean(c(26.8,23.5)), 
+           x = 35.1,
+           label = v) +
+    # diag line
+  geom_segment(aes(y    = 23.5,    x = 37.5, 
+                   yend = 26.8, xend = 42.3, 
+                   colour = "segment"))+
+    annotate("text",
+           y = mean(c(26.8,23.5)), 
+           x = 40.95,
+           label = d.vk) 
+```
+
+If you want to be fancy, you can calculate the Euclidean distance in one step like this
+
+```{r}
+sqrt((42.3-37.5)^2 + (26.8-23.5)^2 )
+```
+
+
+### Distance from falciparum to yoelli
+
+These distance calcualtions are carried out pairwise for each pair of species.  For example, the data from falciparum and yeoli are
+```{r}
+plasmo[c(3,4),]
+```
+
+You can work the math out step by step yourself  In one line its this, saved to d.fy for distance to falciparum to yoeli
+```{r}
+d.fy <- sqrt((23.1-23.3)^2 + (22.6 - 19.4)^2)
+```
+
+We can visualized the horizontal, vertical, and diagonal (Euclidean) distances like this
+```{r}
+ggscatter(y = "mb",
+          x = "GC",
+          color = "spp",
+          size = "genes",
+          data = plasmo,
+          label = "spp") +
+  # falciparum vs yoelii
+   # horiz line
+   geom_segment(aes(y    = 23.1,    x = 22.6, 
+                   yend = 23.1, xend = 19.4, 
+                   colour = "segment")) +
+  # vert line
+   geom_segment(aes(y    = 23.1,    x = 19.4, 
+                   yend = 23.3, xend = 19.4, 
+                   colour = "segment")) +
+  # diag line
+  geom_segment(aes(y    = 23.1,    x = 22.6, 
+                   yend = 23.3, xend = 19.4, 
+                   colour = "segment"))
+```
+
+
+## Distance knowlesi to yoelli
+
+This would be repeated for all 6 possible comparisons.  For knowlesi to yeolii it is
+```{r}
+# knowlesi vs yoelii
+plasmo[c(2,3),]
+d.ky <- sqrt((23.5-23.1)^2 + (37.5 - 22.6)^2)
+```
+
+
+
+## Distances with the dist() function
+
+Compare my math to the dist() function.  See the help file for other distance metrics.
+
+```{r}
+d.vk
+d.fy
+d.ky
+dist(plasmo[,c("GC","mb")],method = "euclidean")
+```
+
+Save the distance matrix
+
+```{r}
+d_mat <- dist(plasmo[,c("GC","mb")],method = "euclidean")
+```
+
+
+## Forming the first cluster
+
+The first cluster is formed by combining the two closest items.  In this case we are considering taxa, though the data we are working with would never be used to build an acutal phylogenetic tree.
+
+The minimum distance is yeolii to falciparum
+```{r}
+d.fy
+```
+
+
+The minimum function works on a matrix like this
+```{r}
+min(d_mat)
+```
+
+The distance between the cluster is just this distance.  Cluster analysis typically assumes a perfectly bifurcating (branching) tree.  This looks like this
+
+```{r}
+d_mat_temp <- dist(plasmo[c(3,4),c("GC","mb")],method = "euclidean")
+clust_temp <- as.dendrogram(hclust(d_mat_temp))
+plot(clust_temp,type = "triangle", axes = F)
+```
+
+

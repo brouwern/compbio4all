@@ -1,0 +1,23 @@
+name,code,letter,MW.da,volume,bulkiness,polarity,isoelectric.pt,hydrophobe.34,hydrophobe.35,saaH2O,faal.fold,polar.req,freq,charge,hydropathy,volume.cat,polarity.cat,chemical,physicochemical,H_dynamics,essential,proteinogenic,taxa,formula,formula.linear
+Alanine,Ala,A,89,67,11.5,0,6,1.8,1.6,113,0.74,7,7.8,un,hydrophobic,verysmall,nonpolar,aliphatic,aliphatic,none,non-essential,proteinogenic,all,C3H7NO2,CH3-CH(NH2)-COOH
+Cysteine,Cys,C,121,86,13.46,1.48,5.07,2.5,2,140,0.91,4.8,1.1,un,hydrophobic,small,nonpolar,sulfur,sulfur,none,non-essential,proteinogenic,all,C3H7NO2S,HS-CH2-CH(NH2)-COOH
+Aspartic acid,Asp,D,133,91,11.68,49.7,2.77,-3.5,-9.2,151,0.62,13,5.19,neg,hydrophilic,small,polar,acidic,acidic,acceptor,non-essential,proteinogenic,all,C4H7NO4,HOOC-CH2-CH(NH2)-COOH
+Glutamic acid,Gln,E,146,109,13.57,49.9,3.22,-3.5,-8.2,183,0.62,12.5,6.72,neg,hydrophilic,medium,polar,acidic,acidic,acceptor,non-essential,proteinogenic,all,C5H9NO4,HOOC-(CH2)2-CH(NH2)-COOH
+Phenylalanine,Phe,F,165,135,19.8,0.35,5.48,2.8,3.7,218,0.88,5,4.39,un,hydrophobic,verylarge,nonpolar,aromatic,F,none,essential,proteinogenic,all,C9H11NO2,Ph-CH2-CH(NH2)-COOH
+Glycine,Gly,G,75,48,3.4,0,5.97,-0.4,1,85,0.72,7.9,6.77,un,neutral,verysmall,nonpolar,aliphatic,G(11),none,non-essential,proteinogenic,all,C2H5NO2,NH2-CH2-COOH
+Histidine,His,H,155,118,13.69,51.6,7.59,-3.2,-3,194,0.78,8.4,2.03,pos,neutral,medium,polar,basic,basic,donorandacceptor,essential,proteinogenic,all,C6H9N3O2,NH-CH=N-CH=C-CH2-CH(NH2)-COOH
+Isoleucine,Ile,I,131,124,21.4,0.13,6.02,4.5,3.1,182,0.88,4.9,6.95,un,hydrophobic,large,nonpolar,aliphatic,aliphatic,none,essential,proteinogenic,all,C6H13NO2,CH3-CH2-CH(CH3)-CH(NH2)-COOH
+Lysine,Lys,K,146,135,15.71,49.5,9.74,-3.9,-8.8,211,0.52,10.1,6.32,pos,hydrophilic,large,polar,basic,basic,donor,essential,proteinogenic,all,C6H14N2O2,H2N-(CH2)4-CH(NH2)-COOH
+Leucine,Leu,L,131,124,21.4,0.13,5.98,3.8,2.8,180,0.85,4.9,10.15,un,hydrophobic,large,nonpolar,aliphatic,aliphatic,none,essential,proteinogenic,all,C6H13NO2,(CH3)2-CH-CH2-CH(NH2)-COOH
+Methionine,Met,M,149,124,16.25,1.43,5.74,1.9,3.4,204,0.85,5.3,2.28,un,hydrophobic,large,nonpolar,sulfur,sulfur,none,essential,proteinogenic,all,C5H11NO2S,CH3-S-(CH2)2-CH(NH2)-COOH
+Asparagine,Asn,N,132,96,12.28,3.38,5.41,-3.5,-4.8,158,0.63,10,4.37,un,hydrophilic,small,polar,amide,amide,donorandacceptor,non-essential,proteinogenic,all,C4H8N2O3,H2N-CO-CH2-CH(NH2)-COOH
+Proline,Pro,P,115,90,17.43,1.58,6.3,-1.6,-0.2,143,0.64,6.6,4.26,un,neutral,small,nonpolar,aliphatic,P(10),none,non-essential,proteinogenic,all,C5H9NO2,NH-(CH2)3-CH-COOH
+Glutamine,Glu,Q,147,114,14.45,3.53,5.65,-3.5,-4.1,189,0.62,8.6,3.45,un,hydrophilic,medium,polar,amide,amide,donorandacceptor,non-essential,proteinogenic,all,C5H10N2O3,H2N-CO-(CH2)2-CH(NH2)-COOH
+Arginine,Arg,R,174,148,14.28,52,10.76,-4.5,-12.3,241,0.64,9.1,5.23,pos,hydrophilic,large,polar,basic,basic,donor,non-essential,proteinogenic,all,C6H14N4O2,HN=C(NH2)-NH-(CH2)3-CH(NH2)-COOH
+Serine,Ser,S,105,73,9.47,1.67,5.68,-0.8,0.6,122,0.66,7.5,6.46,un,neutral,verysmall,polar,hydroxyl,hydroxyl,donorandacceptor,non-essential,proteinogenic,all,C3H7NO3,HO-CH2-CH(NH2)-COOH
+Threonine,Thr,T,119,93,15.77,1.66,6.16,-0.7,1.2,146,0.7,6.6,5.12,un,neutral,small,polar,hydroxyl,hydroxyl,donorandacceptor,essential,proteinogenic,all,C4H9NO3,CH3-CH(OH)-CH(NH2)-COOH
+Valine,Val,V,117,105,21.57,0.13,5.96,4.2,2.6,160,0.86,5.6,7.01,un,hydrophobic,medium,nonpolar,aliphatic,aliphatic,none,essential,proteinogenic,all,C5H11NO2,(CH3)2-CH-CH(NH2)-COOH
+Tryptophan,Trp,W,204,163,21.67,2.1,5.89,-0.9,1.9,259,0.85,5.2,1.09,un,hydrophobic,verylarge,nonpolar,aromatic,W(8),donor,essential,proteinogenic,all,C11H12N2O2,Ph-NH-CH=C-CH2-CH(NH2)-COOH
+Tyrosine,Tyr,Y,181,141,18.03,1.61,5.66,-1.3,-0.7,229,0.76,5.4,3.3,un,neutral,verylarge,polar,aromatic,Y(9),donorandacceptor,non-essential,proteinogenic,all,C9H11NO3,HO-Ph-CH2-CH(NH2)-COOH
+Selenocysteine,NA,U,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,non-essential,proteinogenic,eukaryotessomeprokaryotes,NA,NA
+Pyrrolysine,NA,O,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,proteinogenic,archeaandbacterias,NA,NA

@@ -1,0 +1,240 @@
+---
+title: "Software checkpoint: ggplot2 and ggpubr-KEY"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Software checkpoint: ggplot2 and ggpubr-KEY}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+
+
+## Vocab
+
+* wrapper
+* ggplot2
+* ggpubr
+* line of best fit
+* y = B0 + B1*x
+* residual
+* data ellipse
+* correlation coefficient
+
+## Learning objectives
+
+* Know what a wrapper is
+* Know the relationship between ggplot2 and ggpubr
+* Be able to run code that makes graphs with ggpubr
+* Know how color and shape can make a plot easier to interpret
+
+
+## Introduction
+
+ggplot2 is one of the most well-known and widely used R packages.  It is arguably the most powerful and flexible package for creating plots in R.  
+
+ggplot2 has a very steep learning curve.  ggpubr is a package that creates "wrappers" for much of ggplot2's core functionality.  A **wrapper** is a function that runs another function for you, often making its use easier while also making certain decisions for you by setting certain defaults.
+
+ggpubr is really cool, but unfortunately its syntax is different from both base R plotting and ggplot2.  I will provide you ggpubr code whenever we need it; feel free to experiment, but you'll need to tinker with it or read the help file.
+
+This Software Check point will have you do the following things to get you set up to use these packages
+
+* Download ggplot2 and ggpubr
+* Install a data set of allometric data similar to the mammals data of MASS
+* Make some basic plots
+
+## Preliminaries 
+
+### Download packaged 
+
+Only do this once, then comment out of the script.
+
+```{r}
+# install.packages("ggplot2")
+# iinstall.packages("ggpubr")
+```
+
+### Load the libraries
+
+```{r}
+library(ggplot2)
+library(ggpubr)
+```
+
+### Load the msleep package
+
+The mammals dataset is a classic dataset in the MASS package.  msleep is an updated version of the data that includes more numeric data (e.g. hours of sleep) and categorical data (e.g. if a species is endangered)
+
+
+```{r}
+data(msleep)
+```
+
+
+## Make a basic ggpubr plot
+
+Let's make a boxplot in ggpubr.  ggpubr has hand functions like ggboxplot, gghistogram, and ggscatter.
+
+
+### ggpubr syntax
+
+ggpubr does NOT use formula notation like base R function.  You have to explicitly define a y and an x variable.  Additionally, the variables MUST be in quotes.
+
+Let's make a boxplot of the amount of sleep an organism gets (sleep_total) and what it eats (vore).
+
+Note: Ignore any errors; these are due to NAs in the data.
+
+```{r}
+ggboxplot(y = "sleep_total",
+          x = "vore",
+          data = msleep)
+```
+
+### Color-coding data
+
+The x-axis is "vore" and is labeled.  A general principle of data visualization is that its always good to vary color, size and shape whenever possible, even if its redundant.  This helps reinforce the groupings or patterns in the data.
+
+Change the color of the lines of the boxes:
+```{r}
+ggboxplot(y = "sleep_total",
+          x = "vore",
+          color = "vore",
+          data = msleep)
+```
+
+
+Change the fill inside the boxes:
+```{r}
+ggboxplot(y = "sleep_total",
+          x = "vore",
+          fill = "vore",
+          data = msleep)
+```
+
+
+
+## Scatter plots in ggpubr
+
+Ignore any errors.
+
+```{r}
+ggscatter(y = "sleep_rem",
+          x = "sleep_total",
+          data = msleep)
+```
+
+
+## Coloring by a categorical variable
+
+Note that almost everything goes in quotes
+
+y = "sleep_rem",
+x = "sleep_total",
+color = "vore",
+
+
+Ignore any errors.
+
+```{r}
+ggscatter(y = "sleep_rem",
+          x = "sleep_total",
+          color = "vore",
+          data = msleep)
+```
+
+
+## Coloring by a continuous numeric variable
+
+A third dimension can be added by color-coding the scatterplot.
+
+Note that almost everything goes in quotes
+
+y = "sleep_rem",
+x = "sleep_total",
+color = "sleep_cycle",
+
+Ignore any errors.
+
+```{r}
+ggscatter(y = "sleep_rem",
+          x = "sleep_total",
+          color = "sleep_cycle",
+          data = msleep)
+```
+
+
+
+## Adding a line of best fit
+
+The line has the general form
+
+y = m*x + b
+
+Which stats folks write as
+
+y = B0 + B1*x
+
+The distance from the line to each data point is called the **residual**.
+
+
+Ignore any errors.
+
+```{r}
+ggscatter(y = "sleep_rem",
+          x = "sleep_total",
+          add = "reg.line",  # line of best fit
+          data = msleep)
+```
+
+
+## Adding a data ellipse 
+
+```{r}
+ggscatter(y = "sleep_rem",
+          x = "sleep_total",
+          ellipse = TRUE,   # data ellipse
+          data = msleep)
+```
+
+## Add a correlation coefficient 
+
+By adding "cor.coef = TRUE' correlation coefficient, as well as a p-value for the significance of the correlation coefficient (testing the hypothesis that it is 0).
+
+```{r}
+ggscatter(y = "sleep_rem",
+          x = "sleep_total",
+          cor.coef = TRUE,
+          data = msleep)
+```
+
+
+## TASK
+
+Make a scatter plot with the following elements:
+
+* sleep_cycle on the y axis
+* sleep_total on the x axis
+* a line of best fit
+* a correlation coefficient
+* a data ellipse
+
+```{r}
+ggscatter(y = "sleep_cycle",
+          x = "sleep_total",
+          cor.coef = TRUE,
+          ellipse = TRUE,
+          add = "reg.line",
+          data = msleep)
+```
+
+

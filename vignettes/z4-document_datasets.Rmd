@@ -2,7 +2,7 @@
 title: "y) Documenting datasets"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{y) Documenting datasets"}
+  %\VignetteIndexEntry{y) Documenting datasets}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

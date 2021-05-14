@@ -1,0 +1,66 @@
+---
+title: "P-values"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{P-values}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+## Introduction
+
+P-values are tricky.  You need to memorize the precise definition of them.  The notes below provide a definition and also some additional explanations.  There is also code to simulate a scenario when the null hypothesis is true so you can see how often low p-values occur.
+
+## P-value definition to memorize
+
+
+You need to memorize the definition of a p-value.  Here's a good version:
+
+"the P-value is the probability of getting data as extreme as our data (just by chance) if the null hypothesis is, in fact, true.  In other words, it is the [probability] that chance alone would produce data that differ from the null hypothesis."  (Sadava et al, Statistics Primer)
+
+
+A similar version:
+
+"In many statistical analyses, we ask whether the null hypothesis of random variation among individuals can be rejected.  The P-value is a guide to making that decisions.  A statistical P-value measure the probability that observed or more extreme difference would be found *if the null hypothesis were true*. (Gotelli and Ellison pg 94, 1st ed)
+
+Here's another version, this time emphasizing the situation that occurs in a t-test or similar statistical procedure:
+
+The p-value is the Probability of observing your data comparing two groups (OR data where the difference between groups is even greater) IF there was actually no underlying difference between groups and the difference between the groups you observed is just due to chance.
+
+## P-values are tricky
+
+"Many statistical analyses are reported with P values... P values are often misunderstood because they answer a question you probably never thought to ask."   Motulsky 2017, pg 129.
+
+
+## P-value example: coin flipping
+
+"You flip a coin 20 times and observed 16 heads and 4 tails.  Because the probability of heads is 50%, you'd expect 10 heads in 20 flips.  How unlikely is it to find 16 heads in 20 flips?  Should you suspect that the coin is unfair?" (page 129) ... "The P value answers this question: If the coin tosses were random and the answers were recorded correctly, what is the chance that when you flip a coin 20 times, you'll observed results as extreme (or more extreme) than those you observed... - that is, that you would observed 16 or more, or 4 or fewer, heads?  The answer, the P value, is 0.0118.  You'd only see results this far from an even split of heads to tails in 1.18% of 20-coin runs" ("20 coin runs" = sets of 20 coin flips.  If I have everyone in the class flip a coin 20 time and take data, each persons data would be a "20-coin run".  If I had a class of 200 students, a p value of 0.0118 means that out of 200 students, 1 would probably get at least 16 heads) (page 131)"
+
+We we flip a coin we know the null hypothesis is almost definitely true, or we can easily check a coin to see it it might be damaged or biased.  Usually in science we are assuming (or hoping) that the null hypothesis is false, and the p-value calculation requires the odd mental trick of viewing things from the perspective of the null.
+
+## P-value example 1
+
+"Consider a situation where investigators compared a mean in groups given two alternative treatments and reported a p-value of 0.03." A correct interpretation of this p-value is "If the population means are identical (the null hypothesis is true), there is a 3% chance of observing a difference as large as you observed (or larger)" (Motulsky pg 139).
+
+
+
+## P-value example 2: heights of elementary school students
+
+Compare height of 10 randomly chosen 1st graders from Ms. Bs class to 10 randomly chosen 1st graders in Mr. W’s class.  Mr. W’s class is on average average 10 cm taller.  The p value 0.10.  This means that, if there was actually no difference in the height of 1st graders (Which is likely to be true), the probability of getting a 10 cm difference in heights is 0.10.  This means that if you repeated this experiment in 10 schools where there was no difference in height between classes, you’d expect to still see a 10 cm difference 1 in 10 times.  
+
+
+## P-values and biological sequences
+
+"The p value is the probability of a chance alignment occurring with the score in question
+or better." (Pevner Chapter 4, pg 143).  "A p value below 0.05 is traditionally used to define statistical significance (i.e., to reject the null hypothesis that your query sequence is not related to any database sequence). If the null hypothesis is true, then 5% of all random alignments will result in an apparently significant score. An [P] value of 0.05 or less may therefore be considered significant." (Page 144).  **I don't 110% like this statement but its close enough.**

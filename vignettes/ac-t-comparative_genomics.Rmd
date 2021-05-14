@@ -25,7 +25,7 @@ library(compbio4all)
 **Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/), with assistance from Aman Virmani.
 
 
-```{r}
+```{r, eval = F}
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 

@@ -15,7 +15,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    survival
 VignetteBuilder: knitr
 Imports: 
     ggpubr,
@@ -30,6 +31,15 @@ Imports:
     rentrez,
     seqinr,
     stringr,
-    Biostrings
+    Biostrings,
+    MASS,
+    scatterplot3d,
+    GGally,
+    cowplot,
+    evd,
+    HistData,
+    flextable,
+    webshot,
+    bio3d
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)

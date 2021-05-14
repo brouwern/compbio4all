@@ -1,0 +1,176 @@
+---
+title: "Checkpoint: Cluster analysis with allometric data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Cluster analysis with allometric data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+
+
+## Cluster analysis
+
+The PCA we did on the mammal sleep data didn't indicate any interesting groups.  Instead lets work with a famous dataset with known strong groups.
+
+Read about these data here
+https://en.wikipedia.org/wiki/Iris_flower_data_set
+
+You should defintely read this as further background on PCA and cluster analysis.
+
+For more on PCA see
+https://rpubs.com/brouwern/veganpca
+
+
+Notes on drawing dendrograms:
+http://www.sthda.com/english/wiki/beautiful-dendrogram-visualizations-in-r-5-must-known-methods-unsupervised-machine-learning#plot.dendrogram-function
+
+
+## Preliminaries
+
+### Download packages
+
+Only do this once, then comment out of the script.  You probably already did this in the previous Code Checkpoint.
+
+```{r}
+# install.packages("ggplot2")
+# install.package("vegan")
+```
+
+### Load the libraries
+
+```{r}
+library(ggplot2)
+library(vegan)
+```
+
+
+## PCA data exploration
+
+```{r}
+data(iris)
+```
+
+Scatterplot matrix
+
+```{r}
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- paste0(prefix, txt)
+    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+```
+
+
+When looking at a plot like this you should understand how to read it, what the correlations mean, what the red lines meanm, etc.
+```{r}
+plot(iris,upper.panel = panel.cor,
+     panel = panel.smooth)
+```
+
+
+Run the PCA using rda()
+```{r}
+rda.out <- vegan::rda(iris[,-5], scale = TRUE)
+```
+
+
+
+This displays the 2D PCA plot without the arrows.  For more info on what this code does, see the RPubs document linked above
+```{r}
+biplot(rda.out, display = "sites")
+
+```
+
+
+vegan has some nice tools for groups things.
+
+In this dataset I don't expect there to be any interest groups, but I'll check anyway.
+I will supply this code if needed.
+
+PCA is an exploratory method.  First I'll see if there are any groupsing based on diet ("vore").  Not really
+```{r}
+biplot(rda.out, display = "sites")
+
+vegan::ordihull(rda.out,
+         group = iris$Species,
+         col = 1:3)
+```
+
+
+
+
+
+### Hierachical cluster analysis
+
+Cluster analysis in biology often involves building tree diagrams (dendrograms), which uses hiearchical cluster algorithms.  
+
+Hiearchical clustering involves first calculating a distance matrix.  There are MANY ways to calculate a distance matrix depending on the data and application.  The easiest one to think about is Euclidean distance.
+
+Add row names.  Don't worry about what this is doing
+```{r}
+row.names(iris) <- paste(iris$Species,1:nrow(iris),sep = ".")
+```
+
+There's a TON of data here so let's randomly cut it in half.  You should understand this code
+```{r}
+i <- 1:nrow(iris)
+i <- sample(i, length(i)/2, replace = F)
+iris_sub <- iris[i,]
+```
+
+
+```{r}
+dist_euc <- dist(iris_sub[,-5], 
+                 method = "euclidean")
+```
+
+
+We can then carry out a cluster analysis using the hclust() function.  The default function used for calculating branch lenths is called "complete."  Other options allow you to implement UPGMA, WPGMA and other common forms.
+
+```{r}
+clust_euc <- hclust(dist_euc)
+```
+
+
+Plotting the dendrogram results in a very messy graph
+
+```{r}
+plot(clust_euc, hang = -1, cex = 0.5)
+
+```
+
+It can help in R to plot things horizontally.  This requires converting to a different object type.
+```{r}
+par(mar = c(1,1,1,1))
+is(clust_euc)
+dendro_euc <- as.dendrogram(clust_euc)
+
+is(dendro_euc)
+plot(dendro_euc,horiz = T,nodePar = list(pch = c(1,NA), 
+                                          cex = 0.5, 
+                                          lab.cex = 0.5))
+```
+
+
+## Task
+
+Generate the cluster diagram and upload it to this assignment
+
+https://canvas.pitt.edu/courses/45284/assignments/460774
