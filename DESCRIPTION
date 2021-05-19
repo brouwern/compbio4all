@@ -14,8 +14,10 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
+    cluster,
     knitr,
     rmarkdown,
+    rpart,
     survival
 VignetteBuilder: knitr
 Imports: 

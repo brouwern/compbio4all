@@ -21,6 +21,13 @@ library(compbio4all)
 ```
 
 
+## Review biology through charts
+
+chargaff1951
+
+Higgs 2009 amino acids
+
+
 ## TODO
 
 go through all my repos to look for addiationl code

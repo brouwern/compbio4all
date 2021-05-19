@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 library(compbio4all)
 ```
 
+Run these off of RStudio cloud?
 
 ## Mangroves
 

@@ -1,0 +1,307 @@
+---
+title: "x) Creating this package"
+author: "Nathan Brouwer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{x) Creating this package}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+## Introduction
+
+The following code outlines the key steps I use to set up the framework for a package, principally using the usethis package.
+
+
+## Packages
+
+I use these packages for setting things up
+```{r, eval = F}
+library(devtools)
+library(usethis)
+library(here)
+```
+
+## Create repository usig GitHub
+
+I create the git repo via the GitHub website:
+https://github.com/brouwern/compbio4all.git
+
+## Associate working directory with repo via RStudio
+
+Clone into the repo by hand by creating an RStudio Project: New project / New repro / etc
+
+## Set up package with usethis
+
+I then use usethis::create_package() within my project directory to build the basic package infrastructure  This overwrites the initial project (after a handy prompt in the console).
+
+```{r eval = F}
+usethis::create_package(path = getwd())
+```
+
+### Create vignette infrastructure
+
+I create vignette infrastructure and dummy vignette
+```{r, eval = F}
+usethis::use_vignette("temp")
+```
+
+I then write my vignettes using this template and change the file name.  I use "a)", "b)", "c)" as a prefix on my vignettes so that show up in order when the website is rendered using packagedown.
+
+
+### Copy in package-making scripts
+
+I copy this script and related ones for maintaining the package into the vignettes folder.
+
+### Create "readme" and "news" files
+
+```{r, eval = F}
+usethis::use_readme_md()
+usethis::use_news_md()
+```
+
+### Populating the readme file
+
+I add basic information to the readme fill and add sample code for a call to devtools::install_github() to install the package.  The chunk below is an example:
+
+#### Example materials for readme
+
+The development version of compbio4all is on GitHub.  If you don't already have it, you will need to install the devtools package
+
+``` r
+install.packages("devtools")
+```
+
+You can then install the compbio4all from GitHub with:
+
+``` r
+devtools::install_github("brouwern/compbio4all")
+```
+
+
+
+### Create git ignore
+
+
+Add typical files to gitignore: '.Rproj.user', '.Rhistory', '.Rdata', '.DS_Store'
+```{r}
+usethis::git_vaccinate()
+```
+
+
+I always have trouble with gitingore and haven't taken the time to learn more about it.  I am not sure how to use this properly yet.
+
+```{r, eval = F}
+usethis::use_git_ignore(".pdf", directory = ".")
+usethis::use_git_ignore(".xls", directory = ".")
+usethis::use_git_ignore(".xlsx", directory = ".")
+usethis::use_git_ignore(".docx", directory = ".")
+```
+
+
+### Add required packages
+
+these are the packages I typically use.  I should vectorize this so it would look nicer : )
+
+```{r, eval = F}
+usethis::use_package("ape", "Imports")
+usethis::use_package("phangorn", "Imports")
+
+usethis::use_package("ggplot2", "Imports")
+usethis::use_package("ggpubr",   "Imports")
+usethis::use_package("rentrez", "Imports")
+usethis::use_package("seqinr", "Imports")
+#usethis::use_package("UniprotR",   "Imports") # not used?
+usethis::use_package("Biostrings",   "Imports") # oh boy
+usethis::use_package("MASS",   "Imports")
+usethis::use_package("scatterplot3d",   "Suggests")
+usethis::use_package("GGally",   "Suggests")
+usethis::use_package("cowplot",   "Imports")
+usethis::use_package("pander",   "Imports")
+usethis::use_package("bio3d",   "Suggests")
+usethis::use_package("here",   "Imports")
+usethis::use_package("survival",   "Suggests")
+usethis::use_package("reshape2",   "Imports")
+
+usethis::use_package("rpart",   "Suggests")
+# #usethis::use_package("blme",   "Imports")
+
+# docxtractr
+
+usethis::use_package("dplyr",   "Imports")
+usethis::use_package("tidyr",   "Imports")
+usethis::use_package("stringr",   "Imports")
+
+usethis::use_package("evd", "Suggests")
+
+usethis::use_package("HistData", "Suggests")
+usethis::use_package("flextable", "Suggests")
+usethis::use_package("webshot", "Suggests")
+usethis::use_package("cluster", "Suggests")
+
+
+# devtools::use_package("data.table", "Imports")
+# devtools::use_package("car", "Imports")
+# devtools::use_package("lawstat", "Imports")
+# devtools::use_package("effsize", "Imports")
+# devtools::use_package("here", "Imports")
+# devtools::use_package("metafor", "Imports")
+# devtools::use_package("Formula", "Imports")
+# devtools::use_package("data.tree", "Imports")
+
+
+```
+
+
+
+### Don't save/load user workspace between sessions
+
+```{r, eval = F}
+usethis::use_blank_slate()
+```
+
+
+### Use roxygen for documentation
+
+Where would we be without roxygen for writing documentation files?!?
+
+```{r, eval = F}
+usethis::use_roxygen_md()
+```
+
+
+### Package-level documents
+
+"Adds a dummy .R file that will prompt roxygen to generate basic package-level documentation. "
+
+```{r, eval = F}
+usethis::use_package_doc()
+```
+
+
+### Use pkgdown
+
+For making front end website
+
+```{r, eval = F}
+usethis::use_pkgdown()
+```
+
+
+
+## Set up data
+
+Create folder for external data.
+
+R packages often have a folder called "/inst" which stands for "installed."  This folder is usually for miscellaneous files associated with the package.  This includes external data ("/extdata") such as .csv files.
+
+```{r}
+dir.create(here::here("/inst"))
+dir.create(here::here("/inst/extdata"))
+```
+
+This could be done with use_directory()
+
+
+
+### Look at data in my extdata file
+
+External data is stored in "/inst/extdata"
+```{r, eval = F}
+list.files(here::here("/inst/extdata"))
+```
+
+#### Raw data
+
+
+I copy raw data files into the "/inst/extdata".  
+
+#### Raw data prep
+
+If there are any data processing steps that I don't want to include in the vignettes I put them into the directory "packagename/data-raw".  This structure for this directory and data prep script can be made using use_data_raw()
+
+```{r, eval = F}
+usethis::use_data_raw()
+```
+
+
+## License
+
+For information on licenses see
+http://kbroman.org/pkg_primer/pages/licenses.html
+
+Plaintext versions of licenses can be found at
+https://creativecommons.org/2011/04/15/plaintext-versions-of-creative-commons-licenses-and-cc0/
+
+```{r, eval = F}
+usethis::use_gpl3_license()
+```
+
+An error can occur if you have a separate license file.  eg
+
+>File LICENSE is not mentioned in the DESCRIPTION file.
+
+This can be fixed by changing the description from "License: GPL-3" to "License: GPL-3 +  file LICENSE"
+
+http://r-pkgs.had.co.nz/description.html#license
+
+### Spell check
+
+I usually spell check as I go.  You can add spell checking as a unit test using use_spell_check()
+
+
+## Documenting datasets
+
+All data sets must be documented.  
+
+```{r, eval = F}
+# usethis::use_r(name = "fledgedata")
+# usethis::use_r(name = "telosfull")
+# usethis::use_r(name = "telosfull_focalcols_rnd")
+```
+
+A minimal R dataset .R file looks like this
+#' Full dataset dfor Meillere et al. 2015
+"telosful"
+
+A standard R dataset  .R file looks like this
+(https://r-pkgs.org/data.html)
+
+#' Prices of 50,000 round cut diamonds.
+#'
+#' A dataset containing the prices and other attributes of almost 54,000
+#' diamonds.
+#'
+#' @format A data frame with 53940 rows and 10 variables:
+#' \describe{
+#'   \item{price}{price, in US dollars}
+#'   \item{carat}{weight of the diamond, in carats}
+#'   ...
+#' }
+#' @source \url{http://www.diamondse.info/}
+"diamonds"
+
+### Other potentially useful usethis functions
+
+* use_r() Create or edit a .R file
+* use_build_ignore() Add files to .Rbuildignore
+* use_version() use_dev_version() Increment package version
+* edit_r_profile() 
+* edit_r_environ() 
+* edit_r_makevars() 
+* edit_rstudio_snippets() 
+* edit_git_config() 
+* edit_git_ignore()
+
+
+
+
+

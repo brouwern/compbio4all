@@ -2,7 +2,7 @@
 title: "Checkpoint: Cluster analysis with allometric data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Cluster analysis with allometric data}
+  %\VignetteIndexEntry{Checkpoint: Cluster analysis with allometric data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

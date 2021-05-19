@@ -5,7 +5,7 @@
 \title{Select random subset of Breeding Bird Survey (BBS) routes}
 \usage{
 sample_BBS_routes(
-  dat = BBS_PA,
+  dat,
   years = c(1990, 2000, 2005),
   aou.code = 7610,
   max.sample = 50

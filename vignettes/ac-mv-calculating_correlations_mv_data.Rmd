@@ -31,8 +31,7 @@ It is often of interest to investigate whether any of the variables in a multiva
 
 Get data
 ```{r}
-wine <- read.table("http://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data",
-          sep=",")
+data(wine)
 ```
 
 

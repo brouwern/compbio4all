@@ -39,14 +39,13 @@ You can then use the “scatterplotMatrix()” function to plot the multivariate
 
 Get data
 ```{r}
-wine <- read.table("http://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data",
-          sep=",")
+data(wine)
 ```
 
 To use the scatterplotMatrix() function, you need to give it as its input the variables that you want included in the plot. Say for example, that we just want to include the variables corresponding to the concentrations of the first five chemicals. These are stored in columns 2-6 of the variable “wine”. We can extract just these columns from the variable “wine” by typing:
 
 ```{r}
-wine[2:6]
+wine[,2:6]
 ```
 
 To make a matrix scatterplot of just these 13 variables using the scatterplotMatrix() function we type:

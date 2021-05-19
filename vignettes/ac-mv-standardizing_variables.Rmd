@@ -35,8 +35,7 @@ Thus, it would be a better idea to first standardize the variables so that they 
 You can standardize variables in R using the “scale()” function.
 
 ```{r}
-wine <- read.table("http://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data",
-          sep=",")
+data(wine)
 ```
 
 

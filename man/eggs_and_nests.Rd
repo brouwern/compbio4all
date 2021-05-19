@@ -38,23 +38,23 @@ ggpubr::ggboxplot(data = eggs_and_nests,
 
 ### Plot histograms
 ggpubr::gghistogram(data = eggs_and_nests,
-          x = "ellipticity",
-          title = "All data")
+#           x = "ellipticity",
+#           title = "All data")
 
 ggpubr::gghistogram(data = eggs_and_nests,
-          x = "ellipticity",
-          facet.by = "nest",
-          fill = "nest",
-          title = "Faceted by nest")
+#          x = "ellipticity",
+#          facet.by = "nest",
+#          fill = "nest",
+#          title = "Faceted by nest")
 
 
 
 ## Plot means with 95\% confidence intervals
-ggpubr::ggerrorplot(eggs_and_nests,
-  x = "nest",
-  y = "ellipticity",
-  desc_stat = "mean_ci",
-  add = "mean")
+#ggpubr::ggerrorplot(eggs_and_nests,
+# x = "nest",
+#  y = "ellipticity",
+# desc_stat = "mean_ci",
+# add = "mean")
 
 ## 1-way ANOVA
 
