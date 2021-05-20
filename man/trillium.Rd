@@ -24,32 +24,33 @@ the intensity of deer browse occuring on thee population.
 
 library(ggplot2)
 library(ggpubr)
-
+\dontrun{
 ## Explore data graphically
 
 ### Plot boxplots
-ggboxplot(data = trillium,
+ggpubr::ggboxplot(data = trillium,
           y = "length.stem.cm",
           x = "site",
           fill = "site")
 
 ### Plot histograms
-gghistogram(data = trillium,
+ggpubr::gghistogram(data = trillium,
           x = "length.stem.cm",
           title = "All data")
 
- gghistogram(data = trillium,
+ ggpubr::gghistogram(data = trillium,
           x = "length.stem.cm",
           facet.by = "site",
           fill = "site",
           title = "Faceted by site")
 
 ## Plot means with 95\% confidence intervals
-ggerrorplot(trillium,
+ggpubr::ggerrorplot(trillium,
   x = "site",
   y = "length.stem.cm",
   desc_stat = "mean_ci",
   add = "mean")
+ }
 
 ## 1-way ANOVA to compare sites
 
@@ -80,7 +81,7 @@ model.alt.aov <- aov(length.stem.cm ~ site, data = trillium)
 TukeyHSD(model.alt.aov)
 
 ### Plot effect sizes
-plotTukeysHSD(TukeyHSD(model.alt.aov))
+#plotTukeysHSD(TukeyHSD(model.alt.aov))
 }
 \references{
 Author year.

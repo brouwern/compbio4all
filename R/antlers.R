@@ -22,8 +22,9 @@
 #'
 #' @examples
 #'
-#' ## Load packages
 #'
+#'\dontrun{
+#' ## Load packages
 #' library(ggplot2)
 #' library(ggpubr)
 #'
@@ -40,8 +41,8 @@
 #'           x = "mass",
 #'           title = "All data")
 #'
-#' ggpubr::gghistogram(data = antlers,
-#'           x = "mass",
+#' #ggpubr::gghistogram(data = antlers,
+#'  #         x = "mass",
 #'           facet.by = "diet",
 #'           fill = "diet",
 #'           title = "Faceted by diet")
@@ -53,7 +54,7 @@
 #'   desc_stat = "mean_ci",
 #'   add = "mean",
 #'   ylim = c(400,900))
-#'
+#' }
 #' ## 1-way ANOVA
 #'
 #' ### null model
@@ -83,7 +84,7 @@
 #' TukeyHSD(model.alt.aov)
 #'
 #' ### Plot effect sizes
-#' plotTukeysHSD(TukeyHSD(model.alt.aov))
+#' # plotTukeysHSD(TukeyHSD(model.alt.aov))
 
 "antlers"
 

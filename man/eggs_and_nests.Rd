@@ -25,6 +25,7 @@ eggs_and_nests
 Egg data combined with data on nests
 }
 \examples{
+\dontrun{
 library(ggplot2)
 library(ggpubr)
 
@@ -38,16 +39,16 @@ ggpubr::ggboxplot(data = eggs_and_nests,
 
 ### Plot histograms
 ggpubr::gghistogram(data = eggs_and_nests,
-#           x = "ellipticity",
-#           title = "All data")
+           x = "ellipticity",
+           title = "All data")
 
 ggpubr::gghistogram(data = eggs_and_nests,
-#          x = "ellipticity",
-#          facet.by = "nest",
-#          fill = "nest",
-#          title = "Faceted by nest")
+          x = "ellipticity",
+          facet.by = "nest",
+          fill = "nest",
+          title = "Faceted by nest")
 
-
+}
 
 ## Plot means with 95\% confidence intervals
 #ggpubr::ggerrorplot(eggs_and_nests,
@@ -85,7 +86,7 @@ model.alt.aov <- aov(ellipticity ~ nest, data = eggs_and_nests)
 TukeyHSD(model.alt.aov)
 
 ### Plot effect sizes
-plotTukeysHSD(TukeyHSD(model.alt.aov))
+#plotTukeysHSD(TukeyHSD(model.alt.aov))
 }
 \references{
 ....

@@ -4,9 +4,11 @@
 #
 #' @format A data frame
 #' \describe{
+#'   \item{Route}{Route number}
 #'   \item{Year}{Year of study}
+#'   \item{route.index}{}
+#'   \item{cuts}{}
 #'   \item{State}{}
-#'   \item{Route}{}
 #'   \item{tot.seen}{}
 #' }
 #'

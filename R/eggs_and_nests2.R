@@ -20,7 +20,7 @@
 #' library(ggplot2)
 #' library(ggpubr)
 #'
-#' ggerrorplot(eggs_and_nests2,
+#' ggpubr::ggerrorplot(eggs_and_nests2,
 #' x = "nest",
 #' y = "ellipticity",
 #' desc_stat = "mean_ci")
@@ -46,7 +46,7 @@
 #' TukeyHSD(model.alt.aov)
 #'
 #' ### Plot effect sizes
-#' plotTukeysHSD(TukeyHSD(model.alt.aov))
+#' #plotTukeysHSD(TukeyHSD(model.alt.aov))
 
 "eggs_and_nests2"
 

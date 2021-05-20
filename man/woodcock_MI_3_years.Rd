@@ -85,7 +85,7 @@ model.alt.aov <- aov(woodcocks ~ year, data = woodcock_MI_3_years)
 TukeyHSD(model.alt.aov)
 
 ### Plot effect sizes
-plotTukeysHSD(TukeyHSD(model.alt.aov))
+#plotTukeysHSD(TukeyHSD(model.alt.aov))
 }
 \references{
 Sauer, J. R., and J. B. Bortner. 1991. Population trends from the American Woodcock Singing-ground Survey, 1970-88. J. Wildl. Mange. 55:300-312.

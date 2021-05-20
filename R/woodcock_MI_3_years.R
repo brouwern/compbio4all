@@ -77,6 +77,6 @@
 #' TukeyHSD(model.alt.aov)
 #'
 #' ### Plot effect sizes
-#' plotTukeysHSD(TukeyHSD(model.alt.aov))
+#' #plotTukeysHSD(TukeyHSD(model.alt.aov))
 
 "woodcock_MI_3_years"

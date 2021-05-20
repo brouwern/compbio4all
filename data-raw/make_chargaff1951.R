@@ -16,7 +16,7 @@ PuvsPy <- c(1.1, 1.0, 1.0, 1.0,
             1.1, 1.0, 1.0,
             0.9, 1.0)
 
-chargaff1951 <- data.frame(sample_name, spp, AvsG, TvsC,PyvsPy)
+chargaff1951 <- data.frame(sample_name, spp, AvsG, TvsC,PuvsPy)
 
 
 # source Manchester 20xx Trends in Biochemical Sciences Vol.33 No.2
@@ -31,7 +31,7 @@ chargaff1951 <- data.frame(sample_name, spp, AvsG, TvsC,PyvsPy)
 # Chargaff, E. (1951) Structure and function of nucleic acids as cell
 # constituents. Fed. Proc. 10, 654–659
 
-usethis::use_r("chargaff1951")
+# usethis::use_r("chargaff1951")
 usethis::use_data(chargaff1951,overwrite = TRUE)
 
 chargaff1951

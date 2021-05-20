@@ -30,8 +30,9 @@ basic plotting and 1-way ANOVA.
 }
 \examples{
 
-## Load packages
 
+\dontrun{
+## Load packages
 library(ggplot2)
 library(ggpubr)
 
@@ -48,8 +49,8 @@ ggpubr::gghistogram(data = antlers,
           x = "mass",
           title = "All data")
 
-ggpubr::gghistogram(data = antlers,
-          x = "mass",
+#ggpubr::gghistogram(data = antlers,
+ #         x = "mass",
           facet.by = "diet",
           fill = "diet",
           title = "Faceted by diet")
@@ -61,7 +62,7 @@ ggpubr::ggerrorplot(antlers,
   desc_stat = "mean_ci",
   add = "mean",
   ylim = c(400,900))
-
+}
 ## 1-way ANOVA
 
 ### null model
@@ -91,7 +92,7 @@ model.alt.aov <- aov(mass ~ diet, data = antlers)
 TukeyHSD(model.alt.aov)
 
 ### Plot effect sizes
-plotTukeysHSD(TukeyHSD(model.alt.aov))
+# plotTukeysHSD(TukeyHSD(model.alt.aov))
 }
 \references{
 Asleson et al. 1997.  Effects of seasonal protein restriction on antlerogenesis and body mass in adult male white-tailed deer.  Journal of Wildlife Management 61.

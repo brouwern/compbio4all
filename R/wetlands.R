@@ -23,32 +23,34 @@
 #' ## Set wetland as a factor
 #' wetlands$wetland <- factor(wetlands$wetland)
 #'
+#' \dontrun{
 #' ## Explore data graphically
 #'
 #' ### Plot boxplots
-#' ggboxplot(data = wetlands,
+#' ggpubr::ggboxplot(data = wetlands,
 #'           y = "spp.richness",
 #'           x = "wetland",
 #'           fill = "wetland")
 #'
 #' ### Plot histograms
-#' gghistogram(data = wetlands,
+#' ggpubr::gghistogram(data = wetlands,
 #'           x = "spp.richness",
 #'           title = "All data")
 #'
 #'
-#' gghistogram(data = wetlands,
+#' ggpubr::gghistogram(data = wetlands,
 #'           x = "spp.richness",
 #'           facet.by = "wetland",
 #'           fill = "wetland",
 #'           title = "Faceted by wetland")
 #'
 #' ## Plot means with 95% confidence intervals
-#' ggerrorplot(wetlands,
+#' ggpubr::ggerrorplot(wetlands,
 #'   x = "wetland",
 #'   y = "spp.richness",
 #'   desc_stat = "mean_ci",
 #'   add = "mean")
+#'}
 #'
 #' ## 1-way ANOVA
 #'
@@ -79,7 +81,7 @@
 #' TukeyHSD(model.alt.aov)
 #'
 #' ### Plot effect sizes
-#' plotTukeysHSD(TukeyHSD(model.alt.aov))
+#' #plotTukeysHSD(TukeyHSD(model.alt.aov))
 
 "wetlands"
 

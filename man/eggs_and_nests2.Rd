@@ -28,7 +28,7 @@ Subset of eggs_and_nests data the contains only Dome, Cup, and ground surface ne
 library(ggplot2)
 library(ggpubr)
 
-ggerrorplot(eggs_and_nests2,
+ggpubr::ggerrorplot(eggs_and_nests2,
 x = "nest",
 y = "ellipticity",
 desc_stat = "mean_ci")
@@ -54,7 +54,7 @@ model.alt.aov <- aov(ellipticity ~ nest, data = eggs_and_nests2)
 TukeyHSD(model.alt.aov)
 
 ### Plot effect sizes
-plotTukeysHSD(TukeyHSD(model.alt.aov))
+#plotTukeysHSD(TukeyHSD(model.alt.aov))
 }
 \references{
 ....
