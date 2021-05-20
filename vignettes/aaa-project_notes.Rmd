@@ -12,7 +12,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = F
 )
 ```
 
@@ -38,3 +39,69 @@ https://github.com/brouwern/blaststats
 https://github.com/brouwern/carnivorephylo
 
 https://github.com/brouwern/CaseStudiesEcoStats
+
+
+# Packages that could be worth learning
+
+## Formatting output stats: xplain
+http://www.zuckarelli.de/xplain/index.html
+http://www.zuckarelli.de/xplain/xplain_cheatsheet.pdf
+
+
+
+## Processing images: magick
+https://cran.r-project.org/web/packages/magick/vignettes/intro.html
+
+
+This has a lot of dependencies and can take a long time to set up.
+```{r eval = F}
+install.packages("magick",dependencies = T)
+```
+
+Here's an example of how to resize some png files used in this book
+```{r}
+#get names of files
+files <- list.files(path = "./images/Medley1998csv",pattern = "Medley1998",full.names = T)
+
+#make sure i just have png files, not the ppt
+files <- files[grep("png",files)]
+
+#look at file
+print(image_read(files[1]))
+
+newfiles <- gsub("Medley1998csv-","Medley1998csv-800x",files)
+
+for(i in 1:length(files)){
+  image_write(image_resize(image_read(files[i]), "800x")
+, path = newfiles[i]
+, format = "png")
+}
+
+```
+
+
+
+## Data sets 
+ChickWeight   Weight versus age of chicks on different diets
+chickwts 	Chicken Weights by Feed Type
+CO2 	Carbon Dioxide Uptake in Grass Plants
+co2 	Mauna Loa Atmospheric CO2 Concentration
+InsectSprays   Effectiveness of Insect Sprays
+iris 	Edgar Anderson's Iris Data
+iris3 	Edgar Anderson's Iris Data
+islands 	Areas of the World's Major Landmasses
+LakeHuron   Level of Lake Huron 1875-1972
+Loblolly   Growth of Loblolly pine trees
+lynx 	Annual Canadian Lynx trappings 1821-1934
+npk   Classical N, P, K Factorial Experiment
+Orange   Growth of Orange Trees
+OrchardSprays 	Potency of Orchard Sprays
+PlantGrowth   Results from an Experiment on Plant Growth
+precip 	Annual Precipitation in US Cities
+rivers   Lengths of Major North American Rivers
+rock 	Measurements on Petroleum Rock Samples
+trees   Girth, Height and Volume for Black Cherry Trees
+women   Average Heights and Weights for American Women
+
+
+http://www.zoology.ubc.ca/~whitlock/ABD/teaching/datasets.html

@@ -1,0 +1,80 @@
+---
+title: "R quirks: putting things in vectors"
+author: "Nathan Brouwer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{R quirks: putting things in vectors}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+
+
+# How R works with strings of numbers
+
+
+# How R works with strings of numbers
+
+R has a somewhat strange behavior.  Look at this example where we are trying to find the mean of 3 numbers, 0.86, 1.02, and 1.02.
+
+It might be tempting to calculate the mean of these three numbers like this.
+```{r}
+mean(0.86,1.02,1.02)
+```
+
+Notice, however, that the value that gets returned, 0.86, is exactly the same as the 1st value in the string of numbers.  Hmmmmm.... This is definitely not the mean.
+
+Now try this: put the numbers into a "vector" using the functionc c()
+
+```{r}
+y <- c(0.86,1.02,1.02)
+
+```
+
+We can check that the numbers are there
+```{r}
+y
+```
+
+
+And we can get the mean using the mean command
+```{r}
+mean(y)
+```
+
+
+This seems like a more reasonable answer, but since R seems to be acting weird we can check our answer another way
+```{r}
+sum(y)/length(y)
+```
+
+Ok, seems ok.  So whats wrong with the origin way, of just running "mean(0.86,1.02,1.02)" ?  
+
+In general, R functions carry out operations on **vectors**, or sets/strings of nubmers that have been packaged together using the **c()** command or contained in the column of a dataframe or matrix.  The function mean() is expecting to get a vector, not a list of raw data.  Technically, what its doing is interpreting the value 0.86 as a vector, taking its mean (which is 0.86) and ingoring the rest of the numbers.  Unfortuantely, it isn't giving you a warning message.
+
+
+# Fixing the problem
+
+We can get our oringal bit of code to work by just putting the data 0.86,1.02,1.02 into a vector using c(), like this
+```{r}
+mean(c(0.86,1.02,1.02))
+```
+
+This is just a more direct way of doing the following, just using a single line of code instead of two.
+```{r}
+y <- c(0.86,1.02,1.02)
+mean(y)
+```
+
+
+
+
+

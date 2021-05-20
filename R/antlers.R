@@ -54,7 +54,8 @@
 #'   desc_stat = "mean_ci",
 #'   add = "mean",
 #'   ylim = c(400,900))
-#' }
+#'
+#'
 #' ## 1-way ANOVA
 #'
 #' ### null model
@@ -85,6 +86,7 @@
 #'
 #' ### Plot effect sizes
 #' # plotTukeysHSD(TukeyHSD(model.alt.aov))
+#' }
 
 "antlers"
 

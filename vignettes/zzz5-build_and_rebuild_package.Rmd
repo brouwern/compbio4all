@@ -91,7 +91,10 @@ pkgdown::build_site()
 
 #### Build piece by piece
 
+```{r}
 pkgdown::clean_site (pkg = ".")
+```
+
 
 -- Initializing site
 ```{r, eval = F}

@@ -62,7 +62,8 @@ ggpubr::ggerrorplot(antlers,
   desc_stat = "mean_ci",
   add = "mean",
   ylim = c(400,900))
-}
+
+
 ## 1-way ANOVA
 
 ### null model
@@ -93,6 +94,7 @@ TukeyHSD(model.alt.aov)
 
 ### Plot effect sizes
 # plotTukeysHSD(TukeyHSD(model.alt.aov))
+}
 }
 \references{
 Asleson et al. 1997.  Effects of seasonal protein restriction on antlerogenesis and body mass in adult male white-tailed deer.  Journal of Wildlife Management 61.
