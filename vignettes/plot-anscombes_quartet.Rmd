@@ -1,0 +1,230 @@
+---
+title: "Anscomb's quartet"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Anscomb's quartet}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+
+
+
+
+
+
+# The Data
+
+## x variables
+```{r}
+#x1 through x3 are the same
+x1 <- c(10,8,13,9,11,14,6,4,12,7,5)
+x3 <- x2 <- x1
+
+#x4
+x4 <- c(8,8,8,8,8,8,8,19,8,8,8)
+
+
+```
+
+
+## y varibles are all different
+```{r}
+y1 <- c(8.04,6.95,7.58,8.81,8.33,9.96,7.24,4.26,10.84,4.82,5.68)
+
+y2 <- c(9.14,8.14,8.74,8.77,9.26,8.1,6.13,3.1,9.13,7.26,4.74)
+
+y3 <- c(7.46,6.77,12.74,7.11,7.81,8.84,6.08,5.39,8.15,6.42,5.73)
+
+```
+
+
+<br><br>
+
+# Plots
+
+## Plot y1 vs x1
+
+```{r}
+plot(y1 ~ x1, 
+     main = "y1 ~ x1")
+```
+
+
+## Adjust y and x limits
+
+* arguments "xlim ="" and "ylim = "
+
+```{r}
+plot(y1 ~ x1, 
+     main = "y1 ~ x1",
+     xlim = c(0,15),
+     ylim = c(0,14))
+```
+
+
+
+
+## Calcualte correlation of y1 and x1
+```{r}
+cor(x1,y1)
+```
+
+## Linear regression y1 ~ x1
+
+* Save output to object "y1x1"
+* Not "data = " is required b/c the data are living in seperate vectors stored directly into R's memory
+
+<br>
+
+### Do linear regression
+```{r}
+y1x1 <- lm(y1 ~ x1)
+```
+
+<br>
+
+### Look at output
+
+```{r}
+summary(y1x1)
+```
+
+
+### Plot data with regression line
+
+* abline() add regression line
+* col = changes color
+* lwd = changes line width
+* pch = 16 changes plotting symbol
+* cex = 2 increass point size
+
+```{r}
+#scatter plot
+plot(y1 ~ x1, 
+     main = "y1 ~ x1",
+     xlim = c(0,15),  #axis limits
+     ylim = c(0,14),
+     pch = 16,        #pnt shape
+     cex = 2)         #pnt size
+
+#regression line
+abline(y1x1, 
+       col = 2, #line color
+       lwd = 3) #line width
+```
+
+
+## Add R^2^ values
+
+* get R^2^ by saving output of summary command
+    + y1x1r2 <- summary(y1x1)$r.squared
+* use mtext() to add annotation of R^2^2
+
+```{r}
+#scatter plot
+plot(y1 ~ x1, 
+     main = "y1 ~ x1",
+     xlim = c(0,15),  #axis limits
+     ylim = c(0,14),
+     pch = 16,        #pnt shape
+     cex = 2)         #pnt size
+
+#get r.squared
+y1x1r2 <- summary(y1x1)$r.squared
+y1x1r2 <- round(y1x1r2,3)
+
+#annotation
+mtext(text = y1x1r2)
+
+#regression line
+abline(y1x1, 
+       col = 2, #line color
+       lwd = 3) #line width
+```
+
+<br><br><br>
+
+# Make two side by side plots
+
+* 1^st^, add another set of data, ie y2 and x2, etc
+* Do regression on new data
+    + Look at coefficients and R^2^
+* Plot side by side with 1st data
+    + use par(mfrow = c(1,2)) to set up a 1 x 2 panel
+* NOTE: both plots much be in same Rmarkdown "chunk"
+
+
+```{r}
+#SET up 1 x 2 panel
+par(mfrow = c(1,2))
+
+#PLOT 1
+##scatter plot 1
+plot(y1 ~ x1, 
+     main = "y1 ~ x1",
+     xlim = c(0,15),  #axis limits
+     ylim = c(0,14),
+     pch = 16,        #pnt shape
+     cex = 2)         #pnt size
+
+#get r.squared
+y1x1r2 <- summary(y1x1)$r.squared
+y1x1r2 <- round(y1x1r2,3)
+
+#annotation
+mtext(text = y1x1r2)
+
+#regression line 1
+abline(y1x1, 
+       col = 2, #line color
+       lwd = 3) #line width
+
+
+#PLOT2
+
+## regression y2 ~ x2
+y2x2 <- lm(y2 ~ x2)
+
+##scatter plot 2
+### note: I set col = 0 to hide output
+### deletc this or change it to 1
+plot(y2 ~ x2, 
+     main = "y2 ~ x2",
+     xlim = c(0,15),  #axis limits
+     ylim = c(0,14),
+     col = 0,
+     pch = 16,        #pnt shape
+     cex = 2)         #pnt size
+
+#get r.squared for 2nd model
+y2x2r2 <- summary(y2x2)$r.squared
+y2x2r2 <- round(y2x2r2,3)
+
+## 2nd R^26 annotation
+### note: I set col = 0 to hide output
+### deletc this or change it to 1
+mtext(text = y2x2r2, 
+      col = 0)
+
+## 2nd regression line
+### note: I set col = 0 to hide output
+### deletc this or change it to 1
+abline(y2x2, 
+       col = 0, #line color
+       lwd = 3) #line width
+
+
+```
+

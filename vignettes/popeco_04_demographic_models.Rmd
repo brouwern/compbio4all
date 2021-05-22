@@ -1,0 +1,246 @@
+---
+title: "A primer of population ecology: Part 4 - demographic models"
+author: "Nathan Brouwer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A primer of population ecology: Part 4 - demographic models}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+N <- c(432,502,201,200,216,167,179,200,219,200,211,243,232,207,215,215,216,210,167,207,212,265,347, 397,485,633,765,692,728,804,904,891,1085,1050,1202,1341,1420,1485,1707,1803,1826,1773,1828,2090,2020, NA,2365,
+       1023/0.40)
+
+year <- c(1951,1961,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,
+          1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,
+          2001,2002,2003,2004,2005,2006, 2007,2008,2009,2010,2011,2012,2013,2014,2015,
+          2019)
+
+
+```
+
+
+
+## Population dynamics are often described in terms of demographic rates
+
+Often population ecologists collect data on **demographic rates**: **birth rates** and **death rates** (or the converse of death rate, **survival rate**).  Sometimes these are called **vital rates**.  A model set up in terms of demographic rates is called a **demographic models**.
+
+The most direct way to collect this information is if you know *all* of the individuals in a population (N) and you can count the number of individuals that are born and which subsequently survive until they are old enough to breed.  Often we call this the **birth rate (b)**, but this is not totally correct.  It should really the "birth and survival until old enough to reproduce rate."  
+
+We'll stick with convention and call it the **birthrate** and define it like this:
+
+$b = birth.rate = (number.of.babies)/(number.of.adults)$
+
+or more succinctly: 
+
+$b = B_t/N_t$
+
+That is, the birth rate **b** is equal to the number of births in year *t* divided by the number adults (N.t) in the population.  **b** is a fraction, and can take on values as low as zero.  b = 0 indicates that no offspring were born, or that all offspring died before they could reproduce.  b = 2 indicates that two offspring were born for each adult.
+
+We can also define B, the number of births as
+
+$B_t = b*N_t$
+
+That is, the number of organisms born and entering the population at time t (B.t) is equal to the number of organisms in the population (N) times the number of offspring per organism.  Stated another way, the number born (B) are often expressed as a proportion (b) of the number alive now (N).
+
+The death rate (d) can be similarly defined: 
+
+$d = D_t/N_t$
+$D_t = d*N_t$
+
+
+We can re-write our main population dynamics equation in terms of rates like this:      
+
+$N_{next.year} = N_{now} - N_{died} + N_{now}*(number.of.offspring.per.adult)$
+
+$N_{now} - N_{died}$ is the number of individuals which survived from one year to the next.  We can re-express this as
+
+$N_{survived} = N_{now}*(proportion.of.adults.surviving)$ 
+
+We can therefore express population change entirely in terms of rates like this: 
+
+$N_{t+1} = N_{t} + B - D$
+$N_{t+1} = N_{t} + b*N_t - d*N_t$
+
+If we want we can factor out our the $N_t$ and get an equation like this:
+
+$N_{t+1} = N_{t} + N_{t}(b - d)$
+
+## Ecologists usually calculate survival rates, not death rates
+
+In our equations, D represents the number of organisms that died in a given year *t*.  The number that survive is therefore $N_t - D$.
+
+When studying death rate ecologists often work in terms of **survival rates**, often written as $\phi$, the Greek letter "Phi."
+
+The number of deaths in a population plus the number of survivors needs to total up to the total current population size.  We therefore can use our death rate **d** and survival rate $\phi$ and write:
+
+$N_t = \phi*N_t + d*N_t$
+
+We can do some algebra:
+$N_t - d*N_t = \phi*N_t$
+
+and see that the population size (N) minus those which died (d*N_t) equals the number of survivors.
+
+We can also start with $N_t = \phi*N_t + d*N_t$ and divide both sides by $N_t$
+
+$N_t/N_t = (\phi*N_t + d*N_t)/N_t$
+
+This gives us
+
+$1 = \phi + d$
+
+That, is the proportion which lived and the proportion which died must total 1.
+
+This manipulations allows us to write out demographic equation like this:
+
+First, our current equation:
+$N_{t+1} = N_{t} + b*N_t - d*N_t$
+
+Put related terms next to each other:
+$N_{t+1} = (N_{t} - d*N_t) + b*N_t$
+
+Factor out N.t
+$N_{t+1} = N_{t}(1 - d) + b*N_t$
+
+1-d = phi, so we get:
+$N_{t+1} = \phi*N_t + b*N_t$
+
+If we want to be fancy we can do a bit of algebra and factor out the N.t
+$N_{t+1}= N_t(\phi + b)$   
+
+## Population dynamics are frequently described using the population growth rate
+
+So far we've gone from our initial equation
+
+$N_{t+1}= N_{t} + B - D + E - I$
+
+and then simplified it by ignoring immigration (I) and emigration (E; or found a population where they don't apply):
+
+$N_{t+1}= N_{t} + B - D$
+
+Then we've done some simply thinking about population processes and some algebra to get
+
+$N_{t+1} = \phi*N_t + b*N_t$
+
+Population ecologists are frequently interested in both the absolute number of organisms (eg $N_t$, $N_{t+1}$) and also the **rate of population change over time**, usually referred to as the **population growth rate**.  The Greek letter “L” called “lambda” ($\lambda$) is used to represent this rate. 
+
+If you have been following a population over time you can calculate lambda ($\lambda$) directly using the size of the population at one time point and at a previous time point.
+
+$N_{t+1}/N_t = \lambda$   	
+
+$\lambda$ is therefore the ratio between two population sizes.
+
+For example, in 2012 there were 2011 there were 1828 Kirkland's warbler males, and in 2012 there were 2090.  We can therefore set up our equation with $N_t = 1828$ and $N_{t+1} =  2090$.  Lambda is therefore
+
+$\lambda = N_{t+1}/N_t = N_2012/N_2011 = 2090/1828 = 1.14$  
+
+Note that $N_{t+1} > N_t$, and that $\lambda > 1$.
+
+While the population grew from 2011 to 2012, in 2013 only 2020 singing males were counted.  Therefore
+
+$\lambda = N_{t+1}/N_t = N_2013/N_2012  = 2020/2090 = 0.967$  .
+
+Note that $N_{t+1} < N_t$, and that $\lambda < 1$.
+
+For as many years as possible we can calculate $N_{t+1}/N_t$; this isn't always possible because of gaps in the data, e.g. we can't calculate  $N_2014/N_2013$ because no data was collected in 2014.
+
+Below is a plot our plot of the population **time series** next to a **histogram** of all of the lambda values.  The time series starts in the 1970s when counts of singing males were conducted annually.  What do you notice?  Why is a red line plotted at 1.0?
+
+```{r}
+par(mfrow = c(1,2),mar = c(4,4,3,1))
+#cbind(year, N)
+plot(N ~ year, type = "b", main = "KIWA, 1951-2015",
+     xlab = "Year", ylab = "Number of singing males",ylim = c(0,3000),
+     xlim = c(1969,2020))
+
+hist(N[-1]/N[-length(N)], main = "KIWA lambda, 1951-2015",
+     xlab = "Lambda")
+abline(v = 1, col = 2, lty = 3, lwd = 4)
+
+```
+
+The histogram shows us the distribution of observed lambda values over the ~50 year time series when KIWA males were counted every year. 
+
+
+
+## Population growth rates can be calculated from demographic rates
+
+It is often very difficult, if not impossible, to determine actual population sizes.  For KIWA, researchers work very hard to determine the number of males that are singing each year, but they never know if they found all of them.
+
+While still very challenging, its often easier to determine **demographic rates** such as survival and reproduction rather than population size.  Several studies have captured KIWA males, marked them  with **bird bands** and attempted to re-captured them each year to estimate survival rates ($\phi$).  They have also found  nests and determined how many baby KIWA are born per nest, and what the survival rate is for those birds until they are one year old and can breed.  This gives an estimate of **b**.
+
+With these estimates in hand we can calculate population growth rate ($\lambda$).  We start with our previous equation
+
+$N_{t+1} = \phi*N_t + b*N_t$
+
+We can then divide both sides by N_t
+
+$N_{t+1}/N_t = (\phi*N_t + b*N_t)/N_t$
+
+We can distribute the division of $N_t$ like this
+
+$N_{t+1}/N_t = (\phi*N_t)/N_t + (b*N_t)/N_t$
+
+This cancels out N_t entirely from the right hand side
+
+$N_{t+1}/N_t = \phi + b$
+
+We then define $N_{t+1}/N_t$ as $\lambda$
+
+$\lambda = \phi + b$
+
+$\lambda$ therefore represents a combination of both survival ($\phi$) of adults for one year to the next plus how many offspring they produce ($b$).  We now have a quantity we are interested in, the population growth rate ($\lambda$), in term of the survival rate and birth rate ($\phi$ and $b$).  This means we can understand population dynamics without needing to count every single organism.
+
+We could also do our math this way.  We can start with $N_{t+1} = \phi*N_t + b*N_t$ and factor out $N_t$ on the right to be:
+
+$N_{t+1}= N_t(\phi + b)$ 
+
+We then divide both sides by $N_t$
+
+$N_{t+1}/N_t= N_t(\phi + b)/N_t$ 
+
+This again gives us
+
+$N_{t+1}/N_t= \phi + b$ 
+
+which we write as
+
+$\lambda = \phi + b$.
+
+## The value of lambda summarizes population dynamics 
+
+The minimum value $\lambda$ can take on is 0.  When $\lambda > 1$ a population grows, while if $\lambda < 1$ a population shrinks.  If $\lambda = 1$ a population isn't changing.  If $\lambda = 0$ the population goes extinct. 
+
+## Calculationg lambda 
+
+```{r, echo = F}
+phi.A <- 0.67  #c(0.74, 0.65, 0.75, 0.57, 0.65)
+phi.HY <- 0.415
+fec <- 3.58 #includes nest loss
+
+# ignoring pairing
+phi.A + phi.HY*fec*0.5 #1.42
+
+#  pairing success differences based on habitat quality (i.e. 0·85−0·97; Probst 1986; Rockwell 2013)
+phi.A + phi.HY*1.52 #1.3008 #low  quality
+phi.A + phi.HY*1.74 #1.3921 #high quality
+```
+
+We can calculate lambda for any species if we have estimates of its adult survival rate and its birth rate.  Survival for KIWA is  around 67%, or 0.67.  This means on average that if we have 100 adult KIWA nesting in a forest, we'd expect to see 67 of them next year.  Equivalently, we can say that an adult bird has probability of surviving of 0.67.
+
+The birth rate ($b$) is tricky to estimate for a number of reasons.  Incorporating both the number of baby KIWA which hatch from eggs and their probability of surviving for one year until they can reproduce, the birth rate (b) is about 0.74.
+
+Population growth rate is therefore
+
+$\lambda = 0.67 + 0.74$
+$\lambda = 1.3$
+
+Since $\lambda > 1$ we'd predict that the population of KIWA will be growing.  We aren't actually counting all the birds, however.
+

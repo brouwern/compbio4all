@@ -12,4 +12,3 @@ usethis::use_data(martin1995, overwrite = TRUE)
 
 # make_dateset_helpfile(dataset = martin1995,
 #                       dataset_name = "martin1995")
-

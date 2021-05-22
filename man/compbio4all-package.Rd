@@ -14,13 +14,13 @@ What the package does (one paragraph).
 What the package does (one paragraph).
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Nathan Brouwer \email{brouwern@gmail.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
 
 
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Nathan Brouwer \email{brouwern@gmail.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
 
 
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Nathan Brouwer \email{brouwern@gmail.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
 
 }
 \keyword{internal}

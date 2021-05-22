@@ -1,0 +1,270 @@
+---
+title: "Base R Plots"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Base R Plots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+data("martin1995")
+```
+
+
+
+*Things to cover*
+
+boxplot - base, qplot, ggplot
+boxplot ordered
+histogram 
+scatterplot
+scatterplot w/vert/hort/1:1
+scatterplot with regression lines
+scatterplot with spline smoother
+
+scatterplot matrix
+
+
+### Load Martin 1992 data
+
+
+## R Plotting FAQ
+
+### BP1)How do I make histograms in R?
+
+The basics:
+R makes histograms in a snap in R, something that I do not know of an efficient way to do in Excel.  Let's make a histogram of the different clutch sizes (number of eggs laid per nest) for the different species.  Since I've forgotten exactly what I called this column I'll first figure that out using the names() function, then make a histogram with hist().  R automatically "bins" the data and plots the frequency of observations in each bin along the y-axis.
+
+```{r}
+#Look at the names in the martin1995 dataframe
+names(martin1995)
+
+#Make a histogram of clutch size
+hist(martin1995$clutch.sz)
+```
+
+Finesse: Changing titles
+R automatically assigns names to everything.  Here I change the x-axis (called the x label) and title, which is called the "main title".
+```{r}
+hist(martin1995$clutch.sz, xlab = "Clutch size", main = "data's clutch-size data")
+```
+
+Finesse: Adding a vertical line
+The bird I study typically lays 5 eggs.  To make it easy to compare my bird to other birds, I can add a vertical line at 5.  This requires two seperate commands.  First I'll make the plot, then add the line.  The line is made with the abline() command, which stands for "A-B line", where A stands for the intercept of a line B stands for its slope.  abline() can also make horizontal lines and vertical lines, but the programmers must have thought that abhvline() was too long of a name. 
+```{r}
+#Make histogram
+hist(martin1995$clutch.sz)
+
+#Add vertical line at 5
+abline(v = 5)
+```
+
+The color is black so it blends in.  I can change the color using the col= comamnd within abline line
+```{r}
+#Make histogram
+hist(martin1995$clutch.sz)
+abline(v = 5, col = 2)
+```
+
+
+##### BP2)How do I make boxplot in R?
+Oneliner:
+boxplot(martin1995$clutch.sz ~ martin1995$group)
+
+Skelp
+```{r}
+par(mfrow = c(1,1))
+boxplot(clutch.sz ~ group, data = martin1995,
+        varwidth = TRUE, #modify the width proportional to sample size
+        notch = FALSE,   #notches can be used to judge if medians are          
+                         #different.  Work best with relativley large sample                 
+                         #sizes.
+        col = 2:7)       #colors
+
+```
+
+
+Details:
+Boxplots are recommended by many statisticians as an excellent way to summarize the distribution of data.  Boxplots also a breeze in R, while they are more or less impossible in Excel (I've seen instructions for them but it looks like a pain).  Let's make a box plot of clutch size compared to birds from different nesting locations.  The boxplot() function uses a tilda, ~ in it.  Like many R functions, such as those for regression, the continuous variable goes to the left of ~ and the categorical variables go to the right.
+```{r}
+boxplot(martin1995$clutch.sz ~ martin1995$group)
+```
+
+
+
+
+##### BP3)How do I make scatterplot in R?
+
+*Oneliner:*
+plot(clutch.sz ~ nest.dur, data = martin1995)
+
+*Skelp:*
+```{r}
+#Plot
+plot(clutch.sz ~ nest.dur, data = martin1995,
+     main = "Main Title: Clutch size vs. nesting duration",
+     sub = "Subtitle: Martin 199x Ecological Monographs",
+     xlab = "xlab: nesting duration",
+     ylab = "ylab: clutch size",
+     col = 2,   #change the color
+     pch = 2)   #change th shape of the symbol
+
+#Regression line
+abline(a = 3.6,   #intercept
+       b = 0.045) #slope
+```
+
+
+
+
+*Details:*
+Scatter plots are more or less the default plot type of R.  There are several minor variation that all do the same thing.  The 1st is probably the easiest to remember because it is similar to the standard format for many other R commands, such as linear regression.
+```{r}
+#Using a tilda ~ and "data =""
+plot(clutch.sz ~ nest.dur, data = martin1995)
+
+#Using tilda and explicit column references
+plot(martin1995$clutch.sz ~ martin1995$nest.dur)
+
+#Using commas and explicit column ref.  NOte that order of data has been flipped.
+plot(martin1995$nest.dur, martin1995$clutch.sz)
+
+```
+
+
+
+##### BP4)How do I put a regression line through a  scatterplot in R?
+
+Oneliner:
+plot(clutch.sz ~ nest.dur, data = martin1995)
+abline(a = 3.6, b = 0.045)
+
+Details
+
+```{r}
+
+```
+
+
+
+##### BP5)How do I put 2 plots next to each other in R?
+
+*Oneliner:*
+par(mfrow = c(1,2))
+plot(clutch.sz ~ nest.dur, data = martin1995)
+plot(clutch.sz ~ surv.adult, data = martin1995)
+
+
+*Details*
+R can relativley easily format plots next to each other, but the function is rather cryptic, involving the par() command with "mfrow =" in.  To plot two figures next to each other use 'par(mfrow = c(1,2))', which basically says "put two plots in a 1 by 2 grid."  The default setting for R is par(mfrow = c(1,1)), which corresponds to a 1 x 1 grid.  You can probably guess that to put two plots on top of each other you would use par(mfrow = c(2,1)), and so forth.
+
+```{r, eval = F}
+#Two plots next to each other
+par(mfrow = c(1,2))
+plot(clutch.sz ~ nest.dur, data = martin1995)
+plot(clutch.sz ~ surv.adult, data = martin1995)
+
+
+#Two plots on top of each other
+par(mfrow = c(2,1))
+plot(clutch.sz ~ nest.dur, data = martin1995)
+plot(clutch.sz ~ surv.adult, data = martin1995)
+
+```
+
+
+
+*Finnese:*
+Lots of tweaks can be done to plot in general, and to multiple plots in a grid, such as the space between each plots.  The code, however, is rather cryptic.
+If you look at the help menu for the par() command you'll see dozen of options.  For quickly making plots look nice, many people just export into Power Point and orient and annotat them there.  Learning how to feed commands to par() to make plots and groups of plots look nice can save you time in the long run, but it takes time to figure out what you want and what you like.  I find that the R package ggplot2 with its function qplot() makes nicer default plots.  GGPLOT has its own complicated syntax, but is prefferred by many R users.
+
+
+
+
+##### How do I put two plots next to each other using ggplot?
+Oneliner
+
+```{r}
+library(ggplot2)
+qplot(y = pred, x = nest.dur, data = martin1995)
+
+```
+
+
+
+##### How do I add a regression line to a scatterplot with ggplot?
+Oneliner
+```{r}
+
+library(ggplot2)
+qplot(y = pred, x = nest.dur, data = martin1995,
+geom = c("smooth","point"), method = "lm")
+
+```
+
+
+Skelp
+```{r}
+qplot(y = pred, x = nest.dur, data = martin1995,
+geom = c("smooth","point"),
+se = FALSE,
+method = "lm",
+xlab = "xlab = nesting duration",
+ylab = "ylab = predation rate",
+main = "main title: predation vs. nesting duration")
+
+
+```
+
+
+
+
+
+
+#### How do I make a strip chart with base R
+Box plot are great but don't work well for small data set.
+
+```{r}
+#Vertical strip chart
+stripchart(martin1995$clutch.sz ~ factor(martin1995$group),
+           vertical = TRUE)
+
+#Horizontal strip chart
+stripchart(martin1995$clutch.sz ~ factor(martin1995$group),
+           vertical = FALSE)
+```
+
+
+
+
+
+
+##
+
+Plot clutch size versus duration of incubation using basic R plotting function
+```{r}
+plot(surv.adult ~ clutch.sz, data = martin1995)
+```
+
+
+Plot distribution of survival rates
+```{r}
+hist(martin1995$surv.adult)
+```
+
+Plot distribution of clutch sizes
+```{r}
+hist(martin1995$clutch.sz)
+```
+
+
+

@@ -1,0 +1,111 @@
+---
+title: "A primer of population ecology: Part 6 - Case study"
+author: "Nathan Brouwer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{A primer of population ecology: Part 6 - Case study}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+seriesN.oriole <- c(375, 300, 200, 100)
+yr.oriole <- c(1996,1998,1999,2000)
+
+1. Arendt and Arendt (1984) provided a pre-Hurricane Hugo Montserrat Oriole population estimate of 1,000–1,200 individuals.
+
+For example, the Montserrat Oriole population size is small, but researchers have never been able to determine how many there are.  What they have done, however, is marked a subset of adult orioles with **bird bands** and re-capture them each year to estimate survival rates ($\phi$).  They have also found some nests and determined how many baby orioles are born per nest, and what the survival rate is for those birds until they are one year old and can breed.  This gives an estimate of b.
+
+Survival for the Montserrat Oriole is currently around 70%, or 0.70.  The birth rate is tricky to estimate for a number of reasons.  Incorporating both the number of Orioles which hatch from eggs and their probability of surviving for one year until they can reproduce, then birth rate (b) is about 0.42.  Population growth rate is therefore
+
+$\lambda = 0.70 + 0.42$
+$\lambda = 1.12$
+
+Since $\lambda > 1$ we'd predict that the population of Orioles will be growing.  We aren't actually counting all the birds, however.
+
+In 2012 it was estimated that there might be as few as 300 Orioles on the island.  If lambda = 1.12 was we calculated above, we'd predict that in 2013 the population size would be 
+
+$N_{2013}=\lambda*N_{2012}$
+$N_{2013}=1.12*300 = 336$
+
+
+In 200x a second, very small population of Montserrat Orioles was found very near to the crater of the volcano on the island.  Researchers haven't studied this population much, they estimate that there was about 100 birds it in 2020.  If you start with 100 Orioles and you estimate that $\lambda$ for this population is 1.10 you can start with this equation
+
+$N_{t+1}=\lambda*N_t$ 
+
+We can make this specific
+
+$N_{2021}=\lambda*N_{2020}$ 
+
+then plug in the values $\lambda$ = 1.10 and N = 100
+
+$N_{2021}=1.1*100$
+
+and get the project population the following year
+
+$N_{2021}=110$
+
+So, if you have 100 orioles in 2020 you’d expect to have 2021 next year.
+
+## Exponential population growth
+
+If you take the population size of 110 orioles from our last calculation and plug it back into the population growth equation like this to estimate the number of orioles in the next year, 2022:
+
+$N_{2022}=1.1*110$
+
+the estimated population the following year will be 121 orioles.
+
+$N_{2022}=121$
+
+If you repeat this 8 more  times (for 10 total years of population change) you will see a graph the one below.  Note the curvature to the line.
+
+```{r, echo = F}
+yr <- seq(2020,2030)
+N <- 100
+lambda <- 1.1
+N.t <- c(100, rep(NA,10))
+for(i in 2:length(N.t)){
+  N.t[i] <- N.t[i-1]*lambda
+}
+length(N.t)
+length(yr)
+plot(N.t ~ yr, type = "b", xlab = "Year", ylab = "Population size (N)")
+```
+
+
+When you plug the output of an equation (eg $N_{2020}=110$) back into itself repeatedly this is called **recursion.** 
+
+The equation 
+
+$N_{t+1}=\lambda*N_t$
+
+is therefore sometimes referred to as a **recursion equation**.  (Similar terms are **iterate** and **iteratively**.)  
+
+If you repeat this recursion process 20 times you see a graph like the one below.
+
+This type of upward-curving, accelerating change is known as exponential population growth.  (We won’t do it right now, but we can re-write our equations using an exponential term).
+
+```{r, echo = F}
+yr <- seq(2020,2040)
+N <- 100
+lambda <- 1.1
+N.t <- c(100, rep(NA,20))
+for(i in 2:length(N.t)){
+  N.t[i] <- N.t[i-1]*lambda
+}
+length(N.t)
+length(yr)
+plot(N.t ~ yr, type = "b", xlab = "Year", ylab = "Population size (N)")
+```
+
+
+
+
+## The Montserrat Oriole population declined after volcanic eruptions 
+
+The Montserrat Oriole (*Icterus oberi*) is a relative of the Baltimore Oriole which lives on the Caribbean Island of Montserrat.  Montserrat is a small volcanic islands that is only about 10 miles long and 7 miles wide and lies east of Puerto Rico and north of Barbados.  
+
+The Montserrat Oriole is **endemic** to the island, and volcanic activity has threatened the bird with **extinction.**  Biologists have therefore been very interested in determining how many orioles are left on the island and what is happening with the population.
+

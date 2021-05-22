@@ -1,0 +1,274 @@
+---
+title: "Breeding like rabbits: discrete-time logistic population growth"
+author: "Nathan Brouwer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette demonstrates logistic population growth using a hypothetical population of rabbits.  Specifically, it uses the discrete-time version of the logistics equation to model rabbit population dynamics, assuming that rabbits breed in a single discrete season each year.  This is a simplification of rabbit life history, since in reality
+
+## Preliminaries
+```{r}
+library(ggplot2)
+#library(cowplot)
+library(compbio4all)
+```
+
+
+## Exponential population growth
+
+No limits on population growth
+
+Project population 10 years into future
+```{r}
+N.rabbit.exp <- logit_discrete_multistep(alpha = 0, 
+                                K = NULL,
+                                r.d = 1,
+                                time.steps = 10,
+                                Nt = 10)
+
+```
+
+Plot exponential populatin growth
+```{r}
+gg_plot_logit(N.rabbit.exp,
+              title = "Exponential population growth in rabbits") +
+xlim(0,20) +
+ylim(0,3000) 
+        
+```
+
+
+
+## Logitic population growth
+
+Project population 10 years into future
+```{r}
+N.rabbit.logit <- logit_discrete_multistep(alpha = NULL, 
+                                K = 3000,
+                                r.d = 1,
+                                time.steps = 20,
+                                Nt = 10)
+
+```
+
+Plot exponential population growth
+```{r}
+gg_plot_logit(N.rabbit.logit,
+              title = "Logistic population growth in rabbits") +
+xlim(0,20) +
+ylim(0,3000) 
+        
+```
+
+
+
+## Overlay the two growth curves
+
+Project population 10 years into future
+```{r}
+N.rabbit.exp.20yr <- logit_discrete_multistep(alpha = 0, 
+                                K = NULL,
+                                r.d = 1,
+                                time.steps = 20,
+                                Nt = 10)
+
+```
+
+
+```{r}
+N.rabbit.exp.20yr$growth.type <- "exponential"
+N.rabbit.logit$growth.type <- "logistic"
+
+N.rabbit.compare <- rbind(N.rabbit.exp.20yr,
+                          N.rabbit.logit)
+
+axis.txt.sz<-25
+axis.ti.sz<-25
+title.sz <- 30
+title <- "Exponential vs. logistic"
+ggplot(aes(y = N.t,
+             x = time),
+         data = N.rabbit.compare) +
+    #geom_point(size = 4) +
+    geom_line(size = 3,
+              aes(color =growth.type ,
+                  linetype = growth.type)) +
+    xlab("Time (t)") +
+    ylab("Population size (N)") + 
+  theme(axis.text=element_text(size=axis.txt.sz),
+        axis.title=element_text(size=axis.ti.sz,face="bold")) +
+    theme(plot.title = element_text(size=title.sz)) +
+    ggtitle(title) +
+ylim(0,5000)
+```
+
+
+Focus on part where logit begins to curve
+```{r}
+ggplot(aes(y = N.t,
+             x = time),
+         data = N.rabbit.compare) +
+    #geom_point(size = 4) +
+    geom_line(size = 3,
+              aes(color =growth.type ,
+                  linetype = growth.type)) +
+    xlab("Time (t)") +
+    ylab("Population size (N)") + 
+  theme(axis.text=element_text(size=axis.txt.sz),
+        axis.title=element_text(size=axis.ti.sz,face="bold")) +
+    theme(plot.title = element_text(size=title.sz)) +
+   # ggtitle(title) +
+ylim(0,3000) +
+xlim(7,15)
+```
+
+
+
+
+
+## Logitic population growth with various parameters
+
+Project population 10 years into future
+```{r}
+N.rabbit.logit.K3000 <- logit_discrete_multistep(alpha = NULL, 
+                                K = 3000,
+                                r.d = 1,
+                                time.steps = 20,
+                                Nt = 10)
+
+
+```
+
+Plot exponential populatin growth
+```{r}
+gg_plot_logit(N.rabbit.logit.K3000,
+              title = "") +
+xlim(0,20) +
+ylim(0,6000) 
+        
+```
+
+
+
+
+Vary K 2x
+```{r}
+N.rabbit.logit.K6000 <- logit_discrete_multistep(alpha = NULL, 
+                                K = 6000,
+                                r.d = 1,
+                                time.steps = 20,
+                                Nt = 10)
+
+
+```
+
+Plot K3000 vs K600
+```{r}
+K3kvsK6K <- rbind(N.rabbit.logit.K3000,
+                  N.rabbit.logit.K6000)
+ggplot(aes(y = N.t,
+             x = time),
+         data = K3kvsK6K) +
+    #geom_point(size = 4) +
+    geom_line(size = 3,
+              aes(color = factor(K) ,
+                  linetype = factor(K))) +
+    xlab("Time (t)") +
+    ylab("Population size (N)") + 
+  theme(axis.text=element_text(size=axis.txt.sz),
+        axis.title=element_text(size=axis.ti.sz,face="bold")) +
+    theme(plot.title = element_text(size=title.sz)) +
+    #ggtitle(title) +
+ylim(0,6000) 
+        
+```
+
+
+
+
+## Vary r 1.5
+```{r}
+N.rabbit.logit.r1.5 <- logit_discrete_multistep(alpha = NULL, 
+                                K = 3000,
+                                r.d = 1*1.5,
+                                time.steps = 20,
+                                Nt = 10)
+
+
+```
+
+Plot K3000 vs K600
+```{r}
+N.rabbit.logit.K3000$r <- 1
+N.rabbit.logit.r1.5$r <- 1.5
+K3kvsK6K <- rbind(N.rabbit.logit.K3000,
+                  N.rabbit.logit.r1.5)
+ggplot(aes(y = N.t,
+             x = time),
+         data = K3kvsK6K) +
+    #geom_point(size = 4) +
+    geom_line(size = 3,
+              aes(color = factor(r) ,
+                  linetype = factor(r))) +
+    xlab("Time (t)") +
+    ylab("Population size (N)") + 
+  theme(axis.text=element_text(size=axis.txt.sz),
+        axis.title=element_text(size=axis.ti.sz,face="bold")) +
+    theme(plot.title = element_text(size=title.sz)) +
+    #ggtitle(title) +
+ylim(0,6000) 
+        
+```
+
+
+
+
+## Vary r 2x
+```{r}
+N.rabbit.logit.r2 <- logit_discrete_multistep(alpha = NULL, 
+                                K = 3000,
+                                r.d = 1*2,
+                                time.steps = 20,
+                                Nt = 10)
+
+
+```
+
+Plot K3000 vs K600
+```{r}
+N.rabbit.logit.K3000$r <- 1
+N.rabbit.logit.r2$r <- 2
+K3kvsK6K <- rbind(N.rabbit.logit.K3000,
+                  N.rabbit.logit.r2)
+ggplot(aes(y = N.t,
+             x = time),
+         data = K3kvsK6K) +
+    #geom_point(size = 4) +
+    geom_line(size = 3,
+              aes(color = factor(r) ,
+                  linetype = factor(r))) +
+    xlab("Time (t)") +
+    ylab("Population size (N)") + 
+  theme(axis.text=element_text(size=axis.txt.sz),
+        axis.title=element_text(size=axis.ti.sz,face="bold")) +
+    theme(plot.title = element_text(size=title.sz)) +
+    #ggtitle(title) +
+ylim(0,6000) 
+        
+```
+
+

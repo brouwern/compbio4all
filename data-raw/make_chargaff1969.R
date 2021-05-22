@@ -25,5 +25,5 @@ Cy <- c(18.3, 19.8, 19.1, 19.5,
         18.1, 20.9, 19.5, 18.9,
         20.1, 23.2, 21.7, 21.6)
 
-# usethis::use_r("chargaff1969")
-# usethis::use_data(chargaff1969,overwrite = TRUE)
+usethis::use_r("chargaff1969")
+usethis::use_data(chargaff1969,overwrite = TRUE)

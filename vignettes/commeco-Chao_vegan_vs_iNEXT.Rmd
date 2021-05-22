@@ -1,0 +1,181 @@
+---
+title: "Chao1 in vegan vs. iNEXT"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Chao1 in vegan vs. iNEXT}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+
+
+# Chao1 species richness in vegan vs. iNEXT
+
+This is a very short outline for using the iNEXT and vegan packages to calcualte the chao1 species richness estimate.  It also has notes on a difference between iNEXT and vegan's output, which I believe has to do with the use of a small sample size correction by iNEXT.
+
+
+
+## Preliminaries
+```{r}
+library(vegan)
+library(iNEXT)
+```
+
+I'll use the spider data from iNEXT as an example (origianly  from Ellison et al. 2010, Sackett et al. 2011, probably a subset of Table 3 in Sackett.).
+
+
+Note that iNEXT presents data in as **vectors** in a **list**, not as a dataframe.  Below I work with the data both as a list and as a dataframe.  I am not sure if it matters; I thought I had previously had problems with dataframes but I was able to work with dataframes below.  I think that if data is in list-vector format there might be issues with zerios, but I am not sure.
+
+```{r}
+data(spider)
+spider
+```
+
+
+
+## Setting data up for iNEXT: from dataframe to list
+
+Let's say you need to get data into iNEXT yourself.  You probably have your data in a **dataframe**.  In what follows, I will take the sample iNEXT::spider data, turn it into a dataframe, then re-format it for iNEXT.  I'm going to make up artitrary species designations, and insert some zeros into the girdled data, which has fewer observations than the "Logged" data.  NOTE: this DOES NOT reflect the structure of the original data!
+
+### Turn the _spider_ data into a daframe
+
+Details done matter. 
+
+```{r}
+girdled <- data.frame(spp.i = 1:length(spider$Girdled),
+                      Girdled = spider$Girdled)
+
+logged <- data.frame(spp.i = 1:length(spider$Logged),
+                      Logged = spider$Logged)
+
+df <- merge(girdled,logged, by = "spp.i", all = T)
+
+df[is.na(df)] <- 0
+
+```
+
+
+### Fake spider dataframe
+
+Here's the fake spider dataframe I made.  This is probably a common way to have your data set up for an analysis.  Note that several species that occurr at the logged site do not show up in the girdled site.  
+
+```{r}
+head(df)
+
+tail(df)
+```
+
+
+## Running iNEXT on a daframe 
+
+
+iNEXT will run on a single column of a dataframe
+```{r}
+ChaoRichness(df$Girdled)
+```
+
+
+iNEXT will run aon multiple columns of a dataframe if you specify the columns with the data.
+```{r}
+ChaoRichness(df[,c("Girdled","Logged")])
+
+```
+
+
+The iNEXT function itself will also work.
+```{r, include=FALSE}
+iNEXT(df[,c("Girdled","Logged")], q=0, datatype="abundance")
+```
+
+
+
+## Plotting iNEXT rarefaction curves
+
+```{r}
+i.out <- iNEXT(df[,c("Girdled","Logged")], q=0, datatype="abundance")
+
+library(ggplot2)
+ggiNEXT(i.out,)
+```
+
+
+
+
+
+
+
+
+# iNEXT output
+
+Run the iNEXT function on the spider data
+```{r}
+spider.girdled <- iNEXT(spider$Girdled, q=0, datatype="abundance")
+```
+
+Look at Chao1 estiamte from iNEXt. The output comes in a list, and the Chao1 point estimates are in "AsyEst", which is _think_ means "asymptotic estimate".
+
+```{r}
+#Called from results of iNEXT()
+spider.girdled$AsyEst[1,]
+
+```
+
+
+
+There's also a function **ChaoRichness()** that gives it to you directly. 
+```{r}
+#Called directly with  ChaoRichness()
+i.next.out <-ChaoRichness(spider$Girdled)
+
+
+```
+
+
+
+# vegan ouptut
+
+Vegan can calculate "Extrapolted Species Richness in a Speices Pool" using the estimateR() function, which is "based on abundances (counts) on single sample site."
+
+
+Chao1 from vegan
+```{r}
+vegan.out <-estimateR(spider$Girdled)
+```
+
+## What is vegan doing:
+
+The documentation for estiamteR states: 
+"The abundance-based estimates in estimateR use counts (numbers of individuals) of species in a single site. ... The two variants of extrapolated richness in estimateR are bias-corrected Chao and ACE (O'Hara 2005, Chiu et al. 2014). The Chao estimate is similar as the bias corrected one above, but a_i refers to the number of species with abundance i instead of number of sites, and the **small-sample correction is not used.**" (emphasis mine)
+
+
+### vegan::specpool
+For the related vegan::specpool() function vegan gives the following equations
+
+* Chao	S_P = S_0 + a1^2/(2*a2) * (N-1)/N
+* Chao bias-corrected	S_P = S_0 + a1*(a1-1)/(2*(a2+1)) * (N-1)/N
+
+w/ the note "specpool normally uses basic Chao equation, but when there are no doubletons (a2=0) it switches to bias-corrected version. In that case the Chao equation simplifies to S_0 + (N-1)/N * a1*(a1-1)/2."
+
+
+
+# Compare iNEXT and vegan output
+
+```{r}
+i.next.out[,1:2]
+round(vegan.out[1:2],1)
+```
+
+
+
+

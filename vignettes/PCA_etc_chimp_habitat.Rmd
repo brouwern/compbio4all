@@ -1,0 +1,140 @@
+---
+title: "PCA etc worked example"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PCA etc worked example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = T}
+library(compbio4all)
+```
+
+
+
+
+```{r}
+library(ggpubr)
+```
+
+
+
+## Assignment
+
+1. Write a 1 paragraph description of the dataset and the goal of the analysis.  Indicate the exact table and page number that the data can from.
+1. Provide a Citation for the dataset
+1. Create the dataset from vectors and write a 2-3 sentence description about the  process, explaining it to someone who uses Excel, not R.
+1.  Make a scatterplot using ggpubr::ggscater(), plotting variables against each other and useing a third for color and a fourth for size.
+1.  Run PCA in vegan using the rda() function
+1. Write a paragraph comparing your PCA results to the original one from the reading (page x, y)
+1. Run a cluster analysis that replicates how the original cluster analysis was done.  Use the correct distance (cosine, Manhattan, etc) and clustering algorithm (WPGMA vs. UPGMA)
+1. Write a paragraph comparing your clustering results to the original one from the reading.
+1. Write a 1-paragraph conclusion summarizing to what degree you were able to replicate the original results.
+
+
+## Introduction
+
+Write a 1 paragraph description of the dataset and the goal of the analysis.
+
+Provide a properly formatted citation for the dataset
+
+
+
+https://www.sciencedirect.com/science/article/pii/S0003347212004824?casa_token=F0SJxpVbnZgAAAAA:mn-N8qJdirz1yGd84quoF97FRJwWGBLUXFsGObT1vJytKmfb6esEu43baKwxjibiOizL8mZfsQ#bib29
+
+Ecology of culture: do environmental factors influence foraging tool use in wild chimpanzees, Pan troglodytes verus?
+
+## Data
+
+Set up dataframe from vectors.
+
+```{r}
+#Taï Northa	Taï Southa	Yealéa,b	Bossoub,c	Seringbarab,d	Gashakae	Lopéf
+#                          IC     	IC     IC        Guinea	 Guinea	     Nigeria	Gabon
+#                          1        2      3         4        5            6         7
+country               <- c("IC","IC","IC","Guinea","Guinea","Nigeria","Gabon")
+site                  <- c("tai_T","tai_S","yealea","bossou","seringbara","gashaka","lope")
+coula_edulis          <- c(17.7, 38.8, 2.4,   0,    0,  0,   6.7)
+detarium_spp          <- c(0.2,  0.1,  0.3,   0,    0,  0.1, 0.05)
+elaeis_guineensis     <- c(0.01, 0.01, 4.2,  13.5,  1,  0.3, 0.9)
+parinari_spp          <- c(1.3,   1.5,  1.5,   0.01, 3.4,0,   0)
+panda_oleosa          <- c(0.5,  1.1,  0.2,	  0,	  0,	0,	0.1)
+sacoglottis_gabonensis <- c(6.3,1.2,0,0,0,0,	0.8)
+
+dat <- data.frame(country,
+                  site,
+                   coula_edulis,
+                   detarium_spp,
+                   elaeis_guineensis,parinari_spp,
+                   panda_oleosa,sacoglottis_gabonensis)
+
+row.names(dat) <-dat[,2]
+  
+```
+
+
+## Scatter plot
+
+Add color, size and shape differences.
+
+```{r}
+ggscatter(y = "coula_edulis",
+          x = "panda_oleosa",
+          color = "country",
+          add = "reg.line",
+          # ellipse = T, 
+          data = dat) + geom_jitter()
+```
+
+## Cluster analysis
+
+```{r}
+dist_euclid <- dist(dat[,-c(1:2)])
+clust_out <- hclust(dist_euclid,
+                    method = "ward.D") 
+plot(clust_out,
+     labels = row.names(dat))
+```
+
+
+Cosine distances
+```{r}
+Matrix <- as.matrix(dat[,-c(1,2)])
+sim <- Matrix / sqrt(rowSums(Matrix * Matrix))
+sim <- sim %*% t(sim)
+#Convert to cosine dissimilarity matrix (distance matrix).
+
+D_sim <- as.dist(1 - sim)
+```
+
+
+```{r}
+clust_out <- hclust(D_sim,
+                    method = "average") 
+plot(clust_out,
+     labels = row.names(dat))
+```
+
+
+## PCA
+
+```{r}
+biplot(prcomp(dat[,-c(1:2)],center = T,scale = T))
+```
+
+
+```{r}
+library(vegan)
+
+vegan_pca <- rda(dat[,-c(1:2)])
+plot(vegan_pca)
+```
+

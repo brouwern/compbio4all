@@ -1,0 +1,124 @@
+#,,#,clutch size,Inc (d),Nes (d),Suc (%),Pred (%),Brds (no/yr),Surv (%),Lat,Foraging Site,References
+i.bird,group,spp,clutch.sz,inc.dur,nest.dur,nest.suc,pred,broods,surv.adult,lat,foraging.site,refs
+1,excavating,Red-headed Woodpecker,4.82,13.5,26,78,NA,1.5,0.622,31,Bark,1 4
+2,excavating,Acorn Woodpecker,4.36,11.5,31,92.9,7.1,1,0.746,34,Bark,2 4
+3,excavating,Red-bellied Woodpecker,4.31,11.5,25,82,NA,1,0.683,31,Bark,1 3 4
+4,excavating,Red-NAped Sapsucker,4.93,13,27,96.6,3.4,1,0.607,34,Bark,4 5 111
+5,excavating,Williamson's Sapsucker,4.38,13,31.5,92.3,7.7,1,NA,34,Bark,4 5 6
+6,excavating,Downy Woodpecker,4.81,12,22.5,100,0,1.5,0.604,34,Bark,3 4 5 7
+7,excavating,Hairy Woodpecker,3.93, NA,29,87.5,12.5,1,NA,34,Bark,4 5 8
+8,excavating,Red-cockaded Woodpecker,3.27,11.5,26,72.7,NA,1,0.735,35,Bark,98
+9,excavating,Pileated Woodpecker,3.8,18,26,83,NA,1,0.69,45,Bark,99
+10,excavating,Red-breasted Nuthatch,5.5,12,19.5,74.1,25.9,1,NA,34,Bark,5
+11,excavating,Pygmy Nuthatch,6.5,16,22,86.8,13.2,1,0.65,34,Canopy,5 9
+12,non-excavating,Tree Swallow,4.7,14.5,20,45.8,31.3,1,0.398,43,Aerial,100
+13,non-excavating,Purple Martin,4.93,15.5,28,NA,NA,1,0.431,42,Aerial,101
+14,non-excavating,Cliff Swallow,3.6,13,23,64.8,NA,1.5,0.478,39,Aerial,102 103
+15,non-excavating,Barn Swallow,4.49,15,20.5,43.2,0.1,1.5,0.416,44,Aerial,103 104
+16,non-excavating,Eastern Phoebe,4.74,16,16,70,15.9,2,0.312,40,Aerial,105
+17,non-excavating,Black-capped Chickadee,6.82,12,16,66.3,19.7,1.5,0.403,40,Canopy,10 11 48
+18,non-excavating,CaroliNA Chickadee,6.5,12,16.4,76,21.1,1.5,0.405,40,Canopy,11
+19,non-excavating,Mountain Chickadee,7.06,14,20,57.2,42.8,1,0.52,34,Canopy,5 97
+20,non-excavating,Plain Titmouse,6.75,15,18.5,NA,NA,1,0.526,38,Canopy,12
+21,non-excavating,Tufted Titmouse,6,13.5,17.5,NA,NA,2,0.416,36,Canopy,7
+22,non-excavating,White-breastedN uthatch,8,12,15,60.2,39.8,1.5,0.35,34,Bark,3 5
+23,non-excavating,Brown Creeper,5.55,15,15.5,64.7,35.3,1.5,NA,34,Bark,5 13
+24,non-excavating,House Wren,6.5,14,15,71.5,28.5,2,0.296,34,Shrub,5 14
+25,non-excavating,Dipper ,4.3,NA,16,24.5,NA,2,0.456,40,Aquatic,15
+26,non-excavating,Eastern Bluebird,4.42,14.1,17.5,48.2,48.6,2,0.49,42,Aerial,16
+27,non-excavating,WesternB luebird,4.82,13.8,21,NA,NA,2,0.449,36,Aerial,106
+28,non-excavating,European Starling,5.36,12,21,NA,NA,2,0.485,42,Ground,17
+29,non-excavating,ProthonotaryW arbler,4.87,12.5,12,69,31,2,0.435,36,Canopy,18
+30,ground-nesting,Horned Lark,3.36,11.7,9.5,56,24.9,2,NA,47,Ground,19
+31,ground-nesting,Water Pipit,4.6,14.4,14.4,58.5,22.3,1,NA,45,Ground,20
+32,ground-nesting,Orange-crownedW arbler,4.46,14,11,50,50,1,NA,34,Shrub,5
+33,ground-nesting,Virginia's Warbler,3.6,13,12,58,42,1,NA,34,Canopy,5
+34,ground-nesting,Kirtland's Warbler,4.63,14.1,11.4,30,40.1,1,0.65,44,Shrub,21
+35,ground-nesting,Black-and-WhiteW arbler,4.76,11,11,73.7,26.3,1,NA,38,Bark,5
+36,ground-nesting,Worm-eatingW arbler,4.76,13,11,72.7,25.6,1,0.7,39,Canopy,5 109
+37,ground-nesting,Ovenbird ,4.7,12,9,45.2,24.5,1,0.638,42,Ground,5 22 47 63a
+38,ground-nesting,Northern Waterthrush,4.28,13,10,NA,NA,1,0.647,42,Ground,5 63a
+39,ground-nesting,LouisiaNA Waterthrush,5.8,12.5,10,70,NA,1,NA,42,Ground,23
+40,ground-nesting,Kentucky Warbler,4.62,12.5,9,70,30,1,0.648,38,Ground,5 112
+41,ground-nesting,Wilson's Warbler,4.18,12.8,9.7,60.3,34.9,1,0.563,38,Shrub,24
+42,ground-nesting,Red-faced Warbler,4.53,13,12,52,48,1,0.677,34,Canopy,5
+43,ground-nesting,Bachman's Sparrow,4,13.5,9,35.7,45.8,2,NA,38,Ground,25
+44,ground-nesting,Vesper Sparrow,3.75,12,9,31.4,52.9,2.5,0.5,40,Ground,26
+45,ground-nesting,Lark Sparrow,3.61,11.5,9.5,45.2,38.7,2,NA,34,Ground,27
+46,ground-nesting,SavanNAh Sparrow,4.04,11.8,9,40.8,43.4,2.5,0.485,50,Ground,26 26a 28
+47,ground-nesting,Grasshopper Sparrow,4.39,11.5,9,39.2,58.9,2,NA,42,Ground,26 26a
+48,ground-nesting,White-throatedSp arrow,4.27,13,9,44.9,41.3,1.5,0.543,46,Ground,3 29
+49,ground-nesting,Harris' Sparrow,4.26,12.8,9.3,47.7,30,1,NA,63,Ground,96
+50,ground-nesting,Dark-eyed Junco,3.94,11.8,10,59.9,31.7,2,0.565,38,Ground,3 5 30
+51,ground-nesting,Yellow-eyed Junco,3.4,13,10.5,48.1,NA,2,0.588,34,Ground,107
+52,ground-nesting,Lapland Longspur,5.06,12,7,49.4,32.4,1,0.677,71,Ground,31
+53,ground-nesting,Snow Bunting,5.23,12,13.5,NA,27.9,1,NA,71,Ground,32
+54,ground-nesting,Bobolink ,5.12,11.5,12,62.8,29.8,1,0.59,45,Ground,26a 33
+55,ground-nesting,Eastern Meadowlark,4.49,14.1,11,37.5,48.6,2,0.56,4,,
+56,shrub or low foliage,Acadian Flycatcher,2.93,14.2,13.7,57.4,27.9,1.5,0.46,43,Aerial,36 37
+57,shrub or low foliage,Willow Flycatcher,3.63,13.9,13.5,49.3,44.2,1,0.45,43,Aerial,38
+58,shrub or low foliage,Least Flycatcher,3.95,14,14.8,47.4,53.3,1,0.42,43,Aerial,37 39
+59,shrub or low foliage,Dusky Flycatcher,3.6,13.5,18,38,55.5,1,0.577,43,Aerial,40 41
+60,shrub or low foliage,Cordilleran Flycatcher,3.3,16,16.3,17.9,58.9,1,NA,39,Aerial,5 42
+61,shrub or low foliage,Sedge Wren,6.26,14,13,68.2,22.7,2,NA,47,Shrub,43
+62,shrub or low foliage,Marsh Wren,4.91,13.1,12.5,39.4,46.9,2,NA,31,Shrub,44
+63,shrub or low foliage,Cactus Wren,3.43,16,20.9,68.8,28.6,3,0.439,32,Shrub,108
+64,shrub or low foliage,Blue-gray GNAtcatcher,4.25,15,12.5,24.4,NA,2,NA,34,Canopy,45
+65,shrub or low foliage,Hermit Thrush,3.82,13,13,6,94,2,NA,34,Ground,5
+66,shrub or low foliage,Wood Thrush,3.29,13.5,12,33.3,52.5,2,0.619,39,Ground,46 47
+67,shrub or low foliage,Swainson's Thrush,3.81,12.5,12,NA,NA,2,0.57,44,Ground,5 37
+68,shrub or low foliage,American Robin,3.36,13,13.6,48.8,40.2,2.5,0.546,46,Ground,5 40 47-49
+69,shrub or low foliage,Wrentit ,3.74,15.5,15.5,50.4,NA,1.5,0.685,38,Shrub,50
+70,shrub or low foliage,Gray Catbird,3.75,13.1,10.9,53.2,31.2,2,0.577,42,Shrub,47 51 52
+71,shrub or low foliage,NorthernM ockingbird,3.91,12.2,12,49.7,47.1,2.5,0.49,33,Shrub,3 53
+72,shrub or low foliage,Brown Thrasher,3.72,13.1,11.3,43.5,29,2,NA,39,Ground,54 93
+73,shrub or low foliage,Sage Thrasher,3.5,15,12.3,45,NA,2,NA,43,Shrub,55
+74,shrub or low foliage,Curve-billed Thrasher,3.8,14,14,43.8,40.2,2.5,NA,28,Ground,56
+75,shrub or low foliage,Loggerhead Shrike,5.85,16.6,17.6,61.7,19.4,2,0.47,41,Shrub,57
+76,shrub or low foliage,Bell's Vireo,3.39,14,11,11.4,11.4,2,NA,39,Shrub,58
+77,shrub or low foliage,Black-capped Vireo,3.63,15.5,12.4,18.3,24.1,2,0.545,34,Shrub,59
+78,shrub or low foliage,Black-throated Blue Warbler,3.91,12,9,60.9,42.8,2,0.46,44,Shrub,60
+79,shrub or low foliage,Prairie Warbler,3.89,11.9,9.3,22.3,61.8,2,0.546,39,Shrub,61
+80,shrub or low foliage,Swainson's Warbler,3.33,14.5,11,33.3,NA,1.5,NA,35,Shrub,62
+81,shrub or low foliage,MacGillivray's Warbler,3.83,13,10,50.7,49.3,2,0.491,34,Shrub,5 40
+82,shrub or low foliage,Common Yellowthroat,3.9,12,8.3,44.4,14.5,2,0.542,44,Shrub,63
+83,shrub or low foliage,Hooded Warbler,3.58,12,8.5,53,47,2,0.547,38,Shrub,5 110
+84,shrub or low foliage,Yellow-breastedC hat,3.54,11,8,19.7,66.9,2,NA,35,Shrub,64 67
+85,shrub or low foliage,NorthernC ardiNAl,3.12,12.5,9.5,36.4,54,2.5,0.561,37,Shrub,3 48 52 65 
+86,shrub or low foliage,Indigo Bunting,3.23,12.5,9.5,36.4,54,3,0.476,42,Shrub,52 66
+87,shrub or low foliage,Painted Bunting,3.75,11.5,13,58.8,35.3,3,NA,31,Shrub,67
+88,shrub or low foliage,Dickcissel ,3.95,12,9,33.9,48.8,1.5,NA,39,Shrub,68
+89,shrub or low foliage,Green-tailedT owhee,3.82,12,12,22,78,2,0.56,34,Ground,5 40
+90,shrub or low foliage,Rufous-sided Towhee,3.75,12.5,11,48.1,51.9,2,0.556,41,Ground,47
+91,shrub or low foliage,Abert's Towhee,2.96,NA,12.5,27.5,63.8,NA,NA,34,Ground,69
+92,shrub or low foliage,Chipping Sparrow,4,11.5,9,58.8,41.2,2,NA,46,Ground,70
+93,shrub or low foliage,Clay-colored Sparrow,4.11,11,9,42.7,52.4,1.5,0.566,47,Ground,26a 71
+94,shrub or low foliage,Brewer's Sparrow,3.04,13,8.5,79.5,20.5,NA,NA,43,Ground,72
+95,shrub or low foliage,Field Sparrow,3.56,11.2,8.3,35.1,60.4,2.5,0.46,41,Ground,26 73 81a
+96,shrub or low foliage,Sage Sparrow,2.93,14.2,10,56.4,43.2,2,NA,43,Ground,72 72a
+97,shrub or low foliage,Sharp-tailedS sparrow,3.86,11,10,24.3,,2,0.537,43,Ground,74
+98,shrub or low foliage,Seaside Sparrow,3.81,12.4,9.6,31.9,6.9,2,0.55,43,Shrub,74
+99,shrub or low foliage,Song Sparrow,3.6,12.6,10,42.8,28.1,2,0.554,39,Shrub,40 75
+100,shrub or low foliage,White-crownedS parrow,3.56,12.6,10,37.4,51.1,2.5,0.504,39,Ground,40 76
+101,shrub or low foliage,Red-winged Blackbird,3.49,12.6,12.1,30.7,44.4,2,0.53,43,Ground,52 77 78
+102,shrub or low foliage,Yellow-headed Blackbird,3.18,13.1,12.8,30,34.4,1.5,0.621,44,Ground,78 79
+103,shrub or low foliage,Brewer's Blackbird,4.87,13,13.5,39.4,45.5,1.5,NA,39,Ground,80
+104,shrub or low foliage,American Goldfinch,4.88,12.3,13.5,45,46.8,2,0.44,42,Shrub,3 81 81a
+105,Subcanopy or canopy,Cassin's Kingbird,3.4,18.5,16.5,28.7,42.6,1.5,NA,33,Aerial,82
+106,Subcanopy or canopy,WesternK ingbird,3.81,8.5,16.5,20.2,37.6,1,NA,33,Aerial,82
+107,Subcanopy or canopy,Eastern Kingbird,3.56,14.7,16.4,47,32.7,1,0.433,42,Aerial,83
+108,Subcanopy or canopy,Blue Jay,4.7,17,19,52,38.4,1,0.62,36,Canopy,48 52 84
+109,Subcanopy or canopy,Scrub Jay,4.8,18.2,20,54,29.5,1,0.76,38,Shrub,85
+110,Subcanopy or canopy,Pinyon Jay,3.94,16.5,21,30.5,41.2,1,0.739,35,Canopy,86
+111,Subcanopy or canopy,American Crow,4,18.3,28.8,32.8,49.1,NA,NA,49,Canopy,87
+112,Subcanopy or canopy,Solitary Vireo,3.74,15,13,45.3,18,1.5,NA,40,Canopy,88
+113,Subcanopy or canopy,Warbling Vireo,3.57,13,13,55,45,2,NA,34,Canopy,5
+114,Subcanopy or canopy,Red-eyed Vireo,3.18,13,10.5,50.6,24.9,2,0.553,48,Canopy,89
+115,Subcanopy or canopy,Yellow Warbler,4.3,11,9.5,49.8,34.2,1.5,0.573,50,Shrub,37 40 63a 90
+116,Subcanopy or canopy,Yellow-rumpedW arbler,4,13,13,47,53,1.5,0.528,34,Canopy,5 91
+117,Subcanopy or canopy,American Redstart,3.2,11,8.5,55.2,37.8,1,0.67,43,Canopy,37 92
+118,Subcanopy or canopy,Scarlet TaNAger,4,13.5,12,67.4,32.6,1.5,0.611,39,Canopy,5 47
+119,Subcanopy or canopy,WesternT aNAger,3.61,13,13,53.8,46.2,1,NA,34,Canopy,5
+120,Subcanopy or canopy,Rose-breasted Grosbeak,NA,13.5,10.5,50,50,1.5,NA,42,Canopy,52
+121,Subcanopy or canopy,Black-headed Grosbeak,3.16,11.7,12.1,66.1,34,1.5,NA,37,Canopy,5 94
+122,Subcanopy or canopy,House Finch,4.4,13.3,15.1,44.9,45.8,2,0.552,44,Canopy,95

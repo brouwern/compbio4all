@@ -112,8 +112,8 @@ usethis::use_git_ignore(".docx", directory = ".")
 these are the packages I typically use.  I should vectorize this so it would look nicer : )
 
 ```{r, eval = F}
-usethis::use_package("ape", "Imports")
-usethis::use_package("phangorn", "Imports")
+usethis::use_package("ape", "Suggests")
+usethis::use_package("phangorn", "Suggests")
 
 usethis::use_package("ggplot2", "Imports")
 usethis::use_package("ggpubr",   "Imports")
@@ -148,7 +148,7 @@ usethis::use_package("webshot", "Suggests")
 usethis::use_package("cluster", "Suggests")
 
 
-# devtools::use_package("data.table", "Imports")
+usethis::use_package("iNEXT", "Suggests")
 # devtools::use_package("car", "Imports")
 # devtools::use_package("lawstat", "Imports")
 # devtools::use_package("effsize", "Imports")
