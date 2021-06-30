@@ -12,7 +12,7 @@ printPairwiseAlignment <- function(alignment, chunksize=60, returnlist=FALSE)
   library(Biostrings)           # This function requires the Biostrings package
   seq1aln <- Biostrings::pattern(alignment) # Get the alignment for the first sequence
   seq2aln <- IRanges::subject(alignment) # Get the alignment for the second sequence
-  alnlen  <- nchar(seq1aln)     # Find the number of columns in the alignment
+  alnlen  <- nchar(as.character(seq1aln))     # Find the number of columns in the alignment
   starts  <- seq(1, alnlen, by=chunksize)
   n       <- length(starts)
   seq1alnresidues <- 0
@@ -37,8 +37,8 @@ printPairwiseAlignment <- function(alignment, chunksize=60, returnlist=FALSE)
   }
   if (returnlist == 'TRUE')
   {
-    vector1 <- seqinr::s2c(substring(seq1aln, 1, nchar(seq1aln)))
-    vector2 <- seqinr::s2c(substring(seq2aln, 1, nchar(seq2aln)))
+    vector1 <- seqinr::s2c(substring(seq1aln, 1, nchar(as.character(seq1aln))))
+    vector2 <- seqinr::s2c(substring(seq2aln, 1, nchar(as.character(seq2aln))))
     mylist <- list(vector1, vector2)
     return(mylist)
   }

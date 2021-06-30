@@ -149,7 +149,7 @@ usethis::use_package("cluster", "Suggests")
 
 
 usethis::use_package("iNEXT", "Suggests")
-# devtools::use_package("car", "Imports")
+usethis::use_package("gplots", "Suggests")
 # devtools::use_package("lawstat", "Imports")
 # devtools::use_package("effsize", "Imports")
 # devtools::use_package("here", "Imports")

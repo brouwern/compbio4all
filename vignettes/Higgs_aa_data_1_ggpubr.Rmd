@@ -4,8 +4,8 @@ author: "Nathan Brouwer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Software Checkpoint: ggpubr using Higgs and Atwood amino acids}
   %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{Software Checkpoint: ggpubr using Higgs and Atwood amino acids}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console

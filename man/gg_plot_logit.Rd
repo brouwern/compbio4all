@@ -13,7 +13,7 @@ gg_plot_logit(
 )
 }
 \arguments{
-\item{logit.out}{output of logitistic modeling functions such as logit_discrete()}
+\item{logit.out}{output of logistic modeling functions such as logit_discrete()}
 
 \item{axis.txt.sz}{size of labels along x and y axes}
 

@@ -18,6 +18,35 @@ knitr::opts_chunk$set(
 library(compbio4all)
 ```
 
+https://rdrr.io/cran/NameNeedle/man/needles.html
+
+https://open.oregonstate.education/appliedbioinformatics/chapter/chapter-3/
+
+https://farhanma.github.io/pyseq/
+
+https://iubmb.onlinelibrary.wiley.com/doi/full/10.1002/bmb.21027
+
+http://www.cs.bilkent.edu.tr/~calkan/teaching/cs481/pdfslides/07-needlemanwunsch-smithwaterman.pdf
+
+http://rna.informatik.uni-freiburg.de/Teaching/index.jsp?toolName=Needleman-Wunsch
+
+https://wilkelab.org/classes/SDS348/2019_spring/labs/lab13-solution.html
+
+https://www.biostars.org/p/146980/
+
+https://gist.github.com/juliuskittler/ed53696ac1e590b413aac2dddf0457f6
+
+
+machine-learning using sequenceds
+https://academic.oup.com/bioinformatics/article/34/14/2499/4924718
+https://academic.oup.com/bib/article/21/3/1047/5475015
+https://cran.r-project.org/web/packages/ftrCOOL/ftrCOOL.pdf
+https://ilearn.erc.monash.edu/
+https://www.pnas.org/content/92/19/8700
+https://academic.oup.com/bioinformatics/article/33/1/122/2525676
+
+https://www.nature.com/articles/nrg3920
+https://academic.oup.com/bioinformatics/article/31/2/279/2365812?login=true
 
 
 1. Copy text and code from original website to .rmd files

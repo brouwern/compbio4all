@@ -1,0 +1,42 @@
+﻿#,Viral mutation rates expressed as nucleotide substitutions per site per cell infection (s/n/c),,,,,,,,,,,,,
+#,https://www.uv.es/rsanjuan/Viral_mutation_rates_snc.htm,,,,,,,,,,,,,
+nucleic_acid,strands,reverse_transcribed,group,group_long,virus,name_short,genome_size_kb,mutation_rate,fraction_indels,mutational_target_size,cell_infection_cycles,selection_correction_factor,estimate_relability,source
+RNA,ss,normal,posRNA,Positive stranded RNA,Bacteriophage Qbeta,Qbeta,4.22,1.10E-03,-,1,1 to 10,-,-,Batschelet et al. 1976
+RNA,ss,normal,posRNA,Positive stranded RNA,Tobacco mosaic virus,TMV,6.4,8.70E-06,0.4,723,5.7,1,+,Malpica et al. 2002
+RNA,ss,normal,posRNA,Positive stranded RNA,Human rhinovirus 14,HRV-14,7.13,4.80E-04,-,-,-,-,-,Wang et al. 1998
+RNA,ss,normal,posRNA,Positive stranded RNA,Human rhinovirus 14,HRV-14 (ii),7.13,1.00E-05,-,12,-,-,-,Heinz et al. 1989
+RNA,ss,normal,posRNA,Positive stranded RNA,Poliovirus 1,PV-1,7.44,2.20E-05,-,1,2.8 to 4.6,ca. 1,+,de la Torre et al. 1992
+RNA,ss,normal,posRNA,Positive stranded RNA,Poliovirus 1,PV-1 (ii),7.44,1.10E-04,-,4,2.1,-,+,de la Torre et al. 1990
+RNA,ss,normal,posRNA,Positive stranded RNA,Poliovirus 1,PV-1 (iii),7.44,3.00E-04,-,8463,3,0.28,+,Vignuzzi et al. 2006
+RNA,ss,normal,posRNA,Positive stranded RNA,Tobacco etch virus,TEV,9.49,3.00E-05,-,4890,-,-,-,Sanjuán et al. 2009
+RNA,ss,normal,posRNA,Positive stranded RNA,Tobacco etch virus,TEV (i),9.49,4.80E-06,0.32,4357,16 to 190,1,+,Tromas et al. 2010
+RNA,ss,normal,posRNA,Positive stranded RNA,Hepatitis C virus,HCV,9.65,1.20E-04,-,113,-,-,-,Cuevas et al. 2009
+RNA,ss,normal,posRNA,Positive stranded RNA,Murine hepatitis virus,MHV,31.4,3.50E-06,-,20163,13,0.55,-,Eckerle et al. 2007
+RNA,ss,normal,negRNA,Negative stranded RNA,Vesicular stomatitis virus,VSV,11.2,6.90E-05,-,2,3.0 to 6.4,-,-,Holland et al. 1989
+RNA,ss,normal,negRNA,Negative stranded RNA,Vesicular stomatitis virus,VSV (ii),11.2,1.80E-05,-,6,less than 1,-,+,Furió et al. 2005
+RNA,ss,normal,negRNA,Negative stranded RNA,Influenza A virus,FLUVA,13.6,4.50E-05,-,2547,5,0.33,+,Nobusawa & Sato 2006
+RNA,ss,normal,negRNA,Negative stranded RNA,Influenza A virus,FLUVA (ii),13.6,7.10E-06,-,2547,7,0.28,+,Parvin et al. 1986
+RNA,ss,normal,negRNA,Negative stranded RNA,Influenza A virus,FLUVA (iii),13.6,3.90E-05,-,4,17,ca. 1,+,Stech et al. 1999
+RNA,ss,normal,negRNA,Negative stranded RNA,Influenza B virus,FLUVB,14.5,1.70E-06,-,2547,7,0.33,+,Nobusawa & Sato 2006
+RNA,ds,normal,dsRNA,Double stranded RNA,Bacteriophage phi6,phi6,13.4,1.60E-06,-,ca. 5.6,1,-,+,Chao et al. 2002
+RNA,ss,rt,rtRNA,Reverse transcribing,Duck hepatitis B virus,DHBV,3.03,2.00E-05,-,1,-,-,-,Pult et al. 2001
+RNA,ss,rt,rtRNA,Reverse transcribing,Spleen necrosis virus,SNV,7.8,2.40E-05,0.25,20,1,1,+,Pathak & Temin 1990
+RNA,ss,rt,rtRNA,Reverse transcribing,Spleen necrosis virus,SNV (ii),7.8,5.80E-05,-,1,1,1,+,Dougherty & Temin 1988
+RNA,ss,rt,rtRNA,Reverse transcribing,Murine leukaemia virus,MLV,8.33,6.00E-06,-,1,1,1,+,Varela-Echevarria et al. 1992
+RNA,ss,rt,rtRNA,Reverse transcribing,Murine leukaemia virus,MLV (ii),8.33,4.20E-05,-,4140,1,0.48,+,Monk et al. 1992
+RNA,ss,rt,rtRNA,Reverse transcribing,Murine leukaemia virus,MLV (iii),8.33,1.10E-04,0.27,76,1,1,+,Parthasarathi et al. 1995
+RNA,ss,rt,rtRNA,Reverse transcribing,Bovine leukaemia virus,BLV,8.42,1.70E-05,0.12,20,1,1,+,Mansky & Temin 1994
+RNA,ss,rt,rtRNA,Reverse transcribing,Human T-cell leukaemia virus,HTLV-1,8.5,1.60E-05,0.1,20,1,1,+,Mansky 2000
+RNA,ss,rt,rtRNA,Reverse transcribing,Human immunodeficiency virus 1,HIV-1,9.18,4.90E-05,0.18,20 to 219,1,1,+,Mansky & Temin 1995; Mansky et al. 2000; Mansky & Bernard 2000
+RNA,ss,rt,rtRNA,Reverse transcribing,Human immunodeficiency virus 1,HIV-1 (ii),9.18,1.00E-04,0.35,25295,1,-,-,Gao et al. 2004
+RNA,ss,rt,rtRNA,Reverse transcribing,Human immunodeficiency virus 1,HIV-1 (iii),9.18,8.70E-05,0.07,76,1,1,+,Huang & Wooley 2005
+RNA,ss,rt,rtRNA,Reverse transcribing,Human immunodeficiency virus 1,HIV-1 (iv),9.18,7.30E-07,-,7,1,1,+,Laasko & Sutton 2006
+RNA,ss,rt,rtRNA,Reverse transcribing,Human immunodeficiency virus 1,HIV-1 (v),9.18,4.4 E-05,0.03,17,1,1,+,Abram et al. 2010
+RNA,ss,rt,rtRNA,Reverse transcribing,Rous sarcoma virus,RSV,9.4,1.40E-04,-,3375,1,-,-,Leider et al. 1988
+RNA,ss,rt,rtRNA,Reverse transcribing,Foamy virus,FV,13.2,2.10E-04,0.03,ca. 2200,1,1,+,Gärtner et al. 2009
+DNA,ss,normal,ssDNA,Single stranded DNA,Bacteriophage phiX174,phiX174,5.39,1.30E-06,-,12,3.3,-,+,Raney et al. 2004
+DNA,ss,normal,ssDNA,Single stranded DNA,Bacteriophage phiX174,phiX174 (ii),5.39,1.00E-06,-,7,1.4,-,+,Cuevas et al. 2009
+DNA,ss,normal,ssDNA,Single stranded DNA,Bacteriophage m13,m13,6.41,7.90E-07,0.19,219,5.8,1,+,Kunkel 1985
+DNA,ds,normal,dsDNA,Double stranded DNA,Bacteriophage lambda,lambda,48.5,5.40E-07,0.2,38,-,1,+,Drake 1991
+DNA,ds,normal,dsDNA,Double stranded DNA,Herpes simplex virus,HSV-1,152,5.90E-08,0.17,76,3,1,+,Drake & Hwang 2005
+DNA,ds,normal,dsDNA,Double stranded DNA,Bacteriophage T2,T2,169,9.80E-08,0.37,1576,1,ca. 1,+,Luria 1951

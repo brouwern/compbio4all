@@ -16,8 +16,6 @@ logit_discrete_1step(alpha = 0.01, K = NULL, r.d = 1, Nt = 2, ...)
 \item{Nt}{Initial population size before projection}
 
 \item{...}{additional parameters}
-
-\item{time.steps}{number of time steps for model to run}
 }
 \description{
 The function logit_discrete_1step() projects a population one time step forward. (Eg 1 year).

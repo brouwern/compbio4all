@@ -13,7 +13,6 @@
 #' @param K Carrying capacity; not currently implemented
 #' @param r.d discrete growth increment
 #' @param Nt Initial population size before projection
-#' @param time.steps number of time steps for model to run
 #' @param ... additional parameters
 #'
 #' @examples
