@@ -20,7 +20,18 @@ Suggests:
     knitr,
     rmarkdown,
     rpart,
-    survival
+    survival,    
+    evd,
+    HistData,
+    flextable,
+    webshot,
+    bio3d,
+    ape,
+    phangorn,
+    seqinr,
+    Biostrings,
+    MASS,
+    scatterplot3d
 VignetteBuilder: knitr
 Imports: 
     ggpubr,
@@ -30,20 +41,10 @@ Imports:
     reshape2,
     dplyr,
     tidyr,
-    ape,
-    phangorn,
     rentrez,
-    seqinr,
     stringr,
-    Biostrings,
-    MASS,
-    scatterplot3d,
     GGally,
     cowplot,
-    evd,
-    HistData,
-    flextable,
-    webshot,
-    bio3d
+    Hmisc
 Depends: 
     R (>= 3.5.0)

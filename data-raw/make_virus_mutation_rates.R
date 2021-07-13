@@ -16,8 +16,7 @@
 file. <- here::here("data-raw","virus_mutation_rates_snr.csv")
 
 virus_snr <- read.csv(file = file.,
-                                 skip = 2,
-                                 na.strings = "-")
+                                 skip = 2)
 
 virus_snr$mutation_rate <- gsub("E","e",
                                 virus_snr$mutation_rate)
@@ -28,17 +27,36 @@ summary(virus_snr$mutation_rate )
 
 usethis::use_data(virus_snr, overwrite = TRUE)
 
-# compbio4all::make_dateset_helpfile(dataset = virus_snr,
-#                       dataset_name = "virus_snr")
+compbio4all::make_dateset_helpfile(dataset = virus_snr,
+                      dataset_name = "virus_snr")
 
 
+#
+# library(ggpubr)
+# virus_snr$mutation_rate_log <- log(virus_snr$mutation_rate)
+# virus_snr$genome_size_kb_log <- log(virus_snr$genome_size_kb)
+#
+# ggpubr::ggscatter(y = "mutation_rate_log",
+#           x = "genome_size_kb_log",
+#           data = virus_snr,
+#           color = "group")
 
-library(ggpubr)
-virus_snr$mutation_rate_log <- log(virus_snr$mutation_rate)
-virus_snr$genome_size_kb_log <- log(virus_snr$genome_size_kb)
 
-ggscatter(y = "mutation_rate_log",
-          x = "genome_size_kb_log",
-          data = virus_snr,
-          color = "group")
+# snc
+file. <- here::here("data-raw","virus_mutation_rates_snc.csv")
 
+virus_snc <- read.csv(file = file.,
+                      skip = 2,
+                      na.strings = "-")
+
+virus_snc$mutation_rate <- gsub("E","e",
+                                virus_snc$mutation_rate)
+virus_snc$mutation_rate <- gsub(" ","",virus_snc$mutation_rate )
+virus_snc$mutation_rate <- as.numeric(virus_snc$mutation_rate )
+
+summary(virus_snc$mutation_rate )
+
+usethis::use_data(virus_snc, overwrite = TRUE)
+
+# compbio4all::make_dateset_helpfile(dataset = virus_snc,
+#                                    dataset_name = "virus_snc")

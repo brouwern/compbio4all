@@ -8,4 +8,9 @@ usethis::use_data(dengueseq_fasta,
                   overwrite = TRUE)
 
 file. <- here::here("inst/extdata/dengueseq.fasta")
+
 write(dengueseq_fasta, file=file.)
+
+
+
+

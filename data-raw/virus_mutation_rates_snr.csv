@@ -1,15 +1,15 @@
-﻿# ,Viral mutation rates expressed as nucleotide substitutions per site per strand copying (s/n/r),,,,,,,,
+# ,Viral mutation rates expressed as nucleotide substitutions per site per strand copying (s/n/r),,,,,,,,
 # ,https://www.uv.es/rsanjuan/Viral_mutation_rates_snr.htm,,,,,,,,
 nucleic_acid,strands,group,group_long,virus,name_short,genome_size_kb,mutation_rate,mutational_target_size,source
 RNA,ss,viroid,viroid,Chrysanthemum chloroticmottle viroid,CChMVd,0.399,0.0025,NA,Gago et al 2009
-RNA,ss,posRNA,Positive stranded RNA,Poliovirus 1,PV-1,7.44,8.90E-06,1,Sedivy et al. 1987
-RNA,ss,posRNA,Positive-stranded RNA,Turnip mosaic virus,TuMV,9.84,6.60E-06,ca. 25.2,de la Iglesia et al. 2012
-RNA,ss,negRNA,Negative stranded RNA,Vesicular stomatitis virus,VSV,11.2,6.00E-06,6,Furió et al. 2005
-RNA,ss,negRNA,Negative stranded RNA,Influenza A virus,FLUVA,13.6,9.00E-06,2 to 5,Suárez et al. 1992
-RNA,ss,negRNA,Negative stranded RNA,Measles virus,MV,15.9,4.40E-05,ca. 7.5,Shrag et al. 1999
-RNA,ds,dsRNA,Double stranded RNA,Bacteriophage phi6,phi6,13.4,1.40E-06,ca. 5.6,Chao et al. 2002
-DNA,ss,ssDNA,Single stranded DNA,Bacteriophage phiX174,phiX174,5.39,2.10E-07,ca. 6.4,Denhardt & Silver 1966
-DNA,ss,ssDNA,Single stranded DNA,Bacteriophage phiX174,phiX174 (ii),5.39,1.00E-06,7,Cuevas et al. 2009
-DNA,ds,dsDNA,Double stranded DNA,Bacteriophage lambda,lambda,48.5,7.90E-08,38,Drake 1991
-DNA,ds,dsDNA,Double stranded DNA,Bacteriophage T2,T2,169,2.00E-08,1576,Luria 1951
-,,,,Homo sapiens,Homo,,2.50E-08,,
+RNA,ss,posRNA,Positive-stranded-RNA,Poliovirus-1,PV-1,7.44,8.90E-06,1,Sedivy et al. 1987
+RNA,ss,posRNA,Positive-stranded RNA,Turnip mosaic virus,TuMV,9.84,6.60E-06,25.2,de la Iglesia et al. 2012
+RNA,ss,negRNA,Negative stranded RNA,Vesicular stomatitis virus,VSV,11.2,6.00E-06,6,Furi et al. 2005
+RNA,ss,negRNA,Negative stranded RNA,Influenza A virus,FLUVA,13.6,9.00E-06,3,Surez et al. 1992
+RNA,ss,negRNA,Negative stranded RNA,Measles virus,MV,15.9,4.40E-05,7.5,Shrag et al. 1999
+RNA,ds,dsRNA,Double stranded RNA,Bacteriophage phi6,phi6,13.4,1.40E-06,5.6,Chao et al. 2002
+DNA,ss,ssDNA,Single stranded DNA,Bacteriophage phiX174,phiX174,5.39,2.10E-07,6.4,Denhardt & Silver 1966
+DNA,ss,ssDNA,Single stranded DNA,Bacteriophage phiX174,phiX174 (ii,5.39,1.00E-06,7,Cuevas et al. 2009
+DNA,ds,dsDNA,Double stranded DNA,Bacteriophage lambda,lambda,48.5,7.90E-08,38,Drake 1991
+DNA,ds,dsDNA,Double stranded DNA,Bacteriophage T2,T2,169,2.00E-08,1576,Luria 1951
+DNA,ds,dsDNA,Double stranded DNA,Homo sapiens,Homo,,2.50E-08,,
