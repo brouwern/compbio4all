@@ -13,23 +13,33 @@
 print_msa <- function(alignment, chunksize=60)
 {
   # this function originally required the Biostrings package
-  # require("Biostrings")
+  ## it has been changed to use stringr
 
-  # find the number of sequences in the alignment
+  # 1) setup
+  ## find the number of sequences in the alignment
   numseqs <- alignment$nb
-  # find the length of the alignment
+
+  ## find the overall length of the alignment
   alignmentlen <- nchar(alignment$seq[[1]])
+
+  ## ....
   starts <- seq(1, alignmentlen, by=chunksize)
   n <- length(starts)
-  # get the alignment for each of the sequences:
+
+  # 2) get the alignment for each of the sequences:
+  ## storage
   aln <- vector()
   lettersprinted <- vector()
+
+  ## for() loop
   for (j in 1:numseqs)
   {
     alignmentj <- alignment$seq[[j]]
     aln[j] <- alignmentj
     lettersprinted[j] <- 0
   }
+
+  # 3) display
   # print out the alignment in blocks of 'chunksize' columns:
   for (i in 1:n) { # for each of n chunks
     for (j in 1:numseqs)

@@ -17,5 +17,5 @@ install.packages("devtools")
 You can then install the popcycles from GitHub with:
 
 ``` r
-devtools::install_github("brouwern/popcycles")
+devtools::install_github("brouwern/combio4all")
 ```

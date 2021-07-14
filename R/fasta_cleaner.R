@@ -12,21 +12,6 @@
 
 fasta_cleaner <- function(fasta_object, parse = TRUE){
 
-  #header <- gsub("\\|","",header)
-  #header <- gsub("\\+","",header)
-  #header <- gsub("\\=","",header)
-  #header <- gsub("\\:","",header)
-  #header <- gsub("\\;","",header)
-
-  #fasta_object <- gsub("\\|","",fasta_object)
-  #fasta_object <- gsub("\\+","",fasta_object)
-  #fasta_object <- gsub("\\=","",fasta_object)
-  #fasta_object <- gsub("\\:","",fasta_object)
-  #fasta_object <- gsub("\\;","",fasta_object)
-
-
-  #fasta_object <- gsub(header, "", fasta_object)
-
   fasta_object <- sub("^(>)(.*?)(\\n)(.*)(\\n\\n)","\\4",fasta_object)
   fasta_object <- gsub("\n", "", fasta_object)
 
@@ -35,7 +20,6 @@ fasta_cleaner <- function(fasta_object, parse = TRUE){
                                        pattern = "",
                                        simplify = FALSE)
   }
-
 
   return(fasta_object[[1]])
 }
