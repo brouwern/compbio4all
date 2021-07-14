@@ -29,9 +29,27 @@ seq_1_2_3_4 <- c(P06747 = paste(seq_1_2_3_4[[1]], collapse = ""),
 # convert to AAStringSet
 seq_1_2_3_4_stringset <- Biostrings::AAStringSet(seq_1_2_3_4)
 
+# make MSA
+library(msa)
+virusaln <- msa(inputSeqs = seq_1_2_3_4_stringset,
+method = "ClustalW")
+class(virusaln) <- "AAMultipleAlignment"
+
+
+# convert to seqinr format
+virusaln_seqinr <- msaConvert(virusaln, type = "seqinr::alignment")
+
+# clean poorl aligned sections
+library(compbio4all)
+virusaln_seqinr_clean <- clean_alignment(alignment = virusaln_seqinr,  # virusaln_seqinr
+                                         minpcnongap = 30,
+                                         minpcid = 30)
 
 # save
 
 usethis::use_data(seq_1_2_3_4, overwrite = TRUE)
 usethis::use_data(seq_1_2_3_4_stringset, overwrite = TRUE)
+usethis::use_data(virusaln, overwrite = TRUE)
+usethis::use_data(virusaln_seqinr, overwrite = TRUE)
+usethis::use_data(virusaln_seqinr_clean, overwrite = TRUE)
 
