@@ -1,9 +1,11 @@
 #' Wrapper function for creating unrooted neighbor-joining trees
 #'
-#' By Avril Coghlan.
+#' By Avril Coghlan (2011).
+#'
+#' Uses seqinr::dist.alignment() and ape::nj(), ape::boot.phylo().
 #'
 #' @param alignment Multiple sequence alignment
-#' @param type ?
+#' @param type "DNA" or "protein"
 #'
 #' @export
 
@@ -19,25 +21,26 @@ unrooted_NJ_tree <- function(alignment,type)
     alignment <- ape::as.alignment(alignmentmat)
     if      (type == "protein")
     {
-      mydist <- dist.alignment(alignment)
+      mydist <- seqinr::dist.alignment(alignment)
     }
     else if (type == "DNA")
     {
-      alignmentbin <- as.DNAbin(alignment)
-      mydist <- dist.dna(alignmentbin)
+      alignmentbin <- ape::as.DNAbin(alignment)
+      mydist <- ape::dist.dna(alignmentbin)
     }
-    mytree <- nj(mydist)
-    mytree <- makeLabel(mytree, space="") # get rid of spaces in tip names.
+    mytree <- ape::nj(mydist)
+    mytree <- ape::makeLabel(mytree, space="") # get rid of spaces in tip names.
     return(mytree)
   }
+
   # infer a tree
-  mymat  <- as.matrix.alignment(alignment)
+  mymat  <- seqinr::as.matrix.alignment(alignment)
   mytree <- makemytree(mymat)
   # bootstrap the tree
-  myboot <- boot.phylo(mytree, mymat, makemytree)
+  myboot <- ape::boot.phylo(mytree, mymat, makemytree)
   # plot the tree:
-  plot.phylo(mytree,type="u")   # plot the unrooted phylogenetic tree
-  nodelabels(myboot,cex=0.7)    # plot the bootstrap values
+  ape::plot.phylo(mytree,type="u")   # plot the unrooted phylogenetic tree
+  ape::nodelabels(myboot,cex=0.7)    # plot the bootstrap values
   mytree$node.label <- myboot   # make the bootstrap values be the node labels
   return(mytree)
 }

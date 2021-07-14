@@ -5,7 +5,7 @@
 \alias{seq_1_2_3_4}
 \title{seq_1_2_3_4}
 \format{
-An object of class \code{character} of length 4.
+An object of class \code{list} of length 4.
 }
 \usage{
 seq_1_2_3_4

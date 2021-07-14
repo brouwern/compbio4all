@@ -5,12 +5,12 @@
 \alias{virusaln}
 \title{Alignment of four proteins from dengue fever-related viruses}
 \format{
-An object of class \code{AAMultipleAlignment} with 4 rows and 305 columns.
+An object of class \code{AAMultipleAlignment} with 4 rows and 306 columns.
 }
 \usage{
 virusaln
 }
 \description{
-From examples used by Coglan (201x)
+From examples used by Coghlan (2011)
 }
 \keyword{datasets}

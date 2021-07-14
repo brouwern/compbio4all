@@ -9,8 +9,11 @@ unrooted_NJ_tree(alignment, type)
 \arguments{
 \item{alignment}{Multiple sequence alignment}
 
-\item{type}{?}
+\item{type}{"DNA" or "protein"}
 }
 \description{
-By Avril Coghlan.
+By Avril Coghlan (2011).
+}
+\details{
+Uses seqinr::dist.alignment() and ape::nj(), ape::boot.phylo().
 }

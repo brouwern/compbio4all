@@ -11,6 +11,6 @@ An object of class \code{alignment} of length 4.
 virusaln_seqinr
 }
 \description{
-Alignment of four proteins from dengue fever-related viruses in seqinr format
+From examples used by Coghlan (2011)
 }
 \keyword{datasets}

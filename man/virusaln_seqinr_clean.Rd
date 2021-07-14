@@ -11,6 +11,6 @@ An object of class \code{alignment} of length 4.
 virusaln_seqinr_clean
 }
 \description{
-From examples used by Coglan (201x)
+From examples used by Coghlan (2011)
 }
 \keyword{datasets}
