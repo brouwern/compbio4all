@@ -1,6 +1,6 @@
 #' Dataset helpfile header . . .
 #'
-#' Short description of data . . . 
+#' Short description of data . . .
 #'
 #' @format A data frame with 12 rows and 10 column(s)
 #' \describe{
@@ -16,5 +16,4 @@
 #'   \item{source}{Describe column source here . . .}
 #' }
 #' @source \url{http://www.whereyougotthedata.com/}
-#'
 'virus_snr'

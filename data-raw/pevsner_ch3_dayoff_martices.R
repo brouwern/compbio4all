@@ -40,7 +40,7 @@
 #
 #
 # # page 14
-# tab <- extract_tables(here("data-raw/pevsner3.pdf"), pages = 14)
+# tab <- extract_tables(here::here("data-raw/pevsner3.pdf"), pages = 14)
 #
 # aa_mut <- data.frame(aa        = c(tab[[1]][ ,1 ],tab[[1]][ ,3]),
 #                       mutability = c(tab[[1]][ ,2 ],tab[[1]][ ,4]),
@@ -52,24 +52,24 @@
 #
 #
 # # page 16
-# tab <- extract_tables(here("data-raw/pevsner3.pdf"), pages = 16)
-# write.csv(tab[[1]],file = here("data-raw/pevsner3_fig3_9.csv"))
+# tab <- extract_tables(here::here("data-raw/pevsner3.pdf"), pages = 16)
+# write.csv(tab[[1]],file = here::here("data-raw/pevsner3_fig3_9.csv"))
 #
 #
 # # page 16
-# tab <- extract_tables(here("data-raw/pevsner3.pdf"), pages = 20)
-# write.csv(tab[[1]],file = here("data-raw/pevsner3_fig3_13.csv"))
+# tab <- extract_tables(here::here("data-raw/pevsner3.pdf"), pages = 20)
+# write.csv(tab[[1]],file = here::here("data-raw/pevsner3_fig3_13.csv"))
 #
 #
 #
 # # page 22
-# tab <- extract_tables(here("data-raw/pevsner3.pdf"), pages = 22)
-# write.csv(tab[[1]],file = here("data-raw/pevsner3_fig3_14.csv"))
+# tab <- extract_tables(here::here("data-raw/pevsner3.pdf"), pages = 22)
+# write.csv(tab[[1]],file = here::here("data-raw/pevsner3_fig3_14.csv"))
 #
 #
 # # page 23
-# tab <- extract_tables(here("data-raw/pevsner3.pdf"), pages = 23)
-# write.csv(tab[[1]],file = here("data-raw/pevsner3_fig3_15.csv"))
+# tab <- extract_tables(here::here("data-raw/pevsner3.pdf"), pages = 23)
+# write.csv(tab[[1]],file = here::here("data-raw/pevsner3_fig3_15.csv"))
 #
 #
 #

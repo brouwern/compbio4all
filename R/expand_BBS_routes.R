@@ -34,7 +34,7 @@ expand_BBS_routes <- function(BBSdata){
   cat("Your expanded dataframe will contain",nrow(all.routes),"rows of data")
   cat("\n")
   #merge the datasets
-  library(dplyr)
+  #library(dplyr)
   cat("Merging data - this may take a second...")
   cat("\n")
   #merge

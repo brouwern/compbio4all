@@ -21,7 +21,7 @@ blastr <- function(seq,
                     time.out = NULL,
                     chain.single = TRUE,
                     maxhits = 2000){
-  library(bio3d)
+  #library(bio3d)
 
   if (inherits(seq, "fasta")) {
     if (is.matrix(seq$ali)) {

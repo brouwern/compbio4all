@@ -1,9 +1,11 @@
 #' printPairwiseAlignment
 #'
-#' From Coghlan (2011).
-#' This functions uses Biostrings from Bioconductor.
+#' From Coghlan (2011) A little book of R for bioinformatics.
+#' https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter4.html
 #'
-#' @param alignment alignment
+#' This functions uses Biostrings::pattern() and IRanges::subject() from Bioconductor.
+#'
+#' @param alignment Alignment to print in console
 #' @param chunksize chunksize
 #' @param returnlist returnlist
 #'
@@ -12,7 +14,7 @@
 
 print_pairwise_alignment <- function(alignment, chunksize=60, returnlist=FALSE)
 {
-  library(Biostrings)           # This function requires the Biostrings package
+  #library(Biostrings)           # This function requires the Biostrings package
   seq1aln <- Biostrings::pattern(alignment) # Get the alignment for the first sequence
   seq2aln <- IRanges::subject(alignment)    # Get the alignment for the second sequence
   alnlen  <- nchar(as.character(seq1aln))   # Find the number of columns in the alignment

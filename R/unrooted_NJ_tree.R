@@ -13,8 +13,8 @@
 unrooted_NJ_tree <- function(alignment,type)
 {
   # this function requires the ape and seqinR packages:
-  require("ape")
-  require("seqinr")
+  #require("ape")
+  #require("seqinr")
   # define a function for making a tree:
   makemytree <- function(alignmentmat)
   {

@@ -20,13 +20,13 @@ RNA_init[, c("seq.i","sequence")]
 
 RNA_init$sequence[1]
 
-library(Biostrings)
+#library(Biostrings)
 
-a12 <- pairwiseAlignment(RNA_init$sequence[1],
+a12 <- Biostrings::pairwiseAlignment(RNA_init$sequence[1],
                          RNA_init$sequence[2])
 
 
-a13 <- pairwiseAlignment(RNA_init$sequence[1],
+a13 <- Biostrings::pairwiseAlignment(RNA_init$sequence[1],
                          RNA_init$sequence[3])
 
 

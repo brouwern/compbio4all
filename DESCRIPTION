@@ -31,7 +31,8 @@ Suggests:
     seqinr,
     Biostrings,
     MASS,
-    scatterplot3d
+    scatterplot3d,
+    IRanges
 VignetteBuilder: knitr
 Imports: 
     ggpubr,
