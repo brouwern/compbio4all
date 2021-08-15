@@ -73,7 +73,7 @@ plot_start_stop_codons <- function(sq)
   graphics::segments(1,1,nchar(sq),1)
   graphics::segments(1,2,nchar(sq),2)
   # Add the x-axis at y=0:
-  axis(1, pos=0)
+  graphics::axis(1, pos=0)
   # Add the y-axis labels:
   graphics::text(0.9,0.5,"+1")
   graphics::text(0.9,1.5,"+2")

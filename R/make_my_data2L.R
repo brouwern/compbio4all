@@ -28,12 +28,12 @@ make_my_data2L <- function(dat,
                            n.sample = 20,
                            with.rep = FALSE){
 
-  cat("Codes should only contain letters and numbers")
-
-  if(n.sample*2 > nrow(dat)){
-    cat("\n WARNING: number of samples requested per group exceeds size of dataframe.
-        \n Setting with.rep == TRUE will alleviate this.")
-  }
+  # warning("Codes should only contain letters and numbers")
+  #
+  # if(n.sample*2 > nrow(dat)){
+  #   warning("\n WARNING: number of samples requested per group exceeds size of dataframe.
+  #       \n Setting with.rep == TRUE will alleviate this.")
+  # }
 
   #split string into character vector
   my.code <- unlist(strsplit(my.code,split = ""))
@@ -53,15 +53,15 @@ make_my_data2L <- function(dat,
   #ceate unique variable for seet
   my.seed <- (min(my.code, na.rm = TRUE)+1)^max(my.code, na.rm = TRUE)
 
-  cat("\nYour special code is ", my.seed)
-  cat("\n(You don't really need to know this, though).", my.seed)
+  # warning("\nYour special code is ", my.seed)
+  # warning("\n(You don't really need to know this, though).", my.seed)
 
   #set seed
   set.seed(seed = my.seed)
 
-  cat("\n")
-  cat("NOTE: This function only works properly for data with TWO levels to the categorical var.")
-  cat("\n eg male vs. female; it doesn't work for >2 levels (eg red vs blue vs. green)")
+  # warning("\n")
+  # warning("NOTE: This function only works properly for data with TWO levels to the categorical var.")
+  # warning("\n eg male vs. female; it doesn't work for >2 levels (eg red vs blue vs. green)")
 
   #extract levels of categorical varibale
   cat.var.1 <- levels(dat[,cat.var])[1]
