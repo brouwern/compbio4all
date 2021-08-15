@@ -1,5 +1,5 @@
 Package: compbio4all
-Title: Datasets and helpful functions for learning bioinformatics and computational biology.
+Title: Datasets and helpful functions for learning bioinformatics and computational biology
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Nathan",
