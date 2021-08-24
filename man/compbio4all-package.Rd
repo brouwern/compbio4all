@@ -4,7 +4,7 @@
 \name{compbio4all-package}
 \alias{compbio4all}
 \alias{compbio4all-package}
-\title{compbio4all: Datasets and helpful functions for learning bioinformatics and computational biology.}
+\title{compbio4all: Datasets and helpful functions for learning bioinformatics and computational biology}
 \description{
 What the package does (one paragraph).
 }
